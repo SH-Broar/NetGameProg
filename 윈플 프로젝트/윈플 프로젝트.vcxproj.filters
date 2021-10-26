@@ -1,0 +1,438 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="소스 파일">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="헤더 파일">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="리소스 파일\Image">
+      <UniqueIdentifier>{34c83a81-635c-4777-ba42-ec6d006bcac6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="윈플 팀프.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Block.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Block.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="system.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="resource1.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="Resource\Music\Main_Theme.mp3">
+      <Filter>리소스 파일</Filter>
+    </Media>
+    <Media Include="..\..\WinApi_TermProject\윈플 프로젝트\윈플 프로젝트\Resource\Effect\스킬.mp3">
+      <Filter>리소스 파일</Filter>
+    </Media>
+    <Media Include="..\..\WinApi_TermProject\윈플 프로젝트\윈플 프로젝트\Resource\Music\Death.mp3">
+      <Filter>리소스 파일</Filter>
+    </Media>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resource\Player_Yellow\Crawl_0.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\Crawl_1.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Yellow\Crawl_1.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\Crawl_2.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Yellow\Crawl_2.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\Crawl_3.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Yellow\Crawl_3.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\Crawl_4.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Yellow\Crawl_4.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\Crawl_5.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Yellow\Crawl_5.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\Idle_0.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Yellow\idle_0.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Yellow\idle_1.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\Idle_1.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Yellow\idle_2.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\Idle_2.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Yellow\idle_3.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Yellow\idle_4.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Yellow\idle_5.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Yellow\idle_6.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Yellow\idle_7.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\Idle_6.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\Idle_7.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Yellow\idle_8.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\Idle_8.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Yellow\idle_9.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\Idle_9.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Yellow\idle_10.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\Idle_10.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Yellow\idle_11.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\Idle_11.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Yellow\idle_12.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\Idle_12.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Yellow\idle_13.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\Idle_13.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\Idle_14.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\Idle_15.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\Idle_16.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\Idle_17.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\Idle_18.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\Idle_19.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\Idle_20.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\Idle_21.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\Idle_22.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\Idle_23.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\Idle_24.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\Idle_25.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\Idle_26.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\Idle_27.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\Idle_28.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\Idle_29.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\Idle_30.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\Idle_31.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\Jump_down_0.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\Jump_down_1.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\Jump_down_2.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\Jump_down_3.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\Jump_down_4.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\Jump_up_0.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\Jump_up_1.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\Jump_up_2.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\Run_0.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\Run_1.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\Run_2.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Yellow\Run_2.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\Run_3.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Yellow\Run_3.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\Run_4.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Yellow\Run_4.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\Run_5.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Yellow\Run_5.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\Run_6.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\Run_7.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Yellow\Run_7.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Yellow\Run_6.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Yellow\sit_0.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\Sit_0.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Yellow\sit_1.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\Sit_1.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Yellow\sit_2.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\Sit_2.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Yellow\sit_3.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\Sit_3.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Yellow\sit_4.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\Sit_4.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Yellow\sit_5.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\Sit_5.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Yellow\sit_6.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\Sit_6.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Yellow\sit_7.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\Sit_7.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Yellow\sit_8.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\Sit_8.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Yellow\sit_9.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\Sit_9.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Yellow\sit_10.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\Sit_10.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Yellow\sit_11.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\Sit_11.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Yellow\sit_12.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\Sit_12.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\tumbling_0.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Yellow\tumbling_0.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\tumbling_1.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Yellow\tumbling_1.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\tumbling_2.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Yellow\tumbling_2.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\tumbling_3.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Yellow\tumbling_3.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\tumbling_4.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Yellow\tumbling_4.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\tumbling_5.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Yellow\tumbling_5.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\tumbling_6.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Yellow\tumbling_6.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\tumbling_7.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Yellow\tumbling_7.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\tumbling_8.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Yellow\tumbling_8.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\tumbling_9.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Yellow\tumbling_9.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\tumbling_10.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Yellow\tumbling_10.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Purple\tumbling_11.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+    <Image Include="Resource\Player_Yellow\tumbling_11.png">
+      <Filter>리소스 파일\Image</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resource.rc">
+      <Filter>리소스 파일</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

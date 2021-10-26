@@ -1,0 +1,15 @@
+﻿  윈플 팀프.cpp
+C:\Users\USER\Desktop\윈플 프로젝트\윈플 프로젝트\윈플 팀프.cpp(640,42): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
+C:\Users\USER\Desktop\윈플 프로젝트\윈플 프로젝트\윈플 팀프.cpp(1146,42): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
+C:\Users\USER\Desktop\윈플 프로젝트\윈플 프로젝트\윈플 팀프.cpp(1157,43): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
+C:\Users\USER\Desktop\윈플 프로젝트\윈플 프로젝트\윈플 팀프.cpp(169,19): warning C4101: 'mem2DC' :참조되지 않은 지역 변수입니다.
+C:\Users\USER\Desktop\윈플 프로젝트\윈플 프로젝트\윈플 팀프.cpp(171,18): warning C4101: 'oldBit2' :참조되지 않은 지역 변수입니다.
+C:\Users\USER\Desktop\윈플 프로젝트\윈플 프로젝트\윈플 팀프.cpp(1406,71): warning C4244: '-=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\USER\Desktop\윈플 프로젝트\윈플 프로젝트\윈플 팀프.cpp(1566,71): warning C4244: '-=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\USER\Desktop\윈플 프로젝트\윈플 프로젝트\윈플 팀프.cpp(1584,41): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
+C:\Users\USER\Desktop\윈플 프로젝트\윈플 프로젝트\윈플 팀프.cpp(1813,49): warning C4244: '+=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\USER\Desktop\윈플 프로젝트\윈플 프로젝트\윈플 팀프.cpp(1819,49): warning C4244: '+=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\USER\Desktop\윈플 프로젝트\윈플 프로젝트\윈플 팀프.cpp(2011,42): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
+C:\Users\USER\Desktop\윈플 프로젝트\윈플 프로젝트\윈플 팀프.cpp(1676): warning C4715: 'Pupple_BlockCrush': 모든 제어 경로에서 값을 반환하지는 않습니다.
+C:\Users\USER\Desktop\윈플 프로젝트\윈플 프로젝트\윈플 팀프.cpp(1766): warning C4715: 'Yellow_BlockCrush': 모든 제어 경로에서 값을 반환하지는 않습니다.
+  윈플 프로젝트.vcxproj -> C:\Users\USER\Desktop\윈플 프로젝트\Debug\윈플 프로젝트.exe
