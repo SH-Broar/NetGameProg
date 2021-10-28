@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="소스 파일">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="헤더 파일">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="소스 파일\Obsolete">
+      <UniqueIdentifier>{263c8033-1eba-450a-908b-504ec8a37f69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Frame">
+      <UniqueIdentifier>{d6a70b91-70dc-48fb-bc72-b09fbf3e3813}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Frame">
+      <UniqueIdentifier>{741608c6-18ed-4b68-ad9d-04dca5aa61a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Scenes">
+      <UniqueIdentifier>{24e0a0b4-f3ac-4940-96bf-0421e853ea62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Objects">
+      <UniqueIdentifier>{95385a0e-fdd4-4d0e-8f18-9d339ea24247}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Scenes">
+      <UniqueIdentifier>{5d518785-b79e-4f0b-9ad2-9db79aac3e1d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Objects">
+      <UniqueIdentifier>{f9a0a160-1260-4f3f-8c13-5c330f92033f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Other">
+      <UniqueIdentifier>{e76e9cd1-a385-46d0-8464-c5fd48736386}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Other\Obsolete">
+      <UniqueIdentifier>{050bc01f-f633-4760-bf9d-ed66108af02b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="WindowProgrammin2018FinalTerm.h">
+      <Filter>헤더 파일\Frame</Filter>
+    </ClInclude>
+    <ClInclude Include="Framework.h">
+      <Filter>헤더 파일\Frame</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene_Ingame.h">
+      <Filter>헤더 파일\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>헤더 파일\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene_Main.h">
+      <Filter>헤더 파일\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>헤더 파일\Other</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>헤더 파일\Other</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>헤더 파일\Other</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>헤더 파일\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="OBJECT_Player.h">
+      <Filter>헤더 파일\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>헤더 파일\Frame</Filter>
+    </ClInclude>
+    <ClInclude Include="OBJECT_Coin.h">
+      <Filter>헤더 파일\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="OBJECT_Skill.h">
+      <Filter>헤더 파일\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene_CharSel.h">
+      <Filter>헤더 파일\Scenes</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>소스 파일\Frame</Filter>
+    </ClCompile>
+    <ClCompile Include="WindowProgrammin2018FinalTerm.cpp">
+      <Filter>소스 파일\Frame</Filter>
+    </ClCompile>
+    <ClCompile Include="Framework.cpp">
+      <Filter>소스 파일\Frame</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>소스 파일\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene_Ingame.cpp">
+      <Filter>소스 파일\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene_Main.cpp">
+      <Filter>소스 파일\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>소스 파일\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="OBJECT_Player.cpp">
+      <Filter>소스 파일\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>소스 파일\Frame</Filter>
+    </ClCompile>
+    <ClCompile Include="OBJECT_Coin.cpp">
+      <Filter>소스 파일\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="OBJECT_Skill.cpp">
+      <Filter>소스 파일\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene_CharSel.cpp">
+      <Filter>소스 파일\Scenes</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="WindowProgrammin2018FinalTerm.rc">
+      <Filter>리소스 파일</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="small.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="WindowProgrammin2018FinalTerm.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
+  </ItemGroup>
+</Project>
