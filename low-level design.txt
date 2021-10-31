@@ -1,0 +1,70 @@
+Low Level 디자인
+
+프로토콜 4종류 지정 - struct
+
+*1)
+int start;
+
+
+*3)
+struct ClientToServer
+{
+	int x
+	int y
+	int DrawState // *2일때는 characterNum
+	bool attack   // *2일때는 ready
+}
+
+*4)
+struct ServerToClient
+{
+	int EnemyX
+	int EnemyY
+	int EnemyDrawState // *2일때는 characterNum
+	bool attacked 	// *2일때는 ready
+	int CoinX
+	int CoinY
+	int CoinState
+	int Time
+}
+
+
+class networkManager
+{
+	networkManager ()
+	networkManager ()
+	void connect ()
+	void sendData (const ClientToServer))
+	void recvData (int Scene, &ServerToClient))
+	
+	private:
+		SOCKET socket;
+}
+-
+class PlayerNetworkManager
+{
+	player()
+	~player()
+
+	static void recvData () // data
+	static void sendData () // data
+	
+	private:
+		SOCKET socket;
+		SOCKET othersocket;
+		ClientToServer Data;
+}
+
+class mainStream
+{
+	bool initiate()	//2 client - listen
+	void playerSelectStart()
+	void gameLogic()
+
+	private:
+		int coinX;
+		int coinY;
+		int coinState;
+		int time;
+		PlayerNetworkManager p[2];
+}
