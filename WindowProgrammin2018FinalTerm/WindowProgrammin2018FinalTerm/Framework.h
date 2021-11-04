@@ -2,6 +2,7 @@
 
 #include <Windows.h>
 #include <iostream>
+#include "protocol.h"
 #include "Scene.h"
 #include "Timer.h"
 
@@ -52,6 +53,8 @@ private:
 	TCHAR m_CaptionTitle[TITLE_MX_LENGTH];	// SetWindow 함수에다가 이 타이틀을 집어넣는다.
 	int m_TitleLength;
 	//-------------------------------------------------------
+public:
+	NetworkManager NetGram;
 
 
 public:

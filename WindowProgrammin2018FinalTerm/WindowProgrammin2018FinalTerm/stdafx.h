@@ -12,6 +12,8 @@
 #include <windows.h>
 #include <atlimage.h>
 
+#pragma comment(lib, "ws2_32.lib")
+
 // C 런타임 헤더 파일입니다.
 #include <stdlib.h>
 #include <malloc.h>

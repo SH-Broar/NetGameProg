@@ -1,0 +1,53 @@
+#ifndef PROTOCOLS 1
+#include <WinSock2.h>
+#include <Windows.h>
+
+#define SERVERIP		"127.0.0.1"
+#define SERVERPORT 9000
+#define BUFSIZE 512
+
+struct ClientToServer
+{
+	int x;	//플레이어의 x좌표
+	int y;	//플레이어의 y좌표
+	int DrawState; // *2일때는 characterNum, 플레이어 상태
+	bool attack;   // *2일때는 ready, 다른 캐릭터에게 공격을 적중시켰는지 확인하는 플래그
+};
+
+struct ServerToClient
+{
+	int EnemyX;	//상대의 x좌표
+	int EnemyY;	//상대의 y좌표
+	int EnemyDrawState; // *2일때는 characterNum, 상대의 상태
+	bool attacked;	// *2일때는 ready, 피격 당했는지 알려주는 플래그
+	int CoinX;	//현재 코인의 X좌표
+	int CoinY;	//현재 코인의 Y좌표
+	int CoinState;	//코인의 상태 (누가 갖고 있는지)
+	int Time; 	//남은 시간
+};
+//인 게임에서 서버가 클라이언트에 보내는 데이터
+//동기 TCP 사용
+
+class NetworkManager
+{
+public:
+
+	NetworkManager();	//소켓 생성
+	~NetworkManager();	//소켓 정리
+	void connection();		//네트워크 연결
+	void sendData(const ClientToServer);	//게임 로직 처리부분에서 넘겨주는 데이터
+	void recvData(int, ServerToClient); //게임 로직 처리 부분으로 넘길 데이터
+
+	void err_quit(char* msg);
+	void err_display(char* msg);
+	int recvn(SOCKET s, char* buf, int len, int flags);
+	int init();
+
+	SOCKET sock;	//서버 소켓
+
+private:
+	SOCKET sock_self;	//자신의 소켓
+
+};
+#endif
+#define PROTOCOLS 1

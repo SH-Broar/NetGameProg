@@ -1,42 +1,56 @@
-﻿  stdafx.cpp
-  Framework.cpp
-J:\__대학 문서\윈플\FinalTerm\WindowProgrammin2018FinalTerm\WindowProgrammin2018FinalTerm\Framework.cpp(245,25): warning C4244: 'return': 'LRESULT'에서 'HRESULT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-J:\__대학 문서\윈플\FinalTerm\WindowProgrammin2018FinalTerm\WindowProgrammin2018FinalTerm\Framework.cpp(312,10): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  Object.cpp
-  OBJECT_Coin.cpp
+﻿  Framework.cpp
+J:\!2021Maxid\Full\2021_2\NGP\텀프\Play\NetGameProg\WindowProgrammin2018FinalTerm\WindowProgrammin2018FinalTerm\protocol.h(1,1): warning C4067: 전처리기 지시문 다음에 예기치 않은 토큰이 있습니다. 줄 바꿈 문자가 필요합니다.
+J:\!2021Maxid\Full\2021_2\NGP\텀프\Play\NetGameProg\WindowProgrammin2018FinalTerm\WindowProgrammin2018FinalTerm\protocol.h(1,1): warning C4067: 전처리기 지시문 다음에 예기치 않은 토큰이 있습니다. 줄 바꿈 문자가 필요합니다.
+J:\!2021Maxid\Full\2021_2\NGP\텀프\Play\NetGameProg\WindowProgrammin2018FinalTerm\WindowProgrammin2018FinalTerm\Framework.cpp(245,25): warning C4244: 'return': 'LRESULT'에서 'HRESULT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+J:\!2021Maxid\Full\2021_2\NGP\텀프\Play\NetGameProg\WindowProgrammin2018FinalTerm\WindowProgrammin2018FinalTerm\Framework.cpp(312,10): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   OBJECT_Player.cpp
-  OBJECT_Skill.cpp
+J:\!2021Maxid\Full\2021_2\NGP\텀프\Play\NetGameProg\WindowProgrammin2018FinalTerm\WindowProgrammin2018FinalTerm\protocol.h(1,1): warning C4067: 전처리기 지시문 다음에 예기치 않은 토큰이 있습니다. 줄 바꿈 문자가 필요합니다.
   Scene.cpp
+J:\!2021Maxid\Full\2021_2\NGP\텀프\Play\NetGameProg\WindowProgrammin2018FinalTerm\WindowProgrammin2018FinalTerm\protocol.h(1,1): warning C4067: 전처리기 지시문 다음에 예기치 않은 토큰이 있습니다. 줄 바꿈 문자가 필요합니다.
   Scene_CharSel.cpp
-J:\__대학 문서\윈플\FinalTerm\WindowProgrammin2018FinalTerm\WindowProgrammin2018FinalTerm\Scene_CharSel.cpp(445,22): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-J:\__대학 문서\윈플\FinalTerm\WindowProgrammin2018FinalTerm\WindowProgrammin2018FinalTerm\Scene_CharSel.cpp(447,24): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-J:\__대학 문서\윈플\FinalTerm\WindowProgrammin2018FinalTerm\WindowProgrammin2018FinalTerm\Scene_CharSel.cpp(452,26): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-J:\__대학 문서\윈플\FinalTerm\WindowProgrammin2018FinalTerm\WindowProgrammin2018FinalTerm\Scene_CharSel.cpp(453,26): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-J:\__대학 문서\윈플\FinalTerm\WindowProgrammin2018FinalTerm\WindowProgrammin2018FinalTerm\Scene_CharSel.cpp(457,26): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-J:\__대학 문서\윈플\FinalTerm\WindowProgrammin2018FinalTerm\WindowProgrammin2018FinalTerm\Scene_CharSel.cpp(458,26): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+J:\!2021Maxid\Full\2021_2\NGP\텀프\Play\NetGameProg\WindowProgrammin2018FinalTerm\WindowProgrammin2018FinalTerm\protocol.h(1,1): warning C4067: 전처리기 지시문 다음에 예기치 않은 토큰이 있습니다. 줄 바꿈 문자가 필요합니다.
+J:\!2021Maxid\Full\2021_2\NGP\텀프\Play\NetGameProg\WindowProgrammin2018FinalTerm\WindowProgrammin2018FinalTerm\Scene_CharSel.cpp(445,22): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+J:\!2021Maxid\Full\2021_2\NGP\텀프\Play\NetGameProg\WindowProgrammin2018FinalTerm\WindowProgrammin2018FinalTerm\Scene_CharSel.cpp(447,24): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+J:\!2021Maxid\Full\2021_2\NGP\텀프\Play\NetGameProg\WindowProgrammin2018FinalTerm\WindowProgrammin2018FinalTerm\Scene_CharSel.cpp(452,26): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+J:\!2021Maxid\Full\2021_2\NGP\텀프\Play\NetGameProg\WindowProgrammin2018FinalTerm\WindowProgrammin2018FinalTerm\Scene_CharSel.cpp(453,26): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+J:\!2021Maxid\Full\2021_2\NGP\텀프\Play\NetGameProg\WindowProgrammin2018FinalTerm\WindowProgrammin2018FinalTerm\Scene_CharSel.cpp(457,26): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+J:\!2021Maxid\Full\2021_2\NGP\텀프\Play\NetGameProg\WindowProgrammin2018FinalTerm\WindowProgrammin2018FinalTerm\Scene_CharSel.cpp(458,26): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   Scene_Ingame.cpp
-J:\__대학 문서\윈플\FinalTerm\WindowProgrammin2018FinalTerm\WindowProgrammin2018FinalTerm\Scene_Ingame.cpp(972,51): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-J:\__대학 문서\윈플\FinalTerm\WindowProgrammin2018FinalTerm\WindowProgrammin2018FinalTerm\Scene_Ingame.cpp(973,51): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-J:\__대학 문서\윈플\FinalTerm\WindowProgrammin2018FinalTerm\WindowProgrammin2018FinalTerm\Scene_Ingame.cpp(984,26): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-J:\__대학 문서\윈플\FinalTerm\WindowProgrammin2018FinalTerm\WindowProgrammin2018FinalTerm\Scene_Ingame.cpp(1126,42): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-J:\__대학 문서\윈플\FinalTerm\WindowProgrammin2018FinalTerm\WindowProgrammin2018FinalTerm\Scene_Ingame.cpp(1130,59): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-J:\__대학 문서\윈플\FinalTerm\WindowProgrammin2018FinalTerm\WindowProgrammin2018FinalTerm\Scene_Ingame.cpp(1131,101): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-J:\__대학 문서\윈플\FinalTerm\WindowProgrammin2018FinalTerm\WindowProgrammin2018FinalTerm\Scene_Ingame.cpp(1133,137): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-J:\__대학 문서\윈플\FinalTerm\WindowProgrammin2018FinalTerm\WindowProgrammin2018FinalTerm\Scene_Ingame.cpp(1138,43): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-J:\__대학 문서\윈플\FinalTerm\WindowProgrammin2018FinalTerm\WindowProgrammin2018FinalTerm\Scene_Ingame.cpp(1142,60): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-J:\__대학 문서\윈플\FinalTerm\WindowProgrammin2018FinalTerm\WindowProgrammin2018FinalTerm\Scene_Ingame.cpp(1143,62): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-J:\__대학 문서\윈플\FinalTerm\WindowProgrammin2018FinalTerm\WindowProgrammin2018FinalTerm\Scene_Ingame.cpp(1145,100): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-J:\__대학 문서\윈플\FinalTerm\WindowProgrammin2018FinalTerm\WindowProgrammin2018FinalTerm\Scene_Ingame.cpp(1150,45): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-J:\__대학 문서\윈플\FinalTerm\WindowProgrammin2018FinalTerm\WindowProgrammin2018FinalTerm\Scene_Ingame.cpp(1154,60): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-J:\__대학 문서\윈플\FinalTerm\WindowProgrammin2018FinalTerm\WindowProgrammin2018FinalTerm\Scene_Ingame.cpp(1155,62): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-J:\__대학 문서\윈플\FinalTerm\WindowProgrammin2018FinalTerm\WindowProgrammin2018FinalTerm\Scene_Ingame.cpp(1157,100): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-J:\__대학 문서\윈플\FinalTerm\WindowProgrammin2018FinalTerm\WindowProgrammin2018FinalTerm\Scene_Ingame.cpp(1162,42): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-J:\__대학 문서\윈플\FinalTerm\WindowProgrammin2018FinalTerm\WindowProgrammin2018FinalTerm\Scene_Ingame.cpp(1166,60): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-J:\__대학 문서\윈플\FinalTerm\WindowProgrammin2018FinalTerm\WindowProgrammin2018FinalTerm\Scene_Ingame.cpp(1167,66): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-J:\__대학 문서\윈플\FinalTerm\WindowProgrammin2018FinalTerm\WindowProgrammin2018FinalTerm\Scene_Ingame.cpp(1169,135): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+J:\!2021Maxid\Full\2021_2\NGP\텀프\Play\NetGameProg\WindowProgrammin2018FinalTerm\WindowProgrammin2018FinalTerm\protocol.h(1,1): warning C4067: 전처리기 지시문 다음에 예기치 않은 토큰이 있습니다. 줄 바꿈 문자가 필요합니다.
+J:\!2021Maxid\Full\2021_2\NGP\텀프\Play\NetGameProg\WindowProgrammin2018FinalTerm\WindowProgrammin2018FinalTerm\Scene_Ingame.cpp(972,51): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+J:\!2021Maxid\Full\2021_2\NGP\텀프\Play\NetGameProg\WindowProgrammin2018FinalTerm\WindowProgrammin2018FinalTerm\Scene_Ingame.cpp(973,51): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+J:\!2021Maxid\Full\2021_2\NGP\텀프\Play\NetGameProg\WindowProgrammin2018FinalTerm\WindowProgrammin2018FinalTerm\Scene_Ingame.cpp(984,26): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+J:\!2021Maxid\Full\2021_2\NGP\텀프\Play\NetGameProg\WindowProgrammin2018FinalTerm\WindowProgrammin2018FinalTerm\Scene_Ingame.cpp(1126,42): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+J:\!2021Maxid\Full\2021_2\NGP\텀프\Play\NetGameProg\WindowProgrammin2018FinalTerm\WindowProgrammin2018FinalTerm\Scene_Ingame.cpp(1130,59): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+J:\!2021Maxid\Full\2021_2\NGP\텀프\Play\NetGameProg\WindowProgrammin2018FinalTerm\WindowProgrammin2018FinalTerm\Scene_Ingame.cpp(1131,101): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+J:\!2021Maxid\Full\2021_2\NGP\텀프\Play\NetGameProg\WindowProgrammin2018FinalTerm\WindowProgrammin2018FinalTerm\Scene_Ingame.cpp(1133,137): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+J:\!2021Maxid\Full\2021_2\NGP\텀프\Play\NetGameProg\WindowProgrammin2018FinalTerm\WindowProgrammin2018FinalTerm\Scene_Ingame.cpp(1138,43): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+J:\!2021Maxid\Full\2021_2\NGP\텀프\Play\NetGameProg\WindowProgrammin2018FinalTerm\WindowProgrammin2018FinalTerm\Scene_Ingame.cpp(1142,60): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+J:\!2021Maxid\Full\2021_2\NGP\텀프\Play\NetGameProg\WindowProgrammin2018FinalTerm\WindowProgrammin2018FinalTerm\Scene_Ingame.cpp(1143,62): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+J:\!2021Maxid\Full\2021_2\NGP\텀프\Play\NetGameProg\WindowProgrammin2018FinalTerm\WindowProgrammin2018FinalTerm\Scene_Ingame.cpp(1145,100): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+J:\!2021Maxid\Full\2021_2\NGP\텀프\Play\NetGameProg\WindowProgrammin2018FinalTerm\WindowProgrammin2018FinalTerm\Scene_Ingame.cpp(1150,45): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+J:\!2021Maxid\Full\2021_2\NGP\텀프\Play\NetGameProg\WindowProgrammin2018FinalTerm\WindowProgrammin2018FinalTerm\Scene_Ingame.cpp(1154,60): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+J:\!2021Maxid\Full\2021_2\NGP\텀프\Play\NetGameProg\WindowProgrammin2018FinalTerm\WindowProgrammin2018FinalTerm\Scene_Ingame.cpp(1155,62): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+J:\!2021Maxid\Full\2021_2\NGP\텀프\Play\NetGameProg\WindowProgrammin2018FinalTerm\WindowProgrammin2018FinalTerm\Scene_Ingame.cpp(1157,100): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+J:\!2021Maxid\Full\2021_2\NGP\텀프\Play\NetGameProg\WindowProgrammin2018FinalTerm\WindowProgrammin2018FinalTerm\Scene_Ingame.cpp(1162,42): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+J:\!2021Maxid\Full\2021_2\NGP\텀프\Play\NetGameProg\WindowProgrammin2018FinalTerm\WindowProgrammin2018FinalTerm\Scene_Ingame.cpp(1166,60): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+J:\!2021Maxid\Full\2021_2\NGP\텀프\Play\NetGameProg\WindowProgrammin2018FinalTerm\WindowProgrammin2018FinalTerm\Scene_Ingame.cpp(1167,66): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+J:\!2021Maxid\Full\2021_2\NGP\텀프\Play\NetGameProg\WindowProgrammin2018FinalTerm\WindowProgrammin2018FinalTerm\Scene_Ingame.cpp(1169,135): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   Scene_Main.cpp
-  Timer.cpp
+J:\!2021Maxid\Full\2021_2\NGP\텀프\Play\NetGameProg\WindowProgrammin2018FinalTerm\WindowProgrammin2018FinalTerm\protocol.h(1,1): warning C4067: 전처리기 지시문 다음에 예기치 않은 토큰이 있습니다. 줄 바꿈 문자가 필요합니다.
+J:\!2021Maxid\Full\2021_2\NGP\텀프\Play\NetGameProg\WindowProgrammin2018FinalTerm\WindowProgrammin2018FinalTerm\protocol.h(1,1): warning C4067: 전처리기 지시문 다음에 예기치 않은 토큰이 있습니다. 줄 바꿈 문자가 필요합니다.
   WindowProgrammin2018FinalTerm.cpp
+J:\!2021Maxid\Full\2021_2\NGP\텀프\Play\NetGameProg\WindowProgrammin2018FinalTerm\WindowProgrammin2018FinalTerm\protocol.h(1,1): warning C4067: 전처리기 지시문 다음에 예기치 않은 토큰이 있습니다. 줄 바꿈 문자가 필요합니다.
+  protocol.cpp
+J:\!2021Maxid\Full\2021_2\NGP\텀프\Play\NetGameProg\WindowProgrammin2018FinalTerm\WindowProgrammin2018FinalTerm\protocol.h(1,1): warning C4067: 전처리기 지시문 다음에 예기치 않은 토큰이 있습니다. 줄 바꿈 문자가 필요합니다.
+J:\!2021Maxid\Full\2021_2\NGP\텀프\Play\NetGameProg\WindowProgrammin2018FinalTerm\WindowProgrammin2018FinalTerm\protocol.cpp(67,31): warning C4996: 'inet_addr': Use inet_pton() or InetPton() instead or define _WINSOCK_DEPRECATED_NO_WARNINGS to disable deprecated API warnings
   코드를 생성하고 있습니다...
-J:\__대학 문서\윈플\FinalTerm\WindowProgrammin2018FinalTerm\WindowProgrammin2018FinalTerm\Framework.cpp(113): warning C4715: 'CFramework::GetPlayer': 모든 제어 경로에서 값을 반환하지는 않습니다.
-  WindowProgrammin2018FinalTerm.vcxproj -> J:\__대학 문서\윈플\FinalTerm\WindowProgrammin2018FinalTerm\x64\Debug\WindowProgrammin2018FinalTerm.exe
+J:\!2021Maxid\Full\2021_2\NGP\텀프\Play\NetGameProg\WindowProgrammin2018FinalTerm\WindowProgrammin2018FinalTerm\Framework.cpp(113): warning C4715: 'CFramework::GetPlayer': 모든 제어 경로에서 값을 반환하지는 않습니다.
+protocol.obj : error LNK2019: __imp_connect"public: int __cdecl NetworkManager::init(void)" (?init@NetworkManager@@QEAAHXZ) 함수에서 참조되는 확인할 수 없는 외부 기호
+protocol.obj : error LNK2019: __imp_htons"public: int __cdecl NetworkManager::init(void)" (?init@NetworkManager@@QEAAHXZ) 함수에서 참조되는 확인할 수 없는 외부 기호
+protocol.obj : error LNK2019: __imp_inet_addr"public: int __cdecl NetworkManager::init(void)" (?init@NetworkManager@@QEAAHXZ) 함수에서 참조되는 확인할 수 없는 외부 기호
+protocol.obj : error LNK2019: __imp_recv"public: int __cdecl NetworkManager::recvn(unsigned __int64,char *,int,int)" (?recvn@NetworkManager@@QEAAH_KPEADHH@Z) 함수에서 참조되는 확인할 수 없는 외부 기호
+protocol.obj : error LNK2019: __imp_socket"public: int __cdecl NetworkManager::init(void)" (?init@NetworkManager@@QEAAHXZ) 함수에서 참조되는 확인할 수 없는 외부 기호
+protocol.obj : error LNK2019: __imp_WSAStartup"public: int __cdecl NetworkManager::init(void)" (?init@NetworkManager@@QEAAHXZ) 함수에서 참조되는 확인할 수 없는 외부 기호
+protocol.obj : error LNK2019: __imp_WSAGetLastError"public: void __cdecl NetworkManager::err_display(char *)" (?err_display@NetworkManager@@QEAAXPEAD@Z) 함수에서 참조되는 확인할 수 없는 외부 기호
+J:\!2021Maxid\Full\2021_2\NGP\텀프\Play\NetGameProg\WindowProgrammin2018FinalTerm\x64\Debug\WindowProgrammin2018FinalTerm.exe : fatal error LNK1120: 7개의 확인할 수 없는 외부 참조입니다.

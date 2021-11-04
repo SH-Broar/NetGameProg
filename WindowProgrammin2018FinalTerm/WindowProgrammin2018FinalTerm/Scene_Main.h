@@ -1,5 +1,6 @@
 #pragma once
 #include "Scene.h"
+#include "protocol.h"
 
 class CMainScene : public CScene
 {

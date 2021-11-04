@@ -75,6 +75,7 @@ bool CFramework::OnCreate(HINSTANCE hInstance, HWND hWnd, const RECT & rc) //생�
 	// 씬 생성
 	BuildScene();
 
+	NetGram.init();
 
 	// 최초의 씬은 무엇인가?
 	ChangeScene(CScene::SceneTag::Main_Lobby);

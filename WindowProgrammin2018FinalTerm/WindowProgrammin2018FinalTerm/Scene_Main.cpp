@@ -11,7 +11,7 @@ CMainScene::CMainScene()
 CMainScene::~CMainScene()
 {
 }
-CMainScene::CMainScene(SceneTag tag, CFramework * pFramework) : CScene(tag, pFramework)
+CMainScene::CMainScene(SceneTag tag, CFramework* pFramework) : CScene(tag, pFramework)
 {
 
 }
@@ -59,7 +59,7 @@ void CMainScene::Render(HDC hdc)
 	default:
 		MainTitle.Draw(hdc, 0, 0, windowX, windowY);
 		break;
-	}	
+	}
 }
 
 void CMainScene::Update(float fTimeElapsed)
@@ -79,8 +79,35 @@ void CMainScene::KeyState() {
 		if (!CheckKey) {
 			switch (SceneNum) {
 			case 0:
-				SceneNum = 1;
-				break;
+			{				//네트워크
+				int retval = 0;
+				char sendBuff[BUFSIZE];
+				char recvBuff[BUFSIZE];
+				int loginCode = 9999;
+				sprintf(sendBuff, "%d",loginCode);
+				retval = send(m_pFramework->NetGram.sock, (char*)sendBuff, sizeof(int), 0);
+				if (retval == SOCKET_ERROR)
+				{
+					m_pFramework->NetGram.err_display("send()");
+					break;
+				}
+
+				int len = 0;
+
+				len = m_pFramework->NetGram.recvn(m_pFramework->NetGram.sock,
+					(char*)&recvBuff, sizeof(int), 0);
+				if (len == SOCKET_ERROR)
+				{
+					m_pFramework->NetGram.err_display("recv()");
+					break;
+				}
+				else if (len == 0)
+					break;
+
+				if (atoi(recvBuff) == 777)
+					SceneNum = 1;
+			}
+			break;
 			case 1:
 				SceneNum = 2;
 				break;
