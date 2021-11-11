@@ -26,6 +26,12 @@
 *.la
 *.a
 
+*.ilk
+*.pdb
+*.idb
+*.db
+*.ipch
+
 # Executables
 *.out
 *.app
