@@ -340,9 +340,9 @@ void Scene_Charsel::Update(float fTimeElapsed)
 		if (Finish)
 		{
 			if (choice1 == 4)
-				choice1 = rand() % 4;
+				choice1 = rand() % 3 + 1;
 			if (choice2 == 4)
-				choice2 = rand() % 4;
+				choice2 = rand() % 3 + 1;
 			m_pFramework->ChangeScene(CScene::SceneTag::Ingame);
 			m_pFramework->curSceneCreate();
 			m_pFramework->BuildPlayer(choice1, choice2);
