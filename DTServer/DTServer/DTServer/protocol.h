@@ -1,6 +1,9 @@
 #pragma once
 #include <WinSock2.h>
 #include <Windows.h>
+#include <iostream>
+#include <vector>
+#include <stdexcept>
 
 struct ClientToServer
 {
@@ -23,7 +26,7 @@ struct ServerToClient
 };
 //인 게임에서 서버가 클라이언트에 보내는 데이터
 //동기 TCP 사용
-
+/*
 //서버 네트워크 클래스;
 class PlayerNetworkManager
 {
@@ -40,3 +43,4 @@ private:
 	ClientToServer Data;	//받은 플레이어 데이터 저장
 };
 
+*/

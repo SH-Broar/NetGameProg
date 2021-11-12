@@ -1,9 +1,8 @@
 ﻿#pragma comment(lib, "ws2_32")
 
-#include <iostream>
-#include <vector>
-#include "protocol.h"
 
+#include "protocol.h"
+#include "MainStream.h"
 
 #define SERVERPORT 9000
 #define BUFSIZE 512
@@ -18,57 +17,29 @@ void SetCursorPosition(int y)
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
 }
 
-void err_quit(char* msg)
-{
-	LPVOID lpMsgBuf;
-	FormatMessage(
-		FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM,
-		NULL, WSAGetLastError(),
-		MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
-		(LPTSTR)&lpMsgBuf, 0, NULL);
-	MessageBox(NULL, (LPCTSTR)lpMsgBuf, (LPCTSTR)msg, MB_ICONERROR);
-	LocalFree(lpMsgBuf);
-	exit(1);
-}
-
-void err_display(char* msg)
-{
-	LPVOID lpMsgBuf;
-	FormatMessage(
-		FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM,
-		NULL, WSAGetLastError(),
-		MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
-		(LPTSTR)&lpMsgBuf, 0, NULL);
-	printf("[%s] %s", msg, (char*)lpMsgBuf);
-	LocalFree(lpMsgBuf);
-}
-
-
-int recvn(SOCKET s, char* buf, int len, int flags)
-{
-	int received;
-	char* ptr = buf;
-	int left = len;
-
-	while (left > 0)
-	{
-		received = recv(s, ptr, left, flags);
-		if (received == SOCKET_ERROR)
-		{
-			return SOCKET_ERROR;
-		}
-		else if (received == 0)
-			break;
-		left -= received;
-		ptr += received;
-	}
-
-	return (len - left);
-}
 
 int main()
 {
+	//서버 초기화
+	MainStream mainStream;
+	//클라이언트 접속 대기 
+	mainStream.WaitForClientToConnect();
 
+
+	mainStream.PlayerSelectStart();
+	//모든 클라이언트에 씬 변환 데이터 전송
+	//캐릭터 선택 창 
+
+	//수신 쓰레드 3개 만들기
+
+	//송신 쓰레드 1개 만들기
+
+	mainStream.GameLogic();
+	//모든 클라이언트가 준비완료가 되면 게임 시작
+
+	//게임 씬
+
+	/*
 	int retval;
 	InitializeCriticalSection(&cs);
 
@@ -122,9 +93,9 @@ int main()
 	DeleteCriticalSection(&cs);
 	WSACleanup();
 	return 0;
-
+	*/
 }
-
+/*
 DWORD WINAPI ProcessClient(LPVOID arg)
 {
 	SOCKET client_sock = (SOCKET)arg;
@@ -188,3 +159,4 @@ DWORD WINAPI ProcessClient(LPVOID arg)
 	//closeSocket()
 	closesocket(client_sock);
 }
+*/
