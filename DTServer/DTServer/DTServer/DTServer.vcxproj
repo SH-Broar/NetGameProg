@@ -141,9 +141,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="DTServer.cpp" />
+    <ClCompile Include="MainStream.cpp" />
+    <ClCompile Include="PlayerNetworkManage.cpp" />
+    <ClCompile Include="network.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="MainStream.h" />
+    <ClInclude Include="PlayerNetworkManager.h" />
     <ClInclude Include="protocol.h" />
+    <ClInclude Include="network.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
