@@ -1,6 +1,6 @@
 #include "network.h"
 
-void err_quit(char* msg)
+void err_quit(const char* msg)
 {
 	LPVOID lpMsgBuf;
 	FormatMessage(
@@ -13,7 +13,7 @@ void err_quit(char* msg)
 	exit(1);
 }
 
-void err_display(char* msg)
+void err_display(const char* msg)
 {
 	LPVOID lpMsgBuf;
 	FormatMessage(

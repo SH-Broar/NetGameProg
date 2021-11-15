@@ -11,7 +11,7 @@ MainStream::MainStream() {
 
 	
 	if (WSAStartup(MAKEWORD(2, 2), &wsa) != 0)
-		throw std::invalid_argument("Window Socket Startup Failed");
+		err_quit("WSAStartup()");
 }
 
 MainStream::~MainStream(){
@@ -53,16 +53,30 @@ void MainStream::WaitForClientToConnect() {
 			err_display("accept()");
 			break;
 		}
+#ifdef TEST_BEFORE_CLIENT_COMPLETE
+		char test_num[] = "777 ";
+		send(client_sock, (char*)&test_num, sizeof(char) * 4, 0);
+#else
+		send(client_sock, (char*)&player_num, sizeof(int), 0);
+#endif
 		players[player_num++].setSocket(client_sock);
 	}
 	return;
 }
 
-void MainStream::PlayerSelectStart(){}
+void MainStream::PlayerSelectStart(){
+	ServerToClient scene;
+	for (int i = 0; i < 3; ++i) {
+		players[i].sendData(scene);	//캐릭터 선택 창으로 넘어갔다는 것을 알린다.
+
+	}
+}
 void MainStream::GameLogic(){}
 
 
+DWORD WINAPI sendData(LPVOID arg) {
 
+}
 
 DWORD WINAPI MainStream::sendData(LPVOID arg) {
 	return 0;

@@ -5,20 +5,21 @@
 #include <vector>
 #include <stdexcept>
 
+#define TEST_BEFORE_CLIENT_COMPLETE
+
+
 struct ClientToServer
 {
+	int playerNum;
 	int x;	//플레이어의 x좌표
 	int y;	//플레이어의 y좌표
-	int DrawState; // *2일때는 characterNum, 플레이어 상태
-	bool attack;   // *2일때는 ready, 다른 캐릭터에게 공격을 적중시켰는지 확인하는 플래그
+	int drawState; // *2일때는 characterNum, 플레이어 상태
+	char AttackedPlayerNum;   // *2일때는 ready, 다른 캐릭터에게 공격을 적중시켰는지 확인하는 플래그
 };
 
 struct ServerToClient
 {
-	int EnemyX;	//상대의 x좌표
-	int EnemyY;	//상대의 y좌표
-	int EnemyDrawState; // *2일때는 characterNum, 상대의 상태
-	bool attacked;	// *2일때는 ready, 피격 당했는지 알려주는 플래그
+	ClientToServer PlayerData[3];
 	int CoinX;	//현재 코인의 X좌표
 	int CoinY;	//현재 코인의 Y좌표
 	int CoinState;	//코인의 상태 (누가 갖고 있는지)
