@@ -53,6 +53,8 @@ void MainStream::WaitForClientToConnect() {
 			err_display("accept()");
 			break;
 		}
+		char buf[100];
+		recvn(client_sock, buf, 100, NULL);
 #ifdef TEST_BEFORE_CLIENT_COMPLETE
 		char test_num[] = "777 ";
 		send(client_sock, (char*)&test_num, sizeof(char) * 4, 0);
@@ -65,20 +67,21 @@ void MainStream::WaitForClientToConnect() {
 }
 
 void MainStream::PlayerSelectStart(){
-	ServerToClient scene;
-	for (int i = 0; i < 3; ++i) {
-		players[i].sendData(scene);	//캐릭터 선택 창으로 넘어갔다는 것을 알린다.
-
-	}
+	data.CoinState = 1000;
+	HANDLE tmpHandle = CreateThread(NULL, 0, SendData, this, 0, NULL);
+	if (tmpHandle) CloseHandle(tmpHandle);
 }
 void MainStream::GameLogic(){}
 
 
-DWORD WINAPI sendData(LPVOID arg) {
-
-}
-
-DWORD WINAPI MainStream::sendData(LPVOID arg) {
+DWORD WINAPI MainStream::SendData(LPVOID arg) {
+	MainStream* stream = (MainStream*)arg;
+	while (true) {
+		stream->players[0].sendData(stream->data);
+		stream->players[1].sendData(stream->data);
+		stream->players[2].sendData(stream->data);
+		Sleep(100);
+	}
 	return 0;
 }
 

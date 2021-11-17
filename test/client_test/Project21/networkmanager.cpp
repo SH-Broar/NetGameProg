@@ -13,7 +13,7 @@ void NetworkManager::Connect() {
 	serveraddr.sin_port = htons(SERVERPORT);
 	retval = connect(Socket, (SOCKADDR*)&serveraddr, sizeof(serveraddr));
 
-	
+		
 }
 
 int NetworkManager::receive_number_from_server() {

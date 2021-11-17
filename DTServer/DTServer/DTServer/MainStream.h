@@ -16,7 +16,7 @@ public:
 	void WaitForClientToConnect();
 	void PlayerSelectStart();
 	void GameLogic();
-	static DWORD WINAPI sendData(LPVOID arg);
+	static DWORD WINAPI SendData(LPVOID arg);
 };
 
 
