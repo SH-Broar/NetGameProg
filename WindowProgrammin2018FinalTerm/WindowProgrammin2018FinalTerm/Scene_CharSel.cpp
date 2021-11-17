@@ -63,6 +63,7 @@ bool Scene_Charsel::OnCreate()
 
 	I_Select_L.Load(L"Graphic\\UI\\CharSel\\L.png");
 	I_Select_R.Load(L"Graphic\\UI\\CharSel\\R.png");
+	I_Select_M.Load(L"Graphic\\UI\\CharSel\\M.png");
 
 	for (int i = 0; i < 10; i++) {
 		wsprintf(LoadText, L"Graphic\\UI\\CharSel\\NUM\\%d.png", i);
@@ -74,11 +75,16 @@ bool Scene_Charsel::OnCreate()
 	timer = 60;
 	count = 60;
 
+	P1_L = false;
+	P1_R = false;
 	P2_L = false;
 	P2_R = false;
+	P3_L = false;
+	P3_R = false;
 
 	choice1 = 1;
-	choice2 = 1;
+	choice2 = 3;
+	choice3 = 2;
 
 	Finish = false;
 
@@ -158,6 +164,34 @@ bool Scene_Charsel::OnCreate()
 			R_READY_R.left = 1250;
 			R_READY_R.bottom = 205;
 			R_READY_R.right = 633;
+		}
+
+		//캐릭터 M
+		{
+			R_CHAR_M[0].top = 0;
+			R_CHAR_M[0].left = 500;
+			R_CHAR_M[0].bottom = 1075;
+			R_CHAR_M[0].right = 928;
+						
+			R_CHAR_M[1].top = 25;
+			R_CHAR_M[1].left = 600;
+			R_CHAR_M[1].bottom = 1049;
+			R_CHAR_M[1].right = 596;
+						
+			R_CHAR_M[2].top = 2;
+			R_CHAR_M[2].left = 500;
+			R_CHAR_M[2].bottom = 1078;
+			R_CHAR_M[2].right = 669;
+						
+			R_CHAR_M[3].top = 5;
+			R_CHAR_M[3].left = 500;
+			R_CHAR_M[3].bottom = 1075;
+			R_CHAR_M[3].right = 603;
+
+			R_READY_M.top = 200;
+			R_READY_M.left = 650;
+			R_READY_M.bottom = 205;
+			R_READY_M.right = 633;
 		}
 
 		{
@@ -309,6 +343,59 @@ void Scene_Charsel::KeyState() {
 		}
 	}
 
+	//P3 레디
+	if (GetAsyncKeyState(0x42) & 0x8000) {
+		ready3 = true;
+	}
+	if (!ready3) {
+		// j
+		if (GetAsyncKeyState(0x4A) & 0x8000) {
+			if (!P3_L) {
+				switch (choice3) {
+				case 1:
+					choice3 = 4;
+					break;
+				case 2:
+					choice3 = 1;
+					break;
+				case 3:
+					choice3 = 2;
+					break;
+				case 4:
+					choice3 = 3;
+					break;
+				}
+			}
+			P3_L = true;
+		}
+		else {
+			P3_L = false;
+		}
+		// l
+		if (GetAsyncKeyState(0x4C) & 0x8000) {
+			if (!P3_R) {
+				switch (choice3) {
+				case 1:
+					choice3 = 2;
+					break;
+				case 2:
+					choice3 = 3;
+					break;
+				case 3:
+					choice3 = 4;
+					break;
+				case 4:
+					choice3 = 1;
+					break;
+				}
+			}
+			P3_R = true;
+		}
+		else {
+			P3_R = false;
+		}
+	}
+
 }
 
 // 1/60으로 업데이트됨
@@ -330,10 +417,11 @@ void Scene_Charsel::Update(float fTimeElapsed)
 		if (timer == 0) {
 			ready1 = true;
 			ready2 = true;
+			ready3 = true;
 		}
 
 		//둘다 참이면 피니쉬
-		if (ready1&&ready2) {
+		if (ready1&&ready2&&ready3) {
 			Finish = true;
 
 		}
@@ -343,9 +431,11 @@ void Scene_Charsel::Update(float fTimeElapsed)
 				choice1 = rand() % 3 + 1;
 			if (choice2 == 4)
 				choice2 = rand() % 3 + 1;
+			if (choice3 == 4)
+				choice3 = rand() % 3 + 1;
 			m_pFramework->ChangeScene(CScene::SceneTag::Ingame);
 			m_pFramework->curSceneCreate();
-			m_pFramework->BuildPlayer(choice1, choice2);
+			m_pFramework->BuildPlayer(choice1, choice2, choice3);
 			Scene_Charsel::OnDestroy();
 
 		}
@@ -405,12 +495,29 @@ void Scene_Charsel::Render(HDC hdc)
 		break;
 	}
 
+	switch (choice3)
+	{
+	case 1:
+		I_charL[0].Draw(hdc, CalcImage(R_CHAR_M[0]));
+		break;
+	case 2:
+		I_charL[1].Draw(hdc, CalcImage(R_CHAR_M[1]));
+		break;
+	case 3:
+		I_charL[2].Draw(hdc, CalcImage(R_CHAR_M[2]));
+		break;
+	case 4:
+		I_charL[3].Draw(hdc, CalcImage(R_CHAR_M[3]));
+		break;
+	}
+
 
 
 	I_list.Draw(hdc, CalcImage(R_LIST));
 
 	I_Select_L.Draw(hdc, CalcImage(R_SELECT[choice1 - 1]));
 	I_Select_R.Draw(hdc, CalcImage(R_SELECT[choice2 - 1]));
+	I_Select_M.Draw(hdc, CalcImage(R_SELECT[choice3 - 1]));
 
 	//만약 레디 했다면
 	if (ready1) {
@@ -419,6 +526,10 @@ void Scene_Charsel::Render(HDC hdc)
 	if (ready2) {
 		I_Ready.Draw(hdc, CalcImage(R_READY_R));
 	}
+	if (ready3) {
+		I_Ready.Draw(hdc, CalcImage(R_READY_M));
+	}
+
 
 
 

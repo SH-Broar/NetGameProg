@@ -7,7 +7,6 @@ void PlayerNetworkManager::setSocket(const SOCKET& sock) {
 }
 
 DWORD WINAPI PlayerNetworkManager::recvData(LPVOID arg) {
-	
 	return 0;
 }
 void PlayerNetworkManager::sendData(const ServerToClient& data) {

@@ -82,7 +82,5 @@ DWORD WINAPI MainStream::SendData(LPVOID arg) {
 		stream->players[2].sendData(stream->data);
 		Sleep(100);
 	}
-	return 0;
-}
 
 

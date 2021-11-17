@@ -14,6 +14,35 @@ NetworkManager::~NetworkManager()
 {
 }
 
+bool NetworkManager::connection()
+{
+	int retval = 0;
+	char sendBuff[BUFSIZE];
+	char recvBuff[BUFSIZE];
+	int loginCode = 9999;
+	sprintf(sendBuff, "%d", loginCode);
+	retval = send(sock, (char*)sendBuff, sizeof(int), 0);
+	if (retval == SOCKET_ERROR)
+	{
+		err_display("send()");
+		return false;
+	}
+
+	int len = 0;
+
+	len = recvn(sock,(char*)&recvBuff, sizeof(int), 0);
+	if (len == SOCKET_ERROR)
+	{
+		err_display("recv()");
+		return false;
+	}
+	else if (len == 0)
+		return false;
+
+	if (atoi(recvBuff) == 777)
+		return true;
+}
+
 void NetworkManager::err_quit(char* msg)
 {
 	LPVOID lpMsgBuf;

@@ -44,7 +44,7 @@ private:
 	bool inactive = false;
 	CGameTimer*		m_ticker = NULL;
 	
-	CObject_Player* player1 = NULL , *player2 = NULL;
+	CObject_Player* player1 = NULL , *player2 = NULL, *player3 = NULL;
 
 	std::chrono::system_clock::time_point m_current_time;
 	std::chrono::duration<double> m_timeElapsed;	// 시간이 얼마나 지났는가?
@@ -70,7 +70,7 @@ public:
 	HDC GetTotalDC();
 	void CreatebackBuffer();	// HBITMAP을 만든다.
 	void BuildScene();
-	void BuildPlayer(int p1, int p2);
+	void BuildPlayer(int p1, int p2, int p3);
 	void ReleaseScene();	
 
 	bool OnDestroy();	// HDC로 만든 버퍼가 있으면 릴리즈를 한다.
