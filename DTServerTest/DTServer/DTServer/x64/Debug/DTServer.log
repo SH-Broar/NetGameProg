@@ -1,0 +1,8 @@
+﻿  DTServer.cpp
+C:\WorkStation\2021_2\NGP\텀프\Play\NetGameProg back\DTServerTest\DTServer\DTServer\DTServer.cpp(16,18): warning C4838: 'int'에서 'SHORT'(으)로의 변환에는 축소 변환이 필요합니다.
+  MainStream.cpp
+C:\WorkStation\2021_2\NGP\텀프\Play\NetGameProg back\DTServerTest\DTServer\DTServer\MainStream.cpp(9,6): warning C4101: 'retval' :참조되지 않은 지역 변수입니다.
+  PlayerNetworkManage.cpp
+  network.cpp
+  코드를 생성하고 있습니다...
+  DTServer.vcxproj -> C:\WorkStation\2021_2\NGP\텀프\Play\NetGameProg back\DTServerTest\DTServer\x64\Debug\DTServer.exe
