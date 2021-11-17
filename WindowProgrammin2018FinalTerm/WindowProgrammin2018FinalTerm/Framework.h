@@ -55,13 +55,14 @@ private:
 	//-------------------------------------------------------
 public:
 	NetworkManager NetGram;
-
+	ClientToServer CTS;
+	ServerToClient STC;
 
 public:
 	CFramework();
 	~CFramework();
 
-	RECT p1, p2;
+	RECT p1, p2, p3;
 	bool OnCreate(HINSTANCE hInstance, HWND hWnd, const RECT &rc); // rc는 윈도우크기이고, m_rcClient에 저장한다.
 	RECT GetRect();
 	HDC* GetTileDC();

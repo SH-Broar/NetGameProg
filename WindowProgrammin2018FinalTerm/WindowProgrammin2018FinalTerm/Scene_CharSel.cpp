@@ -70,6 +70,7 @@ bool Scene_Charsel::OnCreate()
 		num[i].Load(LoadText);
 	}
 
+	pn = m_pFramework->NetGram.getPN();
 
 	//타이머 초기화
 	timer = 60;
@@ -230,188 +231,247 @@ void Scene_Charsel::BuildObjects()
 }
 
 
-
 //키 상태를 입력받음.
-void Scene_Charsel::KeyState() {
-
-	//P1 레디
-	if (GetAsyncKeyState(0x41) & 0x8000) {
-		ready1 = true;
-	}
-	if (!ready1) {
-		// f
-		if (GetAsyncKeyState(0x46) & 0x8000) {
-			if (!P1_L) {
-				switch (choice1) {
-				case 1:
-					choice1 = 4;
-					break;
-				case 2:
-					choice1 = 1;
-					break;
-				case 3:
-					choice1 = 2;
-					break;
-				case 4:
-					choice1 = 3;
-					break;
+void Scene_Charsel::KeyState()
+{
+	switch (pn)
+	{
+	case 1:
+		//P1 레디
+		if (GetAsyncKeyState(0x41) & 0x8000) {
+			ready1 = true;
+		}
+		if (!ready1) {
+			// f
+			if (GetAsyncKeyState(VK_LEFT) & 0x8000) {
+				if (!P1_L) {
+					switch (choice1) {
+					case 1:
+						choice1 = 4;
+						break;
+					case 2:
+						choice1 = 1;
+						break;
+					case 3:
+						choice1 = 2;
+						break;
+					case 4:
+						choice1 = 3;
+						break;
+					}
 				}
+				P1_L = true;
 			}
-			P1_L = true;
-		}
-		else {
-			P1_L = false;
-		}
-		// h
-		if (GetAsyncKeyState(0x48) & 0x8000) {
-			if (!P1_R) {
-				switch (choice1) {
-				case 1:
-					choice1 = 2;
-					break;
-				case 2:
-					choice1 = 3;
-					break;
-				case 3:
-					choice1 = 4;
-					break;
-				case 4:
-					choice1 = 1;
-					break;
+			else {
+				P1_L = false;
+			}
+			// h
+			if (GetAsyncKeyState(VK_RIGHT) & 0x8000) {
+				if (!P1_R) {
+					switch (choice1) {
+					case 1:
+						choice1 = 2;
+						break;
+					case 2:
+						choice1 = 3;
+						break;
+					case 3:
+						choice1 = 4;
+						break;
+					case 4:
+						choice1 = 1;
+						break;
+					}
 				}
+				P1_R = true;
 			}
-			P1_R = true;
+			else {
+				P1_R = false;
+			}
 		}
-		else {
-			P1_R = false;
+		break;
+	case 2:
+		//P1 레디
+		if (GetAsyncKeyState(0x41) & 0x8000) {
+			ready2 = true;
 		}
+		if (!ready2) {
+			// f
+			if (GetAsyncKeyState(VK_LEFT) & 0x8000) {
+				if (!P2_L) {
+					switch (choice2) {
+					case 1:
+						choice2 = 4;
+						break;
+					case 2:
+						choice2 = 1;
+						break;
+					case 3:
+						choice2 = 2;
+						break;
+					case 4:
+						choice2 = 3;
+						break;
+					}
+				}
+				P2_L = true;
+			}
+			else {
+				P2_L = false;
+			}
+			// h
+			if (GetAsyncKeyState(VK_RIGHT) & 0x8000) {
+				if (!P2_R) {
+					switch (choice2) {
+					case 1:
+						choice2 = 2;
+						break;
+					case 2:
+						choice2 = 3;
+						break;
+					case 3:
+						choice2 = 4;
+						break;
+					case 4:
+						choice2 = 1;
+						break;
+					}
+				}
+				P2_R = true;
+			}
+			else {
+				P2_R = false;
+			}
+		}
+		break;
+	case 3:
+		//P1 레디
+		if (GetAsyncKeyState(0x41) & 0x8000) {
+			ready3 = true;
+		}
+		if (!ready3) {
+			// f
+			if (GetAsyncKeyState(VK_LEFT) & 0x8000) {
+				if (!P3_L) {
+					switch (choice3) {
+					case 1:
+						choice3 = 4;
+						break;
+					case 2:
+						choice3 = 1;
+						break;
+					case 3:
+						choice3 = 2;
+						break;
+					case 4:
+						choice3 = 3;
+						break;
+					}
+				}
+				P3_L = true;
+			}
+			else {
+				P3_L = false;
+			}
+			// h
+			if (GetAsyncKeyState(VK_RIGHT) & 0x8000) {
+				if (!P3_R) {
+					switch (choice3) {
+					case 1:
+						choice3 = 2;
+						break;
+					case 2:
+						choice3 = 3;
+						break;
+					case 3:
+						choice3 = 4;
+						break;
+					case 4:
+						choice3 = 1;
+						break;
+					}
+				}
+				P3_R = true;
+			}
+			else {
+				P3_R = false;
+			}
+		}
+		break;
 	}
 
 
-	//P2 레디
-	if (GetAsyncKeyState(VK_NUMPAD1) & 0x8000) {
-		ready2 = true;
-	}
-	if (!ready2) {
-		if (GetAsyncKeyState(VK_LEFT) & 0x8000) {
-			if (!P2_L) {
-				switch (choice2) {
-				case 1:
-					choice2 = 4;
-					break;
-				case 2:
-					choice2 = 1;
-					break;
-				case 3:
-					choice2 = 2;
-					break;
-				case 4:
-					choice2 = 3;
-					break;
-				}
-			}
-			P2_L = true;
+}
 
-		}
-		else {
-			P2_L = false;
-		}
+void Scene_Charsel::NetCheck()
+{
+	 m_pFramework->NetGram.recvData(m_pFramework->STC);
+	
+	 choice1 = m_pFramework->STC.PlayerData[0].state;
+	 choice2 = m_pFramework->STC.PlayerData[1].state;
+	 choice3 = m_pFramework->STC.PlayerData[2].state;
+	 printf("%d %d %d\n", choice1, choice2, choice3);
 
+	 ready1 = m_pFramework->STC.PlayerData[0].AttackedPlayerNum[0];
+	 ready2 = m_pFramework->STC.PlayerData[1].AttackedPlayerNum[0];
+	 ready3 = m_pFramework->STC.PlayerData[2].AttackedPlayerNum[0];
 
+	 timer = m_pFramework->STC.Time;
+}
 
-		if (GetAsyncKeyState(VK_RIGHT) & 0x8000) {
-			if (!P2_R) {
-				switch (choice2) {
-				case 1:
-					choice2 = 2;
-					break;
-				case 2:
-					choice2 = 3;
-					break;
-				case 3:
-					choice2 = 4;
-					break;
-				case 4:
-					choice2 = 1;
-					break;
-				}
-			}
-			P2_R = true;
-		}
-		else {
-			P2_R = false;
-		}
+void Scene_Charsel::NetSend()
+{
+	//printf("NetSend1 : %d\n", pn);
+	switch (pn)
+	{
+	case 1:
+		//printf("NetSend2 : %d\n", choice1);
+		m_pFramework->CTS.set(1,choice1,ready1);
+		break;
+	case 2:
+		m_pFramework->CTS.set(2,choice2, ready2);
+		break;
+	case 3:
+		m_pFramework->CTS.set(3,choice3, ready3);
+		break;
+	default:
+		m_pFramework->CTS.set(1, choice1, ready1);
+		break;
 	}
 
-	//P3 레디
-	if (GetAsyncKeyState(0x42) & 0x8000) {
-		ready3 = true;
-	}
-	if (!ready3) {
-		// j
-		if (GetAsyncKeyState(0x4A) & 0x8000) {
-			if (!P3_L) {
-				switch (choice3) {
-				case 1:
-					choice3 = 4;
-					break;
-				case 2:
-					choice3 = 1;
-					break;
-				case 3:
-					choice3 = 2;
-					break;
-				case 4:
-					choice3 = 3;
-					break;
-				}
-			}
-			P3_L = true;
-		}
-		else {
-			P3_L = false;
-		}
-		// l
-		if (GetAsyncKeyState(0x4C) & 0x8000) {
-			if (!P3_R) {
-				switch (choice3) {
-				case 1:
-					choice3 = 2;
-					break;
-				case 2:
-					choice3 = 3;
-					break;
-				case 3:
-					choice3 = 4;
-					break;
-				case 4:
-					choice3 = 1;
-					break;
-				}
-			}
-			P3_R = true;
-		}
-		else {
-			P3_R = false;
-		}
-	}
+	printf("NetSend : %d %d %d %d %d\n", 
+		m_pFramework->CTS.AttackedPlayerNum[0],
+		m_pFramework->CTS.PlayerNum, 
+		m_pFramework->CTS.state,
+		m_pFramework->CTS.x,
+		m_pFramework->CTS.y);
+	m_pFramework->NetGram.sendData(m_pFramework->CTS);
+}
 
+void voidBuffer(SOCKET s)
+{
+	u_long tmpl, i;
+	char tmpc; ioctlsocket(s, FIONREAD, &tmpl);
+	for (i = 0; i < tmpl; i++)
+		recv(s, &tmpc, sizeof(char), 0);
 }
 
 // 1/60으로 업데이트됨
 void Scene_Charsel::Update(float fTimeElapsed)
 {
+	NetCheck();
 	KeyState();
+	//voidBuffer(m_pFramework->NetGram.getSock(true));
 	//종료되지 않아야지 계속 실행한다.
 	if (!Finish) {
-		//매 프레임 체크
-		if (count == 0) {
-			count = 60;
-			timer--;
-		}
-		else {
-			count--;
-		}
+		////매 프레임 체크
+		//if (count == 0) {
+		//	count = 60;
+		//	timer--;
+		//}
+		//else {
+		//	count--;
+		//}
 
 		//타이머가 0이되면 강제로 레디 시킴
 		if (timer == 0) {
@@ -420,10 +480,9 @@ void Scene_Charsel::Update(float fTimeElapsed)
 			ready3 = true;
 		}
 
-		//둘다 참이면 피니쉬
+		//셋다 참이면 피니쉬
 		if (ready1&&ready2&&ready3) {
 			Finish = true;
-
 		}
 		if (Finish)
 		{
@@ -440,8 +499,9 @@ void Scene_Charsel::Update(float fTimeElapsed)
 
 		}
 
-
+		
 	}
+	NetSend();
 }
 
 void Scene_Charsel::Render(HDC hdc)
@@ -569,7 +629,7 @@ RECT Scene_Charsel::CalcImage(RECT input) {
 		calc.right = calc.left + input.right*(windowY / Y);
 	}
 
-	printf("top : %d, bottom : %d, left : %d, right : %d\n", calc.top, calc.bottom, calc.left, calc.right);
+	//printf("top : %d, bottom : %d, left : %d, right : %d\n", calc.top, calc.bottom, calc.left, calc.right);
 	//계산된 결과를 리턴한다.
 	return calc;
 }

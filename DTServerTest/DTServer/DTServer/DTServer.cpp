@@ -23,8 +23,9 @@ int main()
 	//서버 초기화
 	MainStream mainStream;
 	//클라이언트 접속 대기 
-	mainStream.WaitForClientToConnect();
 
+	mainStream.WaitForClientToConnect();
+	printf("접속 대기 끝\n");
 
 	mainStream.PlayerSelectStart();
 	//모든 클라이언트에 씬 변환 데이터 전송
