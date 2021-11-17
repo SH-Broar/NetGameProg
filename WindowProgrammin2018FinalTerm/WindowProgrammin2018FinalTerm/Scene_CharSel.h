@@ -37,13 +37,14 @@ private:
 	CImage I_list;
 
 	CImage I_Select_L, I_Select_R;
+	CImage I_Select_M;
 
 	CImage num[10];
 
 	//선택된 캐릭터입니다.
-	int choice1,choice2;
+	int choice1,choice2, choice3;
 	//레디가 되었는지 체크합니다.
-	bool ready1 = false, ready2 = false;
+	bool ready1 = false, ready2 = false , ready3 = false;
 
 	int timer;
 	int count;
@@ -51,16 +52,16 @@ private:
 	bool Finish = false;
 
 	//자동으로 넘어가는 것을 방지하기 위한 변수
-	bool P2_L, P2_R;
-	bool P1_L, P1_R;
+	bool P2_L, P2_R, P3_R;
+	bool P1_L, P1_R, P3_L;
 	WCHAR LoadText[100];
 
 	//내부 UI 위치값입니다. 1920 1080 기준으로 작성하였습니다.
-	RECT R_NUM1, R_NUM2;
-	RECT R_CHAR_L[4], R_CHAR_R[4];
+	RECT R_NUM1, R_NUM2, R_NUM3;
+	RECT R_CHAR_L[4], R_CHAR_R[4], R_CHAR_M[4];
 	RECT R_SELECT[4];
 	RECT R_LIST;
-	RECT R_READY_L, R_READY_R;
+	RECT R_READY_L, R_READY_R, R_READY_M;
 
 
 

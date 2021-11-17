@@ -21,6 +21,7 @@ void CMainScene::OnDestroy() {
 	MainTitle.Destroy();
 	Manual[0].Destroy();
 	Manual[1].Destroy();
+
 }
 
 bool CMainScene::OnCreate()
@@ -80,32 +81,15 @@ void CMainScene::KeyState() {
 			switch (SceneNum) {
 			case 0:
 			{				//네트워크
-				int retval = 0;
-				char sendBuff[BUFSIZE];
-				char recvBuff[BUFSIZE];
-				int loginCode = 9999;
-				sprintf(sendBuff, "%d",loginCode);
-				retval = send(m_pFramework->NetGram.sock, (char*)sendBuff, sizeof(int), 0);
-				if (retval == SOCKET_ERROR)
+				if (m_pFramework->NetGram.connection())
 				{
-					m_pFramework->NetGram.err_display("send()");
-					break;
-				}
-
-				int len = 0;
-
-				len = m_pFramework->NetGram.recvn(m_pFramework->NetGram.sock,
-					(char*)&recvBuff, sizeof(int), 0);
-				if (len == SOCKET_ERROR)
-				{
-					m_pFramework->NetGram.err_display("recv()");
-					break;
-				}
-				else if (len == 0)
-					break;
-
-				if (atoi(recvBuff) == 777)
+					printf("connected w/ Server\n");
 					SceneNum = 1;
+				}
+				else
+				{
+					printf("connection error!");
+				}
 			}
 			break;
 			case 1:

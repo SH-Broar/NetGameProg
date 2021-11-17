@@ -75,7 +75,7 @@ void MainStream::GameLogic(){}
 
 
 DWORD WINAPI sendData(LPVOID arg) {
-
+	return NULL;
 }
 
 DWORD WINAPI MainStream::sendData(LPVOID arg) {

@@ -75,6 +75,7 @@ bool CFramework::OnCreate(HINSTANCE hInstance, HWND hWnd, const RECT & rc) //생�
 	// 씬 생성
 	BuildScene();
 
+	cout << "NetGram Init" << endl;
 	NetGram.init();
 
 	// 최초의 씬은 무엇인가?
@@ -157,20 +158,26 @@ void CFramework::BuildScene()
 	arrScene[CScene::SceneTag::Main_Lobby]->OnCreate();
 }
 
-void CFramework::BuildPlayer(int p1, int p2)
+void CFramework::BuildPlayer(int p1, int p2, int p3)
 {
 	while (player1 == NULL)
 		player1 = new CObject_Player();
 	while (player2 == NULL)
 		player2 = new CObject_Player();
+	while (player3 == NULL)
+		player3 = new CObject_Player();
 	//printf("%d\n", player1->x);
 	player1->OnCreate(p1);
+	player2->OnCreate(p2);
+	player3->OnCreate(p3);
 	player1->x = 35 * 64;
 	player1->y = 15 * 64;
 	player2->x = 58 * 64;
 	player2->y = 15 * 64;
+	player3->x = 45 * 64;
+	player3->y = 26 * 64;
 	//printf("%d\n", player1->x);
-	player2->OnCreate(p2);
+
 }
 
 void CFramework::ReleaseScene() // 씬 완전삭제
