@@ -30,7 +30,8 @@ bool NetworkManager::connection()
 
 	int len = 0;
 
-	len = recvn(sock,(char*)&recvBuff, sizeof(int), 0);
+	len = recvn(sock, (char*)&recvBuff, sizeof(int), 0);
+	//printf("%d", len);
 	if (len == SOCKET_ERROR)
 	{
 		err_display("recv()");
@@ -39,8 +40,27 @@ bool NetworkManager::connection()
 	else if (len == 0)
 		return false;
 
-	if (atoi(recvBuff) == 777)
-		return true;
+	if (atoi(recvBuff) >= 0 && atoi(recvBuff) <= 2)
+	{
+		printf("player number : %d", atoi(recvBuff)+1);
+		playerNum = atoi(recvBuff) + 1;
+	}
+}
+
+void NetworkManager::sendData(ClientToServer CtS)
+{
+	int retval;
+	retval = send(sock, (char*)(&CtS), sizeof(ClientToServer), 0);
+
+	//retval 예외처리
+}
+
+void NetworkManager::recvData(ServerToClient& StC)
+{
+	int retval;
+	retval = recvn(sock, (char*)(&StC), sizeof(ServerToClient), 0);
+
+	//retval 예외처리
 }
 
 void NetworkManager::err_quit(char* msg)
@@ -77,7 +97,9 @@ int NetworkManager::recvn(SOCKET s, char* buf, int len, int flags)
 	{
 		received = recv(s, ptr, left, flags);
 		if (received == SOCKET_ERROR)
+		{
 			return SOCKET_ERROR;
+		}
 		else if (received == 0)
 			break;
 		left -= received;
@@ -108,6 +130,12 @@ int NetworkManager::init()
 
 	if (retval == SOCKET_ERROR)
 		err_quit("connect()");
+
+	//ULONG isNonBlocking = 1;
+	//ioctlsocket(sock,        //Non-Blocking으로 변경할 소켓
+	//	FIONBIO,       //변경할 소켓의 입출력 모드
+	//	&isNonBlocking //넘기는 인자, 여기서는 nonblocking설정 값
+	//);
 
 	return 0;
 }

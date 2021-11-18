@@ -987,6 +987,8 @@ void CIngameScene::Nevigator()
 
 void CIngameScene::Update(float fTimeElapsed)
 {
+	m_pFramework->NetGram.recvData(m_pFramework->STC);
+
 	if (RemainTime <= 0)
 	{
 		if (m_pFramework->GetPlayer(1)->iHaveCoin == TRUE)
@@ -1110,6 +1112,11 @@ void CIngameScene::Update(float fTimeElapsed)
 				CoinObject->SetDrawFalse();
 			}
 		}
+
+		//VER3
+		m_pFramework->CTS.set(m_pFramework->GetPlayer(m_pFramework->NetGram.getPN()));
+		m_pFramework->NetGram.sendData(m_pFramework->CTS);
+
 	}
 	//for (int i = 0; i < nObjects; ++i)
 		//ppObjects[i]->Update(fTimeElapsed);

@@ -16,6 +16,8 @@ public:
 	
 												// m_pCurrScene->Render(m_hdc);
 	void KeyState();
+	void NetCheck();
+	void NetSend();
 	RECT CalcImage(RECT input);
 
 
@@ -42,12 +44,13 @@ private:
 	CImage num[10];
 
 	//선택된 캐릭터입니다.
-	int choice1,choice2, choice3;
+	int choice1 = -1,choice2 = -1, choice3 = -1;
 	//레디가 되었는지 체크합니다.
 	bool ready1 = false, ready2 = false , ready3 = false;
 
 	int timer;
 	int count;
+	int pn;
 
 	bool Finish = false;
 

@@ -69,6 +69,12 @@ void CMainScene::Update(float fTimeElapsed)
 
 	if (finish)
 	{
+		while (m_pFramework->STC.CoinState != 1000)
+		{
+			printf("waiting %d\n", m_pFramework->STC.CoinState);
+			m_pFramework->NetGram.recvData(m_pFramework->STC);
+		}
+		printf("waiting done %d\n",m_pFramework->STC.CoinState);
 		m_pFramework->ChangeScene(CScene::SceneTag::Select_Char);
 		m_pFramework->curSceneCreate();
 		CMainScene::OnDestroy();
@@ -99,6 +105,7 @@ void CMainScene::KeyState() {
 				SceneNum = 3;
 				break;
 			case 3:
+
 				finish = true;
 				break;
 
