@@ -7,8 +7,6 @@
 #define SERVERPORT 9000
 #define BUFSIZE 512
 
-CRITICAL_SECTION cs;
-
 DWORD WINAPI ProcessClient(LPVOID arg);
 
 void SetCursorPosition(int y)

@@ -5,17 +5,24 @@
 
 #define SERVERPORT 9000
 
+HANDLE hReceiveEvent[3];
+HANDLE hReadCompeleteEvent;
+
 MainStream::MainStream() {
 	int retval;
 	//InitializeCriticalSection(&cs);
-
+	for (int i = 0; i < 3; ++i) {
+		hReceiveEvent[i] = CreateEvent(NULL, FALSE, FALSE, NULL);
+	}
+	hReadCompeleteEvent = CreateEvent(NULL, FALSE, TRUE, NULL);
 	
 	if (WSAStartup(MAKEWORD(2, 2), &wsa) != 0)
 		err_quit("WSAStartup()");
 }
 
 MainStream::~MainStream(){
-
+	if (hReceiveEvent)CloseHandle(hReceiveEvent);
+	if (hReadCompeleteEvent) CloseHandle(hReadCompeleteEvent);
 }
 
 void MainStream::WaitForClientToConnect() {
@@ -54,13 +61,19 @@ void MainStream::WaitForClientToConnect() {
 			break;
 		}
 		char buf[100];
-		recvn(client_sock, buf, 100, NULL);
+		//recvn(client_sock, buf, 100, NULL);
 #ifdef TEST_BEFORE_CLIENT_COMPLETE
 		char test_num[] = "777 ";
 		send(client_sock, (char*)&test_num, sizeof(char) * 4, 0);
+#elif defined(TEST_TEST)
+		int code = 777;
+		send(client_sock, (char*)&code, sizeof(int), 0);
+		send(client_sock, (char*)&player_num, sizeof(int), 0);
 #else
 		send(client_sock, (char*)&player_num, sizeof(int), 0);
 #endif
+		players[player_num].setNum(player_num);
+		players[player_num].setData(&data);
 		players[player_num++].setSocket(client_sock);
 	}
 	return;
@@ -70,6 +83,14 @@ void MainStream::PlayerSelectStart(){
 	data.CoinState = 1000;
 	HANDLE tmpHandle = CreateThread(NULL, 0, SendData, this, 0, NULL);
 	if (tmpHandle) CloseHandle(tmpHandle);
+	while (true) {
+		WaitForMultipleObjects(3, hReceiveEvent, TRUE, INFINITE);
+		if (data.PlayerData[0].AttackedPlayerNum[0] + data.PlayerData[1].AttackedPlayerNum[0] + data.PlayerData[2].AttackedPlayerNum[0] >= 3) {
+			data.CoinState = 2000;
+			break;
+		}
+		SetEvent(hReadCompeleteEvent);
+	}
 }
 void MainStream::GameLogic(){}
 
@@ -82,5 +103,4 @@ DWORD WINAPI MainStream::SendData(LPVOID arg) {
 		stream->players[2].sendData(stream->data);
 		Sleep(100);
 	}
-
-
+}

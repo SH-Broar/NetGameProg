@@ -5,8 +5,8 @@
 #include <vector>
 #include <stdexcept>
 
-#define TEST_BEFORE_CLIENT_COMPLETE
-
+//#define TEST_BEFORE_CLIENT_COMPLETE
+#define TEST_TEST
 
 struct ClientToServer
 {
@@ -25,6 +25,14 @@ struct ServerToClient
 	int CoinState;	//코인의 상태 (누가 갖고 있는지)
 	int Time; 	//남은 시간
 };
+
+extern HANDLE hReceiveEvent[3];
+extern HANDLE hReadCompeleteEvent;
+
+
+
+
+
 //인 게임에서 서버가 클라이언트에 보내는 데이터
 //동기 TCP 사용
 /*
