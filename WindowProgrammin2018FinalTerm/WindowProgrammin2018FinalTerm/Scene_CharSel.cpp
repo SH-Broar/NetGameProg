@@ -440,11 +440,11 @@ void Scene_Charsel::NetSend()
 	}
 
 	printf("NetSend : %d %d %d %d %d\n", 
-		m_pFramework->CTS.AttackedPlayerNum[0],
 		m_pFramework->CTS.PlayerNum, 
 		m_pFramework->CTS.state,
 		m_pFramework->CTS.x,
-		m_pFramework->CTS.y);
+		m_pFramework->CTS.y,
+		m_pFramework->CTS.AttackedPlayerNum[0]);
 	m_pFramework->NetGram.sendData(m_pFramework->CTS);
 }
 
@@ -461,6 +461,7 @@ void Scene_Charsel::Update(float fTimeElapsed)
 {
 	NetCheck();
 	KeyState();
+
 	//voidBuffer(m_pFramework->NetGram.getSock(true));
 	//종료되지 않아야지 계속 실행한다.
 	if (!Finish) {

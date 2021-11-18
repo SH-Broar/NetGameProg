@@ -13,10 +13,7 @@ MainStream::MainStream() {
 	if (WSAStartup(MAKEWORD(2, 2), &wsa) != 0)
 		err_quit("WSAStartup()");
 
-	for (int i=0;i<MEMBERS;++i)
-		players[i].WaitAllDataWriting = CreateEvent(NULL, FALSE, FALSE, NULL);
-	for (int i = 0; i < MEMBERS; ++i)
-		players[i].WaitMainStream = CreateEvent(NULL, FALSE, TRUE, NULL);
+
 }
 
 MainStream::~MainStream(){
@@ -48,6 +45,10 @@ void MainStream::WaitForClientToConnect() {
 
 	char recvBuff[512];
 
+	for (int i = 0; i < MEMBERS; ++i)
+		players[i].WaitAllDataWriting = CreateEvent(NULL, FALSE, FALSE, NULL);
+	for (int i = 0; i < MEMBERS; ++i)
+		players[i].WaitMainStream = CreateEvent(NULL, FALSE, TRUE, NULL);
 
 	while (player_num < MEMBERS)
 	{
@@ -93,25 +94,33 @@ void MainStream::PlayerSelectStart()
 	for (int i = 0; i < MEMBERS; ++i) {
 		players[i].getCTS() = scene.PlayerData[i];
 		players[i].sendData(scene);	//캐릭터 선택 창으로 넘어갔다는 것을 알린다.
-
 	}
 
 	data = scene;
 	printf("선택창으로 넘어가기 %d\n", data.CoinState);
+	Sleep(17);
+	for (int i = 0; i < MEMBERS; ++i) {
+		players[i].getCTS() = scene.PlayerData[i];
+		players[i].sendData(scene);	 // 한번 더미 보내줘야함 (ㅠㅠ?)
+	}
+	for (int i = 0; i < MEMBERS; ++i) {
+		SetEvent(players[i].WaitMainStream);
+	}
 	while (true)
 	{
-		//for (int i = 0; i < MEMBERS; ++i) {
-		//	WaitForSingleObject(players[i].WaitAllDataWriting, INFINITE);
-		//}
-
+		printf("wait...");
+		for (int i = 0; i < MEMBERS; ++i) {
+			WaitForSingleObject(players[i].WaitAllDataWriting, INFINITE);
+		}
+		printf("done!");
 		DataCrowl();
 		for (int i = 0; i < MEMBERS; ++i) {
 			players[i].sendData(data);
 		}
 
-		//for (int i = 0; i < MEMBERS; ++i) {
-		//	SetEvent(players[i].WaitMainStream);
-		//}
+		for (int i = 0; i < MEMBERS; ++i) {
+			SetEvent(players[i].WaitMainStream);
+		}
 
 		if (players[0].getCTS().AttackedPlayerNum[0] == 1 )//&& players[1].getCTS().AttackedPlayerNum[0] == 1 && players[2].getCTS().AttackedPlayerNum[0] == 1)
 		{

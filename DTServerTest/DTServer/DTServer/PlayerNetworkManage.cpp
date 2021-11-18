@@ -26,13 +26,15 @@ DWORD WINAPI PlayerNetworkManager::recvData(LPVOID pPNM)
 	//voidBuffer(This->socket);
 	while (1)
 	{
-		//WaitForSingleObject(This->WaitMainStream, INFINITE);
+		printf("Pwait...");
+		WaitForSingleObject(This->WaitMainStream, INFINITE);
 		int retval;
 		retval = recvn(This ->socket, (char*)&(This->CTS), sizeof(ClientToServer), 0);
 		printf("%d %d %d %d %d\n", This->CTS.PlayerNum, This->CTS.drawState, This->CTS.x, This->CTS.y, This->CTS.AttackedPlayerNum[0]);
+		printf("Pdone!");
 		Sleep(17);
 
-		//SetEvent(This->WaitAllDataWriting);
+		SetEvent(This->WaitAllDataWriting);
 	}
 	return NULL;
 }
