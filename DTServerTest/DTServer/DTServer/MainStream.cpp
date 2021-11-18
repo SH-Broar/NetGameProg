@@ -48,7 +48,7 @@ void MainStream::WaitForClientToConnect() {
 	for (int i = 0; i < MEMBERS; ++i)
 		players[i].WaitAllDataWriting = CreateEvent(NULL, FALSE, FALSE, NULL);
 	for (int i = 0; i < MEMBERS; ++i)
-		players[i].WaitMainStream = CreateEvent(NULL, FALSE, TRUE, NULL);
+		players[i].WaitMainStream = CreateEvent(NULL, FALSE, FALSE, NULL);
 
 	while (player_num < MEMBERS)
 	{
@@ -68,8 +68,10 @@ void MainStream::WaitForClientToConnect() {
 
 		if (atoi(recvBuff) == 9999) // 접속 플래그
 		{
-			printf("send done!");
-			send(client_sock, (char*)&player_num, sizeof(int), 0);
+			printf("send done!\n");
+			char sendBuff[512];
+			sprintf(sendBuff, "%d", player_num);
+			send(client_sock, (char*)&sendBuff, sizeof(int), 0);
 
 			printf("%d player socket created\n", player_num);
 			players[player_num++].setSocket(client_sock, player_num);
@@ -95,6 +97,8 @@ void MainStream::PlayerSelectStart()
 		players[i].getCTS() = scene.PlayerData[i];
 		players[i].sendData(scene);	//캐릭터 선택 창으로 넘어갔다는 것을 알린다.
 	}
+	std::chrono::system_clock::time_point start = std::chrono::system_clock::now();
+	std::chrono::duration<double> sec;
 
 	data = scene;
 	printf("선택창으로 넘어가기 %d\n", data.CoinState);
@@ -106,14 +110,31 @@ void MainStream::PlayerSelectStart()
 	for (int i = 0; i < MEMBERS; ++i) {
 		SetEvent(players[i].WaitMainStream);
 	}
+
+	int timeCut = 0;
 	while (true)
 	{
-		printf("wait...");
-		for (int i = 0; i < MEMBERS; ++i) {
-			WaitForSingleObject(players[i].WaitAllDataWriting, INFINITE);
+		printf("wait...\n");
+		while (recvDoneCount < MEMBERS)
+		{
+			recvDoneCount = 0;
+			for (int i = 0; i < MEMBERS; ++i) {
+				if (players[i].isDone() == 1)
+					recvDoneCount++;
+			}
+			printf("recvDoneC : %d\n", recvDoneCount);
+			Sleep(17);
+			timeCut += 17;
 		}
-		printf("done!");
-		DataCrowl();
+		//for (int i = 0; i < MEMBERS; ++i) {
+		//	WaitForSingleObject(players[i].WaitAllDataWriting, INFINITE);
+		//}
+		recvDoneCount = 0;
+		printf("done!\n");
+
+		sec = std::chrono::system_clock::now() - start;
+
+		DataCrowl(sec.count());
 		for (int i = 0; i < MEMBERS; ++i) {
 			players[i].sendData(data);
 		}
@@ -126,17 +147,17 @@ void MainStream::PlayerSelectStart()
 		{
 			break;
 		}
-		Sleep(17);
 	}
 }
 void MainStream::GameLogic(){}
 
-void MainStream::DataCrowl()
+void MainStream::DataCrowl(int timeCut)
 {
 	for (int i = 0; i < MEMBERS; ++i)
 	{
 		data.PlayerData[i] = players[i].getCTS();
 	}
+	data.Time = 60 - timeCut;
 }
 
 

@@ -1,4 +1,5 @@
 #pragma once
+#include <chrono>
 #include "protocol.h"
 
 void err_quit(const char* msg);

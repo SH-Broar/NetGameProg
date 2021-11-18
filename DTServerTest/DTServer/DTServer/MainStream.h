@@ -10,6 +10,8 @@ private:
 	ServerToClient data;
 	PlayerNetworkManager players[3];
 
+	int recvDoneCount = 0;
+
 public:
 	MainStream();
 	~MainStream();
@@ -17,7 +19,7 @@ public:
 	void WaitForClientToConnect();
 	void PlayerSelectStart();
 	void GameLogic();
-	void DataCrowl();
+	void DataCrowl(int tc);
 	static DWORD WINAPI sendData(LPVOID arg);
 
 };

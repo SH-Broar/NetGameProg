@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "protocol.h"
 
-#define SERVERIP		"127.0.0.1"
+#define SERVERIP		"210.99.120.89"
 #define SERVERPORT 9000
 #define BUFSIZE 512
 
@@ -40,9 +40,10 @@ bool NetworkManager::connection()
 	else if (len == 0)
 		return false;
 
+	printf("player number : %d", atoi(recvBuff) + 1);
 	if (atoi(recvBuff) >= 0 && atoi(recvBuff) <= 2)
 	{
-		printf("player number : %d", atoi(recvBuff)+1);
+
 		playerNum = atoi(recvBuff) + 1;
 	}
 }

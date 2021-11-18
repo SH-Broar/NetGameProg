@@ -23,18 +23,23 @@ void voidBuffer(SOCKET s)
 DWORD WINAPI PlayerNetworkManager::recvData(LPVOID pPNM)
 {
 	PlayerNetworkManager* This = (PlayerNetworkManager*)pPNM;
+
 	//voidBuffer(This->socket);
 	while (1)
 	{
-		printf("Pwait...");
+		printf("Pwait... %d\n", This->playerNum);
+
 		WaitForSingleObject(This->WaitMainStream, INFINITE);
+		This->makeDone = false;
 		int retval;
 		retval = recvn(This ->socket, (char*)&(This->CTS), sizeof(ClientToServer), 0);
-		printf("%d %d %d %d %d\n", This->CTS.PlayerNum, This->CTS.drawState, This->CTS.x, This->CTS.y, This->CTS.AttackedPlayerNum[0]);
-		printf("Pdone!");
-		Sleep(17);
 
-		SetEvent(This->WaitAllDataWriting);
+		printf("%d %d %d %d %d\n", This->CTS.PlayerNum, This->CTS.drawState, This->CTS.x, This->CTS.y, This->CTS.AttackedPlayerNum[0]);
+		printf("Pdone! %d\n", This->playerNum);
+
+		//Sleep(17);
+		This->makeDone = true;
+		//SetEvent(This->WaitAllDataWriting);
 	}
 	return NULL;
 }
@@ -51,4 +56,13 @@ ClientToServer& PlayerNetworkManager::getCTS()
 {
 	printf("CTS :: %d\n", CTS.drawState);
 	return CTS;
+}
+
+int PlayerNetworkManager::isDone()
+{
+	printf("Call isDone by : %d\n", playerNum);
+	if (makeDone)
+		return 1;
+	else
+		return 0;
 }
