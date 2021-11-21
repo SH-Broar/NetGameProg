@@ -14,7 +14,7 @@ MainStream::MainStream() {
 	for (int i = 0; i < 3; ++i) {
 		hReceiveEvent[i] = CreateEvent(NULL, FALSE, FALSE, NULL);
 	}
-	hReadCompeleteEvent = CreateEvent(NULL, FALSE, TRUE, NULL);
+	hReadCompeleteEvent = CreateEvent(NULL, FALSE, FALSE, NULL);
 	
 	if (WSAStartup(MAKEWORD(2, 2), &wsa) != 0)
 		err_quit("WSAStartup()");
@@ -80,20 +80,38 @@ void MainStream::WaitForClientToConnect() {
 }
 
 void MainStream::PlayerSelectStart(){
-	data.CoinState = 1000;
+	data.setInitForSelect();
+	sendData(players, data);
 	HANDLE tmpHandle = CreateThread(NULL, 0, SendData, this, 0, NULL);
 	if (tmpHandle) CloseHandle(tmpHandle);
+	std::chrono::system_clock::time_point start = std::chrono::system_clock::now();
+	std::chrono::duration<double> sec;
+
+	
+	SetEvent(hReadCompeleteEvent);
 	while (true) {
 		WaitForMultipleObjects(3, hReceiveEvent, TRUE, INFINITE);
+		sec = std::chrono::system_clock::now() - start;
+		data.Time = 60 - sec.count();
+		
 		if (data.PlayerData[0].AttackedPlayerNum[0] + data.PlayerData[1].AttackedPlayerNum[0] + data.PlayerData[2].AttackedPlayerNum[0] >= 3) {
-			data.CoinState = 2000;
+			//data.CoinState = 2000;
+			sendData(players, data);
+			SetEvent(hReadCompeleteEvent);
 			break;
 		}
+		sendData(players, data);
 		SetEvent(hReadCompeleteEvent);
 	}
 }
 void MainStream::GameLogic(){}
 
+void sendData(PlayerNetworkManager* players, ServerToClient& data) {
+	players[0].sendData(data);
+	players[1].sendData(data);
+	players[2].sendData(data);
+
+}
 
 DWORD WINAPI MainStream::SendData(LPVOID arg) {
 	MainStream* stream = (MainStream*)arg;

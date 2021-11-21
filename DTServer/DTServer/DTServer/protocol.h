@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <stdexcept>
+#include <chrono>
 
 //#define TEST_BEFORE_CLIENT_COMPLETE
 #define TEST_TEST
@@ -24,6 +25,21 @@ struct ServerToClient
 	int CoinY;	//현재 코인의 Y좌표
 	int CoinState;	//코인의 상태 (누가 갖고 있는지)
 	int Time; 	//남은 시간
+
+	void setInitForSelect()
+	{
+		CoinState = 1000;
+
+		PlayerData[0].drawState = 1;
+		PlayerData[1].drawState = 2;
+		PlayerData[2].drawState = 3;
+
+		PlayerData[0].AttackedPlayerNum[0] = false;
+		PlayerData[1].AttackedPlayerNum[0] = false;
+		PlayerData[2].AttackedPlayerNum[0] = false;
+
+		Time = 60;
+	}
 };
 
 extern HANDLE hReceiveEvent[3];
