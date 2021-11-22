@@ -3,6 +3,8 @@
 #include "network.h"
 
 
+void sendData(PlayerNetworkManager* players, ServerToClient& data);
+
 #define SERVERPORT 9000
 
 HANDLE hReceiveEvent[3];
@@ -47,7 +49,7 @@ void MainStream::WaitForClientToConnect() {
 	SOCKADDR_IN clientaddr;
 
 	int player_num = 0;
-
+	
 	while (player_num < 3)
 	{
 		int addrlen;
@@ -63,8 +65,10 @@ void MainStream::WaitForClientToConnect() {
 		char buf[100];
 		//recvn(client_sock, buf, 100, NULL);
 #ifdef TEST_BEFORE_CLIENT_COMPLETE
-		char test_num[] = "777 ";
-		send(client_sock, (char*)&test_num, sizeof(char) * 4, 0);
+		recvn(client_sock, (char*)buf, sizeof(int), 0);
+		if (atoi(buf) != 9999) continue;
+		sprintf(buf, "%d", player_num);
+		send(client_sock, (char*)buf, sizeof(char) * 4, 0);
 #elif defined(TEST_TEST)
 		int code = 777;
 		send(client_sock, (char*)&code, sizeof(int), 0);
@@ -82,8 +86,8 @@ void MainStream::WaitForClientToConnect() {
 void MainStream::PlayerSelectStart(){
 	data.setInitForSelect();
 	sendData(players, data);
-	HANDLE tmpHandle = CreateThread(NULL, 0, SendData, this, 0, NULL);
-	if (tmpHandle) CloseHandle(tmpHandle);
+	//HANDLE tmpHandle = CreateThread(NULL, 0, SendDataThread, this, 0, NULL);
+	//if (tmpHandle) CloseHandle(tmpHandle);
 	std::chrono::system_clock::time_point start = std::chrono::system_clock::now();
 	std::chrono::duration<double> sec;
 
@@ -91,10 +95,11 @@ void MainStream::PlayerSelectStart(){
 	SetEvent(hReadCompeleteEvent);
 	while (true) {
 		WaitForMultipleObjects(3, hReceiveEvent, TRUE, INFINITE);
+		SetData();
 		sec = std::chrono::system_clock::now() - start;
 		data.Time = 60 - sec.count();
-		
-		if (data.PlayerData[0].AttackedPlayerNum[0] + data.PlayerData[1].AttackedPlayerNum[0] + data.PlayerData[2].AttackedPlayerNum[0] >= 3) {
+		// 모두 준비되면
+		if (data.PlayerData[0].ready[0] + data.PlayerData[1].ready[0] + data.PlayerData[2].ready[0] >= 3) {
 			//data.CoinState = 2000;
 			sendData(players, data);
 			SetEvent(hReadCompeleteEvent);
@@ -113,12 +118,18 @@ void sendData(PlayerNetworkManager* players, ServerToClient& data) {
 
 }
 
-DWORD WINAPI MainStream::SendData(LPVOID arg) {
+DWORD WINAPI MainStream::SendDataThread(LPVOID arg) {
 	MainStream* stream = (MainStream*)arg;
 	while (true) {
 		stream->players[0].sendData(stream->data);
 		stream->players[1].sendData(stream->data);
 		stream->players[2].sendData(stream->data);
 		Sleep(100);
+	}
+}
+
+void MainStream::SetData() {
+	for (int i = 0; i < 3; ++i) {
+		data.PlayerData[i] = players[i].getCTS();
 	}
 }

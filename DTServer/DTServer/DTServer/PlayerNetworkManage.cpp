@@ -18,11 +18,9 @@ void PlayerNetworkManager::setSocket(const SOCKET& sock) {
 
 DWORD WINAPI PlayerNetworkManager::recvData(LPVOID arg) {
 	PlayerNetworkManager* P = (PlayerNetworkManager*)arg;
-	ClientToServer clientData;
 	while (true) {
 		WaitForSingleObject(hReadCompeleteEvent, INFINITE);
-		recvn(P->socket, (char*)&clientData, sizeof(ClientToServer), NULL);
-		P->pData->PlayerData[P->playerNum] = clientData;
+		recvn(P->socket, (char*)&P->CTS, sizeof(ClientToServer), NULL);
 		SetEvent(hReceiveEvent[P->playerNum]);
 	}
 	return 0;

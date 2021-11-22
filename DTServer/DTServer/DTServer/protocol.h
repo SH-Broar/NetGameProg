@@ -6,8 +6,8 @@
 #include <stdexcept>
 #include <chrono>
 
-//#define TEST_BEFORE_CLIENT_COMPLETE
-#define TEST_TEST
+#define TEST_BEFORE_CLIENT_COMPLETE
+//#define TEST_TEST
 
 struct ClientToServer
 {
@@ -16,6 +16,8 @@ struct ClientToServer
 	int y;	//플레이어의 y좌표
 	int drawState; // *2일때는 characterNum, 플레이어 상태
 	char AttackedPlayerNum[3];   // *2일때는 ready, 다른 캐릭터에게 공격을 적중시켰는지 확인하는 플래그
+#define ready AttackedPlayerNum
+#define characterNum drawState
 };
 
 struct ServerToClient

@@ -1,8 +1,9 @@
-﻿  DTServer.cpp
-F:\2021 2학기\Network team\NetGameProg\DTServer\DTServer\DTServer\DTServer.cpp(14,18): warning C4838: 'int'에서 'SHORT'(으)로의 변환에는 축소 변환이 필요합니다.
-  MainStream.cpp
-F:\2021 2학기\Network team\NetGameProg\DTServer\DTServer\DTServer\MainStream.cpp(12,6): warning C4101: 'retval' :참조되지 않은 지역 변수입니다.
-F:\2021 2학기\Network team\NetGameProg\DTServer\DTServer\DTServer\MainStream.cpp(63,8): warning C4101: 'buf' :참조되지 않은 지역 변수입니다.
-  PlayerNetworkManage.cpp
-  코드를 생성하고 있습니다...
+﻿  MainStream.cpp
+F:\2021 2학기\Network team\NetGameProg\DTServer\DTServer\DTServer\MainStream.cpp(14,6): warning C4101: 'retval' :참조되지 않은 지역 변수입니다.
+F:\2021 2학기\Network team\NetGameProg\DTServer\DTServer\DTServer\MainStream.cpp(65,8): warning C4101: 'buf' :참조되지 않은 지역 변수입니다.
+F:\2021 2학기\Network team\NetGameProg\DTServer\DTServer\DTServer\MainStream.cpp(98,18): warning C4244: '=': '_Rep'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+          with
+          [
+              _Rep=double
+          ]
   DTServer.vcxproj -> F:\2021 2학기\Network team\NetGameProg\DTServer\DTServer\x64\Debug\DTServer.exe

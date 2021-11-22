@@ -6,10 +6,10 @@ class PlayerNetworkManager
 	SOCKET socket;
 	int playerNum;
 	ServerToClient* pData;
-	//ClientToServer CTS;
+	ClientToServer CTS;
 
 public:
-	PlayerNetworkManager() { playerNum = 0; }
+	PlayerNetworkManager() { playerNum = 0; ZeroMemory(&CTS, sizeof(CTS)); }
 	~PlayerNetworkManager(){}
 	void setNum(int n) { playerNum = n; }
 	void setData(ServerToClient* p) { pData = p; }
@@ -19,9 +19,6 @@ public:
 	static DWORD WINAPI recvData(LPVOID);
 	void sendData(const ServerToClient&);
 
-	ClientToServer& getCTS();
-	HANDLE WaitAllDataWriting;
-	HANDLE WaitMainStream;
-
+	ClientToServer& getCTS() { return CTS; };
 };
 
