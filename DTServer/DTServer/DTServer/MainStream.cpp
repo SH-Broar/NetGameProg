@@ -91,7 +91,7 @@ void MainStream::PlayerSelectStart(){
 	std::chrono::system_clock::time_point start = std::chrono::system_clock::now();
 	std::chrono::duration<double> sec;
 
-	
+	sendData(players, data);
 	SetEvent(hReadCompeleteEvent);
 	while (true) {
 		WaitForMultipleObjects(3, hReceiveEvent, TRUE, INFINITE);
