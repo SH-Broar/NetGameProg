@@ -1,5 +1,1 @@
-﻿  소스.cpp
-F:\2021 2학기\Network team\NetGameProg\test\server_test\Project20\소스.cpp(18,18): warning C4838: 'int'에서 'SHORT'(으)로의 변환에는 축소 변환이 필요합니다.
-F:\2021 2학기\Network team\NetGameProg\test\server_test\Project20\소스.cpp(133,7): warning C4101: 'buf' :참조되지 않은 지역 변수입니다.
-F:\2021 2학기\Network team\NetGameProg\test\server_test\Project20\소스.cpp(150,7): warning C4101: 'recvBuff' :참조되지 않은 지역 변수입니다.
-  Project20.vcxproj -> F:\2021 2학기\Network team\NetGameProg\test\server_test\Debug\server_test.exe
+﻿

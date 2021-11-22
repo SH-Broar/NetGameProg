@@ -140,7 +140,7 @@ DWORD WINAPI ProcessClient(LPVOID arg)
 	
 	
 	int code;
-	int client_num = 0;
+	int client_num = 6;
 
 	//---
 
@@ -156,21 +156,30 @@ DWORD WINAPI ProcessClient(LPVOID arg)
 
 	if (code == 9999) {
 		code = 777;
-		retval = send(client_sock, (char*)&code, sizeof(int), 0);
-
-		retval = send(client_sock, (char*)&client_num, sizeof(int), 0);
+		send(client_sock, (char*)&code, sizeof(int), 0);
+		send(client_sock, (char*)&client_num, sizeof(int), 0);
 		client_num++;
 	}
 	
 
 	ClientToServer client_to_server_data;
 
+	ServerToClient server_to_client_data;
+
+
 	int n = 0;
 	while (1) {
 		retval = recvn(client_sock, (char*)&client_to_server_data, sizeof(ClientToServer), 0);
 
-		printf("x:%d, y:%d, Drawdate:%d, playernum:%d (%d)\n", 
-			client_to_server_data.x, client_to_server_data.y, client_to_server_data.draw_state, client_to_server_data.PlayerNum,n++);
+		printf("[%d receive] playerNum:%d, x:%d, y:%d, draw:%d,    ",
+			n++, client_to_server_data.PlayerNum, client_to_server_data.x, client_to_server_data.y, client_to_server_data.draw_state);
+
+		server_to_client_data.PlayerData[0] = client_to_server_data;
+		server_to_client_data.PlayerData[1] = client_to_server_data;
+		server_to_client_data.PlayerData[2] = client_to_server_data;
+
+		send(client_sock, (char*)&server_to_client_data, sizeof(server_to_client_data), 0);
+		printf("send\n");
 	}
 	
 
