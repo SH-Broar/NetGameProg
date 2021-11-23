@@ -241,12 +241,12 @@ HRESULT CFramework::OnProcessingWindowMessage(HWND hWnd, UINT nMessageID, WPARAM
 		if (LOWORD(wParam) == WA_INACTIVE)
 		{
 			//厚劝己拳 贸府
-			inactive = true;
+			//inactive = true;
 		}
 		else
 		{
 			//劝己拳 贸府
-			inactive = false;
+			//inactive = false;
 		}
 		break;
 	default:
