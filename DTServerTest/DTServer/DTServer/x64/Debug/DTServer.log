@@ -1,7 +1,7 @@
 ﻿  MainStream.cpp
 C:\WorkStation\2021_2\NGP\텀프\Play\NetGameProg\DTServerTest\DTServer\DTServer\MainStream.cpp(9,6): warning C4101: 'retval' :참조되지 않은 지역 변수입니다.
 C:\WorkStation\2021_2\NGP\텀프\Play\NetGameProg\DTServerTest\DTServer\DTServer\MainStream.cpp(73,4): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-C:\WorkStation\2021_2\NGP\텀프\Play\NetGameProg\DTServerTest\DTServer\DTServer\MainStream.cpp(137,22): warning C4244: '인수': '_Rep'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\WorkStation\2021_2\NGP\텀프\Play\NetGameProg\DTServerTest\DTServer\DTServer\MainStream.cpp(139,22): warning C4244: '인수': '_Rep'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
           with
           [
               _Rep=double

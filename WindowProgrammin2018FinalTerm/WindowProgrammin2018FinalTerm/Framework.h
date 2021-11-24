@@ -65,6 +65,7 @@ public:
 	RECT p1, p2, p3;
 	bool OnCreate(HINSTANCE hInstance, HWND hWnd, const RECT &rc); // rc는 윈도우크기이고, m_rcClient에 저장한다.
 	RECT GetRect();
+	RECT GetPlayerRect(int num);
 	HDC* GetTileDC();
 	HDC* GetPlayerDC();
 	CObject_Player* GetPlayer(int Playernum);

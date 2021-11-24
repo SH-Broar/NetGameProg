@@ -89,6 +89,23 @@ RECT CFramework::GetRect()
 	return m_rcClient;
 }
 
+RECT CFramework::GetPlayerRect(int num)
+{
+	switch (num)
+	{
+	case 1:
+		return p1;
+		break;
+	case 2:
+		return p2;
+		break;
+	case 3:
+		return p3;
+		break;
+	}
+	return RECT();
+}
+
 HDC* CFramework::GetTileDC()
 {
 	return &m_tileMemDC;
@@ -108,6 +125,9 @@ CObject_Player* CFramework::GetPlayer(int PlayerNum)
 		break;
 	case 2:
 		return player2;
+		break;
+	case 3:
+		return player3;
 		break;
 	default:
 		break;

@@ -38,7 +38,7 @@ struct ServerToClient
 	ClientToServer PlayerData[3];	// 플레이어 데이터
 	int CoinX;	//현재 코인의 X좌표
 	int CoinY;	//현재 코인의 Y좌표
-	int CoinState;	//코인의 상태 (누가 갖고 있는지)
+	int CoinState;	//코인의 상태 (누가 갖고 있는지)	//캐릭터 선택창에서는 종료플래그
 	int Time;		//남은 시간
 
 	void setInitForSelect()

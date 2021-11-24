@@ -481,8 +481,8 @@ void Scene_Charsel::Update(float fTimeElapsed)
 			ready3 = true;
 		}
 
-		//셋다 참이면 피니쉬
-		if (ready1&&ready2&&ready3) {
+		//네트워크가 끝났다고 하면 끝
+		if (m_pFramework->STC.CoinState == 1) {
 			Finish = true;
 		}
 		if (Finish)
@@ -500,9 +500,7 @@ void Scene_Charsel::Update(float fTimeElapsed)
 			m_pFramework->BuildPlayer(choice1, choice2, choice3);
 			Scene_Charsel::OnDestroy();
 
-		}
-
-		
+		}		
 	}
 	NetSend();
 }

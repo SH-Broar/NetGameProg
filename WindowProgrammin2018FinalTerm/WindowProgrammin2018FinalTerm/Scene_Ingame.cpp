@@ -22,8 +22,13 @@ CIngameScene::CIngameScene(SceneTag tag, CFramework * pFramework) : CScene(tag, 
 {
 
 }
+
+char Inbuff[20000] = { 0 };
 bool CIngameScene::OnCreate()
 {	
+	myPlayerNum = m_pFramework->NetGram.getPN();
+	printf("My Player Number : %d", myPlayerNum);
+
 	C_Tile[0].Load(L"Graphic\\Tile\\Tile1.jpg");
 	C_Tile[1].Load(L"Graphic\\Tile\\Tile2.png");
 	C_Tile[2].Load(L"Graphic\\Tile\\Tile3.png");
@@ -44,7 +49,7 @@ bool CIngameScene::OnCreate()
 		this->C_Numbers[i].Load(LoadText);
 	}
 
-	char Inbuff[20000] = { 0 };
+
 	DWORD read_size = 20000;
 	DWORD c = 20000;
 
@@ -1122,7 +1127,7 @@ void CIngameScene::Update(float fTimeElapsed)
 		//ppObjects[i]->Update(fTimeElapsed);
 }
 
-void CIngameScene::AngleRender(HDC hdc) // 아 안돼...
+void CIngameScene::AngleRender(HDC hdc)
 {
 	//printf("%lf\n", Angle);
 	if (TotalDistance > 0)
@@ -1178,33 +1183,34 @@ void CIngameScene::AngleRender(HDC hdc) // 아 안돼...
 	}
 }
 
+//Network Accepted
 void CIngameScene::Render(HDC hdc)
 {
 	keydown = FALSE;
 	for (int i = 0; i < 14; i++)
 	{
 		keydownList[i] = FALSE;
+		keydownList_N[(i%7)] = FALSE;
 	}
 	p1key = false;
 	p2key = false;
+	p3key = false;
 
-	//타일
-	BitBlt(*m_pFramework->GetPlayerDC(), m_pFramework->GetPlayer(1)->x - m_pFramework->p1.right / 2, m_pFramework->GetPlayer(1)->y - m_pFramework->p1.bottom / 2, m_pFramework->p1.right, m_pFramework->p1.bottom,
-		*m_pFramework->GetTileDC(), m_pFramework->GetPlayer(1)->x - m_pFramework->p1.right / 2, m_pFramework->GetPlayer(1)->y - m_pFramework->p1.bottom / 2, SRCCOPY);
-	BitBlt(*m_pFramework->GetPlayerDC(), m_pFramework->GetPlayer(2)->x - m_pFramework->p1.right / 2, m_pFramework->GetPlayer(2)->y - m_pFramework->p1.bottom / 2, m_pFramework->p1.right, m_pFramework->p2.bottom,
-		*m_pFramework->GetTileDC(), m_pFramework->GetPlayer(2)->x - m_pFramework->p1.right / 2, m_pFramework->GetPlayer(2)->y - m_pFramework->p2.bottom / 2, SRCCOPY);
+	//플레이어별 바닥타일
+	BitBlt(*m_pFramework->GetPlayerDC(), m_pFramework->GetPlayer(myPlayerNum)->x - m_pFramework->GetPlayerRect(myPlayerNum).right / 2,
+		m_pFramework->GetPlayer(myPlayerNum)->y - m_pFramework->GetPlayerRect(myPlayerNum).bottom / 2,
+		m_pFramework->GetPlayerRect(myPlayerNum).right, m_pFramework->GetPlayerRect(myPlayerNum).bottom,
+		*m_pFramework->GetTileDC(), m_pFramework->GetPlayer(myPlayerNum)->x - m_pFramework->GetPlayerRect(myPlayerNum).right / 2,
+		m_pFramework->GetPlayer(myPlayerNum)->y - m_pFramework->GetPlayerRect(myPlayerNum).bottom / 2, SRCCOPY);
+	//BitBlt(*m_pFramework->GetPlayerDC(), m_pFramework->GetPlayer(2)->x - m_pFramework->p1.right / 2, m_pFramework->GetPlayer(2)->y - m_pFramework->p1.bottom / 2, m_pFramework->p1.right, m_pFramework->p2.bottom,
+	//	*m_pFramework->GetTileDC(), m_pFramework->GetPlayer(2)->x - m_pFramework->p1.right / 2, m_pFramework->GetPlayer(2)->y - m_pFramework->p2.bottom / 2, SRCCOPY);
+
 
 	//플레이어
-	if (m_pFramework->GetPlayer(1)->y > m_pFramework->GetPlayer(2)->y)
-	{
-		m_pFramework->GetPlayer(2)->Render(m_pFramework->GetPlayerDC());
-		m_pFramework->GetPlayer(1)->Render(m_pFramework->GetPlayerDC());
-	}
-	else
-	{
-		m_pFramework->GetPlayer(1)->Render(m_pFramework->GetPlayerDC());
-		m_pFramework->GetPlayer(2)->Render(m_pFramework->GetPlayerDC());
-	}
+	m_pFramework->GetPlayer(1)->Render(m_pFramework->GetPlayerDC());
+	m_pFramework->GetPlayer(2)->Render(m_pFramework->GetPlayerDC());
+	m_pFramework->GetPlayer(3)->Render(m_pFramework->GetPlayerDC());
+
 	//코인
 	CoinObject->Render(&*m_pFramework->GetPlayerDC());
 	
@@ -1212,55 +1218,50 @@ void CIngameScene::Render(HDC hdc)
 	//Ellipse(*m_pFramework->GetPlayerDC(), m_pFramework->GetPlayer(2)->x - 5, m_pFramework->GetPlayer(2)->y - 5, m_pFramework->GetPlayer(2)->x + 5, m_pFramework->GetPlayer(2)->y + 5);
 
 	//토탈로 옮기기
-	BitBlt(hdc, m_pFramework->p1.left, m_pFramework->p1.top, m_pFramework->p1.right, m_pFramework->p1.bottom, *m_pFramework->GetPlayerDC(),
-		m_pFramework->GetPlayer(1)->x - m_pFramework->p1.right / 2, m_pFramework->GetPlayer(1)->y - m_pFramework->p1.bottom / 2, SRCCOPY);
-	//BitBlt(hdc, m_pFramework->p2.left, m_pFramework->p2.top, m_pFramework->p1.right, m_pFramework->p2.bottom, *m_pFramework->GetPlayerDC(), m_pFramework->GetPlayer(2)->x - m_pFramework->p1.right / 2, m_pFramework->GetPlayer(2)->y - m_pFramework->p2.bottom / 2, SRCCOPY);
-	
+	BitBlt(hdc, 0, 0, m_pFramework->GetPlayerRect(myPlayerNum).right, m_pFramework->GetPlayerRect(myPlayerNum).bottom,
+		*m_pFramework->GetPlayerDC(),
+		m_pFramework->GetPlayer(myPlayerNum)->x - m_pFramework->GetPlayerRect(myPlayerNum).right / 2,
+		m_pFramework->GetPlayer(myPlayerNum)->y - m_pFramework->GetPlayerRect(myPlayerNum).bottom / 2, SRCCOPY);
 
+	//승패그림
 	if (isGameEnd)
 	{
-		if (m_pFramework->GetPlayer(1)->iHaveCoin == TRUE)
+		if (m_pFramework->GetPlayer(myPlayerNum)->iHaveCoin == TRUE)
 		{
-			WinC.Draw(hdc, m_pFramework->p1.right / 2 - 100, m_pFramework->p1.bottom / 2 - 300, 200, 200);
-			LoseC.Draw(hdc, m_pFramework->p2.right / 4 * 3 - 100, m_pFramework->p2.bottom / 2 - 300, 200, 200);
+			WinC.Draw(hdc, m_pFramework->GetPlayerRect(myPlayerNum).right / 2 - 100, m_pFramework->GetPlayerRect(myPlayerNum).bottom / 2 - 300, 200, 200);
 		}
 		else
 		{
-			LoseC.Draw(hdc, m_pFramework->p1.right / 2 - 100, m_pFramework->p1.bottom / 2 - 300, 200, 200);
-			WinC.Draw(hdc, m_pFramework->p2.right / 4 * 3 - 100, m_pFramework->p2.bottom / 2 - 300, 200, 200);
+			LoseC.Draw(hdc, m_pFramework->GetPlayerRect(myPlayerNum).right / 2 - 100, m_pFramework->GetPlayerRect(myPlayerNum).bottom / 2 - 300, 200, 200);
 		}
 	}
-	else
-	{
-		//AngleRender(hdc);
-	}
 
+
+	//스킬 / 쿨타임
 	for (int i = 0; i < 3; i++)
 	{
-		m_pFramework->GetPlayer(1)->Image.Skill_I[i].Draw(hdc, 30 + 80 * i, windowY-120,64,64);
-		m_pFramework->GetPlayer(2)->Image.Skill_I[i].Draw(hdc,windowX - 280 +( 30 + 80 * i), windowY - 120, 64, 64);
+		m_pFramework->GetPlayer(myPlayerNum)->Image.Skill_I[i].Draw(hdc, 30 + 80 * i, windowY-120,64,64);
+		//m_pFramework->GetPlayer(2)->Image.Skill_I[i].Draw(hdc,windowX - 280 +( 30 + 80 * i), windowY - 120, 64, 64);
 	}
+
 	if (SkillCoolTime[0] > 0)
 	{
 		Rectangle(hdc, 30, windowY - 120, 30+SkillCoolTime[0]*4, windowY - 120 + 64);
 	}
-	if (m_pFramework->GetPlayer(1)->DashCoolTimer > 0)
+	if (m_pFramework->GetPlayer(myPlayerNum)->DashCoolTimer > 0)
 	{
-		Rectangle(hdc, 30 + 160, windowY - 120, 30 + 160 + (m_pFramework->GetPlayer(1)->DashCoolTimer / 10), windowY - 120 + 64);
-	}
-	if (SkillCoolTime[1] > 0)
-	{
-		Rectangle(hdc, windowX - 280 + 30 + 64 - SkillCoolTime[1]*4, windowY - 120, windowX - 280 + 30 + 64, windowY - 120 + 64);
-	}
-	if (m_pFramework->GetPlayer(2)->DashCoolTimer > 0)
-	{
-		Rectangle(hdc, windowX - 280 + 30 + 160 + 64 - (m_pFramework->GetPlayer(2)->DashCoolTimer / 10), windowY - 120, windowX - 280 + 30 + 160 + 64, windowY - 120 + 64);
+		Rectangle(hdc, 30 + 160, windowY - 120, 30 + 160 + (m_pFramework->GetPlayer(myPlayerNum)->DashCoolTimer / 10), windowY - 120 + 64);
 	}
 
+
+
+	//UI
 	C_IngameLine.Draw(hdc, 0, 0, m_pFramework->GetRect().right, m_pFramework->GetRect().bottom);
 	C_Numbers[TimerImage[0]].Draw(hdc, m_pFramework->GetRect().right / 2 - 90, m_pFramework->GetRect().bottom / 15, 80, 80);
 	C_Numbers[TimerImage[1]].Draw(hdc, m_pFramework->GetRect().right / 2 + 20, m_pFramework->GetRect().bottom / 15, 80, 80);
 
+
+	//Coin 소지 표현
 	if (m_pFramework->GetPlayer(1)->iHaveCoin)
 	{
 		CoinObject->Image.Draw(hdc, m_pFramework->GetRect().right / 2 - 90 - 60, windowY / 15, 50, 50);
@@ -1269,7 +1270,12 @@ void CIngameScene::Render(HDC hdc)
 	{
 		CoinObject->Image.Draw(hdc, m_pFramework->GetRect().right / 2 + 110, windowY / 15, 50, 50);
 	}
+	else if (m_pFramework->GetPlayer(3)->iHaveCoin)
+	{
+		CoinObject->Image.Draw(hdc, m_pFramework->GetRect().right / 2, windowY / 15 - 20, 50, 50);
+	}
 
+	//오브젝트 렌더링
 	for (int i = 0; i < nObjects; ++i)
 		ppObjects[i]->Render(*m_pFramework->GetPlayerDC());
 

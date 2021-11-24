@@ -2,21 +2,21 @@
 #include "protocol.h"
 #include "network.h"
 
-#define MEMBERS 1
+#define MEMBERS 2
 #define SERVERPORT 9000
 
 MainStream::MainStream() {
 	int retval;
 	//InitializeCriticalSection(&cs);
 
-	
+
 	if (WSAStartup(MAKEWORD(2, 2), &wsa) != 0)
 		err_quit("WSAStartup()");
 
 
 }
 
-MainStream::~MainStream(){
+MainStream::~MainStream() {
 
 }
 
@@ -77,12 +77,12 @@ void MainStream::WaitForClientToConnect() {
 			players[player_num++].setSocket(client_sock, player_num);
 		}
 
-//#ifdef TEST_BEFORE_CLIENT_COMPLETE
-//		char test_num[] = "777";
-//		send(client_sock, (char*)&test_num, sizeof(char) * 4, 0);
-//#else
+		//#ifdef TEST_BEFORE_CLIENT_COMPLETE
+		//		char test_num[] = "777";
+		//		send(client_sock, (char*)&test_num, sizeof(char) * 4, 0);
+		//#else
 
-//#endif
+		//#endif
 
 	}
 
@@ -111,6 +111,8 @@ void MainStream::PlayerSelectStart()
 		SetEvent(players[i].WaitMainStream);
 	}
 
+	//-----------------------------------------------------------------------------------------
+
 	int timeCut = 0;
 	while (true)
 	{
@@ -135,6 +137,11 @@ void MainStream::PlayerSelectStart()
 		sec = std::chrono::system_clock::now() - start;
 
 		DataCrowl(sec.count());
+		if (players[0].getCTS().AttackedPlayerNum[0] == 1)//&& players[1].getCTS().AttackedPlayerNum[0] == 1 && players[2].getCTS().AttackedPlayerNum[0] == 1)
+		{
+			data.CoinState = 1;	//씬 끝나는 플래그 설정
+		}
+
 		for (int i = 0; i < MEMBERS; ++i) {
 			players[i].sendData(data);
 		}
@@ -143,13 +150,13 @@ void MainStream::PlayerSelectStart()
 			SetEvent(players[i].WaitMainStream);
 		}
 
-		if (players[0].getCTS().AttackedPlayerNum[0] == 1 )//&& players[1].getCTS().AttackedPlayerNum[0] == 1 && players[2].getCTS().AttackedPlayerNum[0] == 1)
+		if (data.CoinState == 1) //다음 씬으로 넘어갈 상태이면
 		{
 			break;
 		}
 	}
 }
-void MainStream::GameLogic(){}
+void MainStream::GameLogic() {}
 
 void MainStream::DataCrowl(int timeCut)
 {
