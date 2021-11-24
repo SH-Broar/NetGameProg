@@ -32,6 +32,7 @@ struct ClientToServer
 
 	void set(CObject_Player* CP)
 	{
+		//¼öÁ¤
 		x = CP->x;
 		y = CP->y;
 		state = CP->CharacterStatus;

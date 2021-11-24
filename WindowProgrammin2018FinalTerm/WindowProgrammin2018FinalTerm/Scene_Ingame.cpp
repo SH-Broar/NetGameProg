@@ -994,40 +994,48 @@ void CIngameScene::Update(float fTimeElapsed)
 {
 	m_pFramework->NetGram.recvData(m_pFramework->STC);
 
+	//승리 처리
 	if (RemainTime <= 0)
 	{
-		if (m_pFramework->GetPlayer(1)->iHaveCoin == TRUE)
+		isGameEnd = TRUE;
+
+		m_pFramework->GetPlayer(1)->CharacterStatus = 15;
+		m_pFramework->GetPlayer(2)->CharacterStatus = 15;
+		m_pFramework->GetPlayer(3)->CharacterStatus = 15;
+
+		for (int i = 1; i <= 3; ++i)
 		{
-			isGameEnd = TRUE;
-			m_pFramework->GetPlayer(1)->CharacterStatus = 14;
-			m_pFramework->GetPlayer(2)->CharacterStatus = 15;
-		}
-		else if (m_pFramework->GetPlayer(2)->iHaveCoin == TRUE)
-		{
-			isGameEnd = TRUE;
-			m_pFramework->GetPlayer(1)->CharacterStatus = 15;
-			m_pFramework->GetPlayer(2)->CharacterStatus = 14;
+			if (m_pFramework->GetPlayer(i)->iHaveCoin == TRUE)
+			{
+				m_pFramework->GetPlayer(i)->CharacterStatus = 14;
+			}
 		}
 	}
+
 	if (isGameEnd == FALSE)
 	{
 		KeyState();
 		CharacterState();
-		Nevigator();
+		//Nevigator();
+
+		//코인 Idle 애니메이션
 		CoinObject->Update(fTimeElapsed);
+
+		//여기서 네트워크 처리
+
+		//업데이트
 		m_pFramework->GetPlayer(1)->Update(fTimeElapsed);
 		m_pFramework->GetPlayer(2)->Update(fTimeElapsed);
+		m_pFramework->GetPlayer(3)->Update(fTimeElapsed);
+
 		TimeTick++;
 
-		if (m_pFramework->GetPlayer(1)->DashCoolTimer > 0)
+		if (m_pFramework->GetPlayer(myPlayerNum)->DashCoolTimer > 0)
 		{
-			m_pFramework->GetPlayer(1)->DashCoolTimer--;
-		}
-		if (m_pFramework->GetPlayer(2)->DashCoolTimer > 0)
-		{
-			m_pFramework->GetPlayer(2)->DashCoolTimer--;
+			m_pFramework->GetPlayer(myPlayerNum)->DashCoolTimer--;
 		}
 
+		//스킬 피격
 		//if (m_pFramework->GetPlayer(1)->isSkill)
 		{
 			if (IntersectRect(&tmp, m_pFramework->GetPlayer(2)->getRECT(), m_pFramework->GetPlayer(1)->CSkill->GetRECT())) // p2스킬피격
@@ -1086,15 +1094,20 @@ void CIngameScene::Update(float fTimeElapsed)
 			}
 		}
 
+
+		//네트워크 시간으로 체크
 		if (TimeTick >= 60)
 		{
-			TimeTick = 0;
-			if (RemainTime > 0)
-			{
-				RemainTime--;
-				TimerImage[0] = RemainTime / 10;
-				TimerImage[1] = RemainTime % 10;
-			}
+			//TimeTick = 0;
+			//if (RemainTime > 0)
+			//{
+			//	RemainTime--;
+			
+			// 이거 지우면 안됨
+			//	TimerImage[0] = RemainTime / 10;
+			//	TimerImage[1] = RemainTime % 10;
+			//}
+
 			if (SkillCoolTime[0] > 0)
 			{
 				SkillCoolTime[0]--;
@@ -1106,19 +1119,19 @@ void CIngameScene::Update(float fTimeElapsed)
 		}
 		if (CoinObject->GetbDraw() && coinLockDown == FALSE)
 		{
-			if (abs(CoinObject->x() - m_pFramework->GetPlayer(1)->x) < 30 && abs(CoinObject->y() - m_pFramework->GetPlayer(1)->y) < 30)
+			if (abs(CoinObject->x() - m_pFramework->GetPlayer(myPlayerNum)->x) < 30 && abs(CoinObject->y() - m_pFramework->GetPlayer(myPlayerNum)->y) < 30)
 			{
-				m_pFramework->GetPlayer(1)->iHaveCoin = TRUE;
+				m_pFramework->GetPlayer(myPlayerNum)->iHaveCoin = TRUE;
 				CoinObject->SetDrawFalse();
 			}
-			if (abs(CoinObject->x() - m_pFramework->GetPlayer(2)->x) < 30 && abs(CoinObject->y() - m_pFramework->GetPlayer(2)->y) < 30)
-			{
-				m_pFramework->GetPlayer(2)->iHaveCoin = TRUE;
-				CoinObject->SetDrawFalse();
-			}
+			//if (abs(CoinObject->x() - m_pFramework->GetPlayer(2)->x) < 30 && abs(CoinObject->y() - m_pFramework->GetPlayer(2)->y) < 30)
+			//{
+			//	m_pFramework->GetPlayer(2)->iHaveCoin = TRUE;
+			//	CoinObject->SetDrawFalse();
+			//}
 		}
-
 		//VER3
+		//CObject_Player 이거 수정하고 CTS.set에서 수정한걸로 send하면 될거같음
 		m_pFramework->CTS.set(m_pFramework->GetPlayer(m_pFramework->NetGram.getPN()));
 		m_pFramework->NetGram.sendData(m_pFramework->CTS);
 
