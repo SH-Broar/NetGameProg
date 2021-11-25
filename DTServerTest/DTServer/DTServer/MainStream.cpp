@@ -173,7 +173,7 @@ void MainStream::GameLogic()
 	data = scene;
 
 	data.CoinState = 0;
-	DataCrowl(0);
+	//DataCrowl(0);
 
 	for (int i = 0; i < MEMBERS; ++i) {
 		players[i].sendData(data);
@@ -227,7 +227,6 @@ void MainStream::GameLogic()
 
 void MainStream::DataCrowl(int timeCut)
 {
-
 	for (int i = 0; i < MEMBERS; ++i)
 	{
 		data.PlayerData[i] = players[i].getCTS();

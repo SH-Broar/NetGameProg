@@ -98,6 +98,7 @@ bool CIngameScene::OnCreate()
 	SkillCoolTime = 0;
 	BuildObjects();
 
+
 	return true;
 }
 
@@ -986,6 +987,7 @@ void CIngameScene::Update(float fTimeElapsed)
 	{
 		isGameEnd = TRUE;
 
+		printf("End\n");
 		m_pFramework->GetPlayer(1)->CharacterStatus = 15;
 		m_pFramework->GetPlayer(2)->CharacterStatus = 15;
 		m_pFramework->GetPlayer(3)->CharacterStatus = 15;
@@ -1001,14 +1003,16 @@ void CIngameScene::Update(float fTimeElapsed)
 
 	if (isGameEnd == FALSE)
 	{
-		//printf("1001\n");
+		printf("%d\n", m_pFramework->GetPlayer(myPlayerNum)->CharacterStatus);
 		m_pFramework->NetGram.recvData(m_pFramework->STC);
 
+		m_pFramework->STC.explain();
 		KeyState();
 		CharacterState();
 		//Nevigator();
 
 		//여기서 네트워크 처리
+
 
 		if (m_pFramework->STC.CoinState != 0)
 		{
@@ -1045,6 +1049,7 @@ void CIngameScene::Update(float fTimeElapsed)
 		{
 			if (m_pFramework->STC.PlayerData[i].AttackedPlayerNum[myPlayerNum-1])
 			{
+				printf("설마 여기");
 				//피격
 				switch (m_pFramework->GetPlayer(i+1)->charNum)
 				{

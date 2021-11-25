@@ -62,9 +62,20 @@ struct ServerToClient
 		CoinY = rand() % 5000 + 250;
 		CoinState = 0;
 
+		PlayerData[0].PlayerNum = 1;
+		PlayerData[1].PlayerNum = 2;
+		PlayerData[2].PlayerNum = 3;
+
 		PlayerData[0].drawState = 1;
 		PlayerData[1].drawState = 1;
 		PlayerData[2].drawState = 1;
+
+		PlayerData[0].x = 35 * 64;
+		PlayerData[0].y = 15 * 64;
+		PlayerData[1].x = 58 * 64;
+		PlayerData[1].y = 15 * 64;
+		PlayerData[2].x = 45 * 64;
+		PlayerData[2].y = 26 * 64;
 
 		PlayerData[0].AttackedPlayerNum[0] = false;
 		PlayerData[1].AttackedPlayerNum[0] = false;

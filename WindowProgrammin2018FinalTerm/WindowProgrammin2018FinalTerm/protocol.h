@@ -48,6 +48,11 @@ struct ClientToServer
 		AttackedPlayerNum[1] = false;
 		AttackedPlayerNum[2] = false;
 	}
+
+	void explain()
+	{
+		printf("CTS : %d %d %d %d %d %d %d", PlayerNum, x, y, state, AttackedPlayerNum[0], AttackedPlayerNum[1], AttackedPlayerNum[2]);
+	}
 };
 
 struct ServerToClient
@@ -67,6 +72,18 @@ struct ServerToClient
 		CoinY = 0;
 		CoinState = 0;
 		Time = 99;
+	}
+	
+	void explain()
+	{
+		printf("STC : ");
+		PlayerData[0].explain();
+		printf("\n");
+		PlayerData[0].explain();
+		printf("\n");
+		PlayerData[0].explain();
+		printf("\n");
+		printf("and %d %d %d %d\n",CoinX, CoinY, CoinState, Time);
 	}
 
 };
