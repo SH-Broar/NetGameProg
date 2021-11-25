@@ -16,6 +16,7 @@ public:
 	void WaitForClientToConnect();
 	void PlayerSelectStart();
 	void GameLogic();
+	void CoinUpdate();
 	static DWORD WINAPI SendDataThread(LPVOID arg);
 	void SetData();
 };

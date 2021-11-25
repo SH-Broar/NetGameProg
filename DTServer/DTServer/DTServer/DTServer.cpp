@@ -7,15 +7,6 @@
 #define SERVERPORT 9000
 #define BUFSIZE 512
 
-DWORD WINAPI ProcessClient(LPVOID arg);
-
-void SetCursorPosition(int y)
-{
-	COORD pos = { 0,y };
-	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
-}
-
-
 int main()
 {
 	//서버 초기화
