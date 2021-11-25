@@ -20,6 +20,7 @@ public:
 	void PlayerSelectStart();
 	void GameLogic();
 	void DataCrowl(int tc);
+	void DataClear();
 	static DWORD WINAPI sendData(LPVOID arg);
 
 };

@@ -55,6 +55,29 @@ struct ServerToClient
 
 		Time = 60;
 	}
+
+	void setInitForIngame()
+	{
+		CoinX = rand() % 5000 + 250;
+		CoinY = rand() % 5000 + 250;
+		CoinState = 0;
+
+		PlayerData[0].drawState = 1;
+		PlayerData[1].drawState = 1;
+		PlayerData[2].drawState = 1;
+
+		PlayerData[0].AttackedPlayerNum[0] = false;
+		PlayerData[1].AttackedPlayerNum[0] = false;
+		PlayerData[2].AttackedPlayerNum[0] = false;
+		PlayerData[0].AttackedPlayerNum[1] = false;
+		PlayerData[1].AttackedPlayerNum[1] = false;
+		PlayerData[2].AttackedPlayerNum[1] = false;
+		PlayerData[0].AttackedPlayerNum[2] = false;
+		PlayerData[1].AttackedPlayerNum[2] = false;
+		PlayerData[2].AttackedPlayerNum[2] = false;
+
+		Time = 99;
+	}
 };
 //인 게임에서 서버가 클라이언트에 보내는 데이터
 //동기 TCP 사용

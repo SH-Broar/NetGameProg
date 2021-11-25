@@ -485,6 +485,11 @@ void Scene_Charsel::Update(float fTimeElapsed)
 		if (m_pFramework->STC.CoinState == 1) {
 			Finish = true;
 		}
+		else
+		{
+			NetSend();
+		}
+
 		if (Finish)
 		{
 			if (choice1 == 4)
@@ -499,10 +504,9 @@ void Scene_Charsel::Update(float fTimeElapsed)
 			m_pFramework->curSceneCreate();
 			m_pFramework->BuildPlayer(choice1, choice2, choice3);
 			Scene_Charsel::OnDestroy();
-
 		}		
 	}
-	NetSend();
+
 }
 
 void Scene_Charsel::Render(HDC hdc)

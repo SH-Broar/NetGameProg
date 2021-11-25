@@ -67,7 +67,7 @@ private:
 	float anX;
 	float anY;
 
-	int SkillCoolTime[3];
+	int SkillCoolTime;
 	int Tileindex[100][100] = { 0 };
 	int RemainTime;
 	int TimeTick;

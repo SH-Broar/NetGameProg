@@ -37,6 +37,17 @@ struct ClientToServer
 		y = CP->y;
 		state = CP->CharacterStatus;
 	}
+
+	void clear()
+	{
+		x = 0;
+		y = 0;
+		state = 1;
+
+		AttackedPlayerNum[0] = false;
+		AttackedPlayerNum[1] = false;
+		AttackedPlayerNum[2] = false;
+	}
 };
 
 struct ServerToClient
@@ -46,6 +57,17 @@ struct ServerToClient
 	int CoinY;	//현재 코인의 Y좌표
 	int CoinState;	//코인의 상태 (누가 갖고 있는지)
 	int Time;		//남은 시간
+
+	void clear()
+	{
+		PlayerData[0].clear();
+		PlayerData[1].clear();
+		PlayerData[2].clear();
+		CoinX = 0;
+		CoinY = 0;
+		CoinState = 0;
+		Time = 99;
+	}
 
 };
 //인 게임에서 서버가 클라이언트에 보내는 데이터

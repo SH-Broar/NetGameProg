@@ -22,7 +22,7 @@ OBJECT_Skill::OBJECT_Skill(int characterNum)
 	}
 	for (int i = 1; i <= this->MaxImageNumOfSkill; i++)
 	{
-		printf("%d", i);
+		//printf("%d", i);
 		wsprintf(LoadText, L"Graphic\\Char%d\\SKILL_E\\%d.png", characterNum, i);
 		this->Skill[i - 1].Load(LoadText);
 	}
