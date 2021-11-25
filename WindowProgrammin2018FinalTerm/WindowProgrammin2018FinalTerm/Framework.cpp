@@ -52,7 +52,8 @@ bool CFramework::OnCreate(HINSTANCE hInstance, HWND hWnd, const RECT & rc) //생�
 	//플레이어 생성
 	//BuildPlayer();
 	p1.top = 0; p1.left = 0; p1.right = m_rcClient.right; p1.bottom = m_rcClient.bottom;
-	p2.top = 0; p2.left = m_rcClient.right / 2; p2.right = m_rcClient.right; p2.bottom = m_rcClient.bottom;
+	p2.top = 0; p2.left = 0; p2.right = m_rcClient.right; p2.bottom = m_rcClient.bottom;
+	p3.top = 0; p3.left = 0; p3.right = m_rcClient.right; p3.bottom = m_rcClient.bottom;
 	// 클래스와 윈도우 프로시저 연결
 	::SetUserDataPtr(m_hWnd, this);
 

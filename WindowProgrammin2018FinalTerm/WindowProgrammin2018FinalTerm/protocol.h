@@ -76,14 +76,14 @@ struct ServerToClient
 	
 	void explain()
 	{
-		printf("STC : ");
+		printf("*********STC\n");
 		PlayerData[0].explain();
 		printf("\n");
 		PlayerData[0].explain();
 		printf("\n");
 		PlayerData[0].explain();
 		printf("\n");
-		printf("and %d %d %d %d\n",CoinX, CoinY, CoinState, Time);
+		printf("and %d %d %d %d*********\n",CoinX, CoinY, CoinState, Time);
 	}
 
 };

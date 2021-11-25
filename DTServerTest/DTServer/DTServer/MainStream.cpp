@@ -2,7 +2,7 @@
 #include "protocol.h"
 #include "network.h"
 
-#define MEMBERS 1
+#define MEMBERS 2
 #define SERVERPORT 9000
 
 MainStream::MainStream() {
@@ -203,11 +203,7 @@ void MainStream::GameLogic()
 		sec = std::chrono::system_clock::now() - start;
 
 		DataCrowl(sec.count());
-		if (players[0].getCTS().AttackedPlayerNum[0] == 1)//&& players[1].getCTS().AttackedPlayerNum[0] == 1 && players[2].getCTS().AttackedPlayerNum[0] == 1)
-		{
-			//printf("204 %d\n", players[0].getCTS().AttackedPlayerNum[0]);
-			data.CoinState = 1;	//씬 끝나는 플래그 설정
-		}
+
 
 		for (int i = 0; i < MEMBERS; ++i) {
 			players[i].sendData(data);

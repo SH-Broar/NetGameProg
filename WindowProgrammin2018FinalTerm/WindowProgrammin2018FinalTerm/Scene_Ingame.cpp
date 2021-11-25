@@ -5,6 +5,7 @@
 #include "OBJECT_Skill.h"
 #include "Framework.h"
 
+#define MEMBERS 2
 
 CIngameScene::CIngameScene()
 {
@@ -312,6 +313,17 @@ void CIngameScene::KeyState()
 				}
 			}
 		}
+
+		for (int i = 1; i <= MEMBERS; ++i)
+		{
+			if (i != myPlayerNum)
+			{
+				m_pFramework->GetPlayer(i)->x = m_pFramework->STC.PlayerData[i-1].x;
+				m_pFramework->GetPlayer(i)->y = m_pFramework->STC.PlayerData[i-1].y;
+				m_pFramework->GetPlayer(i)->CharacterStatus = m_pFramework->STC.PlayerData[i-1].state;
+			}
+		}
+
 		//지우면 안됨
 		/*
 		if (isp1LockDown != TRUE)
@@ -961,7 +973,7 @@ void CIngameScene::CharacterState()
 }
 
 void CIngameScene::Nevigator()
-{	
+{
 	//안 씀 VER3
 	//this->distanceX = (m_pFramework->GetPlayer(2)->x - m_pFramework->GetPlayer(1)->x);
 	//this->distanceY = (m_pFramework->GetPlayer(2)->y - m_pFramework->GetPlayer(1)->y);
@@ -988,12 +1000,10 @@ void CIngameScene::Update(float fTimeElapsed)
 		isGameEnd = TRUE;
 
 		printf("End\n");
-		m_pFramework->GetPlayer(1)->CharacterStatus = 15;
-		m_pFramework->GetPlayer(2)->CharacterStatus = 15;
-		m_pFramework->GetPlayer(3)->CharacterStatus = 15;
 
-		for (int i = 1; i <= 3; ++i)
+		for (int i = 1; i <= MEMBERS; ++i)
 		{
+			m_pFramework->GetPlayer(i)->CharacterStatus = 15;
 			if (m_pFramework->GetPlayer(i)->iHaveCoin == TRUE)
 			{
 				m_pFramework->GetPlayer(i)->CharacterStatus = 14;
@@ -1045,13 +1055,12 @@ void CIngameScene::Update(float fTimeElapsed)
 		}
 
 		//여기서 스킬을 사용했는지 판별(from네트워크)
-		for (int i = 0; i < 3; i++)
+		for (int i = 0; i < MEMBERS; i++)
 		{
-			if (m_pFramework->STC.PlayerData[i].AttackedPlayerNum[myPlayerNum-1])
+			if (m_pFramework->STC.PlayerData[i].AttackedPlayerNum[myPlayerNum - 1] && i != myPlayerNum - 1)
 			{
-				printf("설마 여기");
 				//피격
-				switch (m_pFramework->GetPlayer(i+1)->charNum)
+				switch (m_pFramework->GetPlayer(i + 1)->charNum)
 				{
 				case 1:
 					m_pFramework->GetPlayer(myPlayerNum)->SkillAttackedTimer = 120;
@@ -1075,19 +1084,18 @@ void CIngameScene::Update(float fTimeElapsed)
 				}
 			}
 		}
-		
+
 		//스킬 사용시 업데이트
 		m_pFramework->GetPlayer(myPlayerNum)->Update(fTimeElapsed);
 
-
 		//이걸 서버에서 해도될듯 아닌가
-		for (int i = 0; i < 3; i++)
+		for (int i = 0; i < MEMBERS; i++)
 		{
 			//초기화
 			m_pFramework->CTS.AttackedPlayerNum[i] = false;
 			if (i != myPlayerNum - 1)
 			{
-				if (IntersectRect(&tmp, m_pFramework->GetPlayer(i)->getRECT(), m_pFramework->GetPlayer(myPlayerNum)->CSkill->GetRECT())) // 스킬 공격 성공
+				if (IntersectRect(&tmp, m_pFramework->GetPlayer(i+1)->getRECT(), m_pFramework->GetPlayer(myPlayerNum)->CSkill->GetRECT())) // 스킬 공격 성공
 				{
 					//공격
 					switch (m_pFramework->GetPlayer(myPlayerNum)->charNum)
@@ -1107,16 +1115,16 @@ void CIngameScene::Update(float fTimeElapsed)
 					m_pFramework->GetPlayer(i)->CharacterStatus = 9;
 
 					m_pFramework->CTS.AttackedPlayerNum[i] = true;
-					//if (m_pFramework->GetPlayer(myPlayerNum)->iHaveCoin)
-					//{
-					//	m_pFramework->GetPlayer(myPlayerNum)->iHaveCoin = FALSE;
-					//	CoinObject->OnCreate(m_pFramework->GetPlayer(myPlayerNum)->x, m_pFramework->GetPlayer(myPlayerNum)->y);
-					//	coinLockDown = TRUE;	//이거 FALSE같은데
-					//}
+					if (m_pFramework->GetPlayer(myPlayerNum)->iHaveCoin)
+					{
+						m_pFramework->GetPlayer(myPlayerNum)->iHaveCoin = FALSE;
+						CoinObject->OnCreate(m_pFramework->GetPlayer(myPlayerNum)->x, m_pFramework->GetPlayer(myPlayerNum)->y);
+						coinLockDown = TRUE;	//이거 FALSE같은데
+					}
 				}
 			}
-		}
 
+		}
 
 		//네트워크 시간으로 시간 체크
 		if (RemainTime != m_pFramework->STC.Time)
@@ -1146,7 +1154,6 @@ void CIngameScene::Update(float fTimeElapsed)
 		//CObject_Player 이거 수정하고 CTS.set에서 수정한걸로 send하면 될거같음
 		m_pFramework->CTS.set(m_pFramework->GetPlayer(m_pFramework->NetGram.getPN()));
 		m_pFramework->NetGram.sendData(m_pFramework->CTS);
-
 	}
 	//for (int i = 0; i < nObjects; ++i)
 		//ppObjects[i]->Update(fTimeElapsed);
@@ -1275,8 +1282,6 @@ void CIngameScene::Render(HDC hdc)
 	{
 		Rectangle(hdc, 30 + 160, windowY - 120, 30 + 160 + (m_pFramework->GetPlayer(myPlayerNum)->DashCoolTimer / 10), windowY - 120 + 64);
 	}
-
-
 
 	//UI
 	C_IngameLine.Draw(hdc, 0, 0, m_pFramework->GetRect().right, m_pFramework->GetRect().bottom);
