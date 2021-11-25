@@ -156,7 +156,10 @@ void MainStream::PlayerSelectStart()
 		}
 	}
 }
-void MainStream::GameLogic() {}
+void MainStream::GameLogic()
+{
+
+}
 
 void MainStream::DataCrowl(int timeCut)
 {

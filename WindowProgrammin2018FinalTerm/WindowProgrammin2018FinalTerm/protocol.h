@@ -36,10 +36,6 @@ struct ClientToServer
 		x = CP->x;
 		y = CP->y;
 		state = CP->CharacterStatus;
-		for (int i = 0; i < 3; ++i)
-		{
-			AttackedPlayerNum[i] = false;
-		}
 	}
 };
 
