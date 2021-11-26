@@ -32,13 +32,12 @@ int recvn(SOCKET s, char* buf, int len, int flags)
 	char* ptr = buf;
 	int left = len;
 
-	WSAEWOULDBLOCK;
 	while (left > 0)
 	{
 		received = recv(s, ptr, left, flags);
-		if (received == SOCKET_ERROR || received == WSAEWOULDBLOCK)
+		if (received == SOCKET_ERROR)
 		{
-			return received;
+			err_quit("recv()");
 		}
 		else if (received == 0)
 			break;
