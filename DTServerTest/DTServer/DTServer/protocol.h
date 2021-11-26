@@ -58,8 +58,8 @@ struct ServerToClient
 
 	void setInitForIngame()
 	{
-		CoinX = rand() % 5000 + 250;
-		CoinY = rand() % 5000 + 250;
+		CoinX = 3600;
+		CoinY = 960;
 		CoinState = 0;
 
 		PlayerData[0].PlayerNum = 1;

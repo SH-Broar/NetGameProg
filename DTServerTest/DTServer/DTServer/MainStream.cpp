@@ -2,7 +2,7 @@
 #include "protocol.h"
 #include "network.h"
 
-#define MEMBERS 1
+#define MEMBERS 2
 #define SERVERPORT 9000
 
 MainStream::MainStream() {
@@ -203,6 +203,34 @@ void MainStream::GameLogic()
 		sec = std::chrono::system_clock::now() - start;
 
 		DataCrowl(sec.count());
+
+		//코인 처리
+		for (int i = 0; i < MEMBERS; i++)
+		{
+			if (data.CoinState == 0)
+			{
+				if (abs(data.CoinX - data.PlayerData[i].x) < 30 && abs(data.CoinY - data.PlayerData[i].y) < 30)
+				{
+					data.CoinState = i+1;
+					//m_pFramework->GetPlayer(myPlayerNum)->iHaveCoin = TRUE;
+					//CoinObject->SetDrawFalse();
+				}
+			}
+			else
+			{
+				for (int j = 0; j < MEMBERS; j++)
+				{
+					if (data.PlayerData[i].AttackedPlayerNum[j])
+					{
+						if (j + 1 == data.CoinState)
+						{
+							data.CoinState = 0;
+						}
+					}
+				}
+
+			}
+		}
 
 
 		for (int i = 0; i < MEMBERS; ++i) {

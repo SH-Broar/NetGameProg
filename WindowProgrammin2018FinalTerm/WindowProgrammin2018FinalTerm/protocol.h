@@ -86,9 +86,9 @@ struct ServerToClient
 		printf("*********STC\n");
 		PlayerData[0].explain();
 		printf("\n");
-		PlayerData[0].explain();
+		PlayerData[1].explain();
 		printf("\n");
-		PlayerData[0].explain();
+		PlayerData[2].explain();
 		printf("\n");
 		printf("and %d %d %d %d*********\n",CoinX, CoinY, CoinState, Time);
 	}

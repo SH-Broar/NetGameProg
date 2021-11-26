@@ -5,7 +5,7 @@
 #include "OBJECT_Skill.h"
 #include "Framework.h"
 
-#define MEMBERS 1
+#define MEMBERS 2
 
 CIngameScene::CIngameScene()
 {
@@ -318,9 +318,9 @@ void CIngameScene::KeyState()
 		{
 			if (i != myPlayerNum)
 			{
-				m_pFramework->GetPlayer(i)->x = m_pFramework->STC.PlayerData[i-1].x;
-				m_pFramework->GetPlayer(i)->y = m_pFramework->STC.PlayerData[i-1].y;
-				m_pFramework->GetPlayer(i)->CharacterStatus = m_pFramework->STC.PlayerData[i-1].state;
+				m_pFramework->GetPlayer(i)->x = m_pFramework->STC.PlayerData[i - 1].x;
+				m_pFramework->GetPlayer(i)->y = m_pFramework->STC.PlayerData[i - 1].y;
+				m_pFramework->GetPlayer(i)->CharacterStatus = m_pFramework->STC.PlayerData[i - 1].state;
 			}
 		}
 
@@ -675,12 +675,12 @@ void CIngameScene::CharacterState()
 							{
 								m_pFramework->GetPlayer(i)->iHaveCoin = FALSE;
 								CoinObject->OnCreate(m_pFramework->GetPlayer(i)->x, m_pFramework->GetPlayer(i)->y);
-								coinLockDown = TRUE;
+								coinLockDown = FALSE;
 							}
 						}
 					}
 				}
-				
+
 				break; // 앞 볼 때
 			case 3:
 			case 4:
@@ -690,7 +690,7 @@ void CIngameScene::CharacterState()
 				m_pFramework->GetPlayer(myPlayerNum)->isAttack = TRUE;
 				m_pFramework->GetPlayer(myPlayerNum)->CharacterStatus = 7;
 
-				//상대 피격 처리(수정필)
+				//상대 피격 처리
 				for (int i = 1; i <= MEMBERS; ++i)
 				{
 					if (i != myPlayerNum)
@@ -707,7 +707,7 @@ void CIngameScene::CharacterState()
 							{
 								m_pFramework->GetPlayer(i)->iHaveCoin = FALSE;
 								CoinObject->OnCreate(m_pFramework->GetPlayer(i)->x, m_pFramework->GetPlayer(i)->y);
-								coinLockDown = TRUE;
+								coinLockDown = FALSE;
 							}
 						}
 					}
@@ -750,7 +750,7 @@ void CIngameScene::CharacterState()
 			}
 		}
 
-		//characterStatus로 if돌려야함 (수정필)
+		//characterStatus로 if돌려야함
 	//	if (keydownList[8])
 	//	{
 	//		if (Tileindex[m_pFramework->GetPlayer(1)->x / 64][(m_pFramework->GetPlayer(1)->y + 60) / 64] == 1)
@@ -1007,6 +1007,24 @@ void CIngameScene::CharacterState()
 		}
 
 	}
+	else
+	{
+		switch (m_pFramework->GetPlayer(myPlayerNum)->CharacterStatus)
+		{
+		case 2:
+		case 5:
+		case 6:
+		case 0:
+			m_pFramework->GetPlayer(myPlayerNum)->CharacterStatus = 0;
+			break; // 앞 볼 때
+		case 3:
+		case 4:
+		case 7:
+		case 1:
+			m_pFramework->GetPlayer(myPlayerNum)->CharacterStatus = 1;
+			break; // 뒤 볼 때
+		}
+	}
 }
 
 void CIngameScene::Nevigator()
@@ -1055,12 +1073,8 @@ void CIngameScene::Update(float fTimeElapsed)
 
 		m_pFramework->STC.explain();
 		m_pFramework->CTS.APNclear();
-		KeyState();
-		CharacterState();
+
 		//Nevigator();
-
-		//여기서 네트워크 처리
-
 
 		if (m_pFramework->STC.CoinState != 0)
 		{
@@ -1075,17 +1089,25 @@ void CIngameScene::Update(float fTimeElapsed)
 		{
 			CoinObject->SetDrawTrue();
 
-			if (coinLockDown == TRUE)
-			{
-				CoinObject->Setx(m_pFramework->STC.CoinX);
-				CoinObject->Sety(m_pFramework->STC.CoinY);
-			}
+
+			CoinObject->Setx(m_pFramework->STC.CoinX);
+			CoinObject->Sety(m_pFramework->STC.CoinY);
+
+
+			for (int i = 1; i <= MEMBERS; ++i)
+				m_pFramework->GetPlayer(i)->iHaveCoin = FALSE;
 
 			//코인 Idle 애니메이션
 			CoinObject->Update(fTimeElapsed);
 			coinLockDown = FALSE;
 
 		}
+
+		//여기서 네트워크 처리
+
+
+		KeyState();
+		CharacterState();
 
 		if (m_pFramework->GetPlayer(myPlayerNum)->DashCoolTimer > 0)
 		{
@@ -1116,9 +1138,9 @@ void CIngameScene::Update(float fTimeElapsed)
 				ismyPLockDown = TRUE;
 				if (m_pFramework->GetPlayer(myPlayerNum)->iHaveCoin)
 				{
-					m_pFramework->GetPlayer(myPlayerNum)->iHaveCoin = FALSE;
+					//m_pFramework->GetPlayer(myPlayerNum)->iHaveCoin = FALSE;
 					CoinObject->OnCreate(m_pFramework->GetPlayer(myPlayerNum)->x, m_pFramework->GetPlayer(myPlayerNum)->y);
-					coinLockDown = TRUE;	//이거 FALSE같은데
+					coinLockDown = FALSE;	//이거 FALSE같은데
 				}
 			}
 		}
@@ -1126,36 +1148,35 @@ void CIngameScene::Update(float fTimeElapsed)
 		//스킬 사용시 업데이트
 		m_pFramework->GetPlayer(myPlayerNum)->Update(fTimeElapsed);
 
-		//이걸 서버에서 해도될듯 아닌가
 		for (int i = 0; i < MEMBERS; i++)
 		{
 			//초기화
 			m_pFramework->CTS.AttackedPlayerNum[i] = false;
 			if (i != myPlayerNum - 1)
 			{
-				if (IntersectRect(&tmp, m_pFramework->GetPlayer(i+1)->getRECT(), m_pFramework->GetPlayer(myPlayerNum)->CSkill->GetRECT())) // 스킬 공격 성공
+				if (IntersectRect(&tmp, m_pFramework->GetPlayer(i + 1)->getRECT(), m_pFramework->GetPlayer(myPlayerNum)->CSkill->GetRECT())) // 스킬 공격 성공
 				{
 					//공격
 					switch (m_pFramework->GetPlayer(myPlayerNum)->charNum)
 					{
 					case 1:
-						m_pFramework->GetPlayer(i)->SkillAttackedTimer = 120;
+						m_pFramework->GetPlayer(i+1)->SkillAttackedTimer = 120;
 						break;
 					case 2:
-						m_pFramework->GetPlayer(i)->SkillAttackedTimer = 60;
+						m_pFramework->GetPlayer(i + 1)->SkillAttackedTimer = 60;
 						break;
 					case 3:
-						m_pFramework->GetPlayer(i)->SkillAttackedTimer = 180;
+						m_pFramework->GetPlayer(i + 1)->SkillAttackedTimer = 180;
 						break;
 					}
 
-					m_pFramework->GetPlayer(i)->isAttacked = TRUE;
-					m_pFramework->GetPlayer(i)->CharacterStatus = 9;
+					m_pFramework->GetPlayer(i + 1)->isAttacked = TRUE;
+					m_pFramework->GetPlayer(i + 1)->CharacterStatus = 9;
 
 					m_pFramework->CTS.AttackedPlayerNum[i] = true;
 					if (m_pFramework->GetPlayer(myPlayerNum)->iHaveCoin)
 					{
-						m_pFramework->GetPlayer(myPlayerNum)->iHaveCoin = FALSE;
+						//m_pFramework->GetPlayer(myPlayerNum)->iHaveCoin = FALSE;
 						CoinObject->OnCreate(m_pFramework->GetPlayer(myPlayerNum)->x, m_pFramework->GetPlayer(myPlayerNum)->y);
 						coinLockDown = TRUE;	//이거 FALSE같은데
 					}
@@ -1179,14 +1200,14 @@ void CIngameScene::Update(float fTimeElapsed)
 		}
 
 		//이거는 서버쪽에 있어야 되겠는데?
-		if (CoinObject->GetbDraw() && coinLockDown == FALSE)
-		{
-			if (abs(CoinObject->x() - m_pFramework->GetPlayer(myPlayerNum)->x) < 30 && abs(CoinObject->y() - m_pFramework->GetPlayer(myPlayerNum)->y) < 30)
-			{
-				//m_pFramework->GetPlayer(myPlayerNum)->iHaveCoin = TRUE;
-				//CoinObject->SetDrawFalse();
-			}
-		}
+		//if (CoinObject->GetbDraw() && coinLockDown == FALSE)
+		//{
+		//	if (abs(CoinObject->x() - m_pFramework->GetPlayer(myPlayerNum)->x) < 30 && abs(CoinObject->y() - m_pFramework->GetPlayer(myPlayerNum)->y) < 30)
+		//	{
+		//		//m_pFramework->GetPlayer(myPlayerNum)->iHaveCoin = TRUE;
+		//		//CoinObject->SetDrawFalse();
+		//	}
+		//}
 
 		//VER3
 		//CObject_Player 이거 수정하고 CTS.set에서 수정한걸로 send하면 될거같음
@@ -1327,24 +1348,31 @@ void CIngameScene::Render(HDC hdc)
 	C_Numbers[TimerImage[1]].Draw(hdc, m_pFramework->GetRect().right / 2 + 20, m_pFramework->GetRect().bottom / 15, 80, 80);
 
 
-	//Coin 소지 표현
-	if (m_pFramework->GetPlayer(1)->iHaveCoin)
+	//Coin 소지 표현'
+	for (int i = 0; i < MEMBERS; i++)
 	{
-		CoinObject->Image.Draw(hdc, m_pFramework->GetRect().right / 2 - 90 - 60, windowY / 15, 50, 50);
-	}
-	else if (m_pFramework->GetPlayer(2)->iHaveCoin)
-	{
-		CoinObject->Image.Draw(hdc, m_pFramework->GetRect().right / 2 + 110, windowY / 15, 50, 50);
-	}
-	else if (m_pFramework->GetPlayer(3)->iHaveCoin)
-	{
-		CoinObject->Image.Draw(hdc, m_pFramework->GetRect().right / 2, windowY / 15 - 20, 50, 50);
-	}
+		if (m_pFramework->GetPlayer(i + 1)->iHaveCoin)
+		{
+			switch (i + 1)
+			{
+			case 1:
+				CoinObject->Image.Draw(hdc, m_pFramework->GetRect().right / 2 - 90 - 60, windowY / 15, 50, 50);
+				break;
+			case 2:
+				CoinObject->Image.Draw(hdc, m_pFramework->GetRect().right / 2 + 110, windowY / 15, 50, 50);
+				break;
+			case 3:
 
-	//오브젝트 렌더링
-	for (int i = 0; i < nObjects; ++i)
-		ppObjects[i]->Render(*m_pFramework->GetPlayerDC());
+				CoinObject->Image.Draw(hdc, m_pFramework->GetRect().right / 2, windowY / 15 - 20, 50, 50);
+				break;
+			}
+		}
 
+		//오브젝트 렌더링
+		for (int i = 0; i < nObjects; ++i)
+			ppObjects[i]->Render(*m_pFramework->GetPlayerDC());
+
+	}
 }
 
 
