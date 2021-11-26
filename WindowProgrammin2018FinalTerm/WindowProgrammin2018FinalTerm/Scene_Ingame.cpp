@@ -5,7 +5,7 @@
 #include "OBJECT_Skill.h"
 #include "Framework.h"
 
-#define MEMBERS 2
+#define MEMBERS 1
 
 CIngameScene::CIngameScene()
 {
@@ -657,21 +657,30 @@ void CIngameScene::CharacterState()
 				m_pFramework->GetPlayer(myPlayerNum)->isAttack = TRUE;
 				m_pFramework->GetPlayer(myPlayerNum)->CharacterStatus = 6;
 
-				//상대 피격 처리(수정필)
-				if ((abs(m_pFramework->GetPlayer(myPlayerNum)->x - m_pFramework->GetPlayer(1)->x) < 70) &&
-					(abs(m_pFramework->GetPlayer(myPlayerNum)->y - m_pFramework->GetPlayer(1)->y) < 50))
+				for (int i = 1; i <= MEMBERS; ++i)
 				{
-					m_pFramework->GetPlayer(1)->Old_CharStat = m_pFramework->GetPlayer(1)->CharacterStatus;
-					m_pFramework->GetPlayer(1)->isAttacked = TRUE;
-					m_pFramework->GetPlayer(1)->CharacterStatus = 9;
-					//isp1LockDown = TRUE;
-					if (m_pFramework->GetPlayer(1)->iHaveCoin)
+					if (i != myPlayerNum)
 					{
-						m_pFramework->GetPlayer(1)->iHaveCoin = FALSE;
-						CoinObject->OnCreate(m_pFramework->GetPlayer(1)->x, m_pFramework->GetPlayer(1)->y);
-						coinLockDown = TRUE;
+						//상대 피격 처리(수정필)
+						if ((abs(m_pFramework->GetPlayer(myPlayerNum)->x - m_pFramework->GetPlayer(i)->x) < 70) &&
+							(abs(m_pFramework->GetPlayer(myPlayerNum)->y - m_pFramework->GetPlayer(i)->y) < 50))
+						{
+							//수정필 : 때린 애 서버에 실어서 보내야함
+							m_pFramework->CTS.AttackedPlayerNum[i - 1] = true;
+							m_pFramework->GetPlayer(i)->Old_CharStat = m_pFramework->GetPlayer(i)->CharacterStatus;
+							m_pFramework->GetPlayer(i)->isAttacked = TRUE;
+							m_pFramework->GetPlayer(i)->CharacterStatus = 9;
+							//isp1LockDown = TRUE;
+							if (m_pFramework->GetPlayer(i)->iHaveCoin)
+							{
+								m_pFramework->GetPlayer(i)->iHaveCoin = FALSE;
+								CoinObject->OnCreate(m_pFramework->GetPlayer(i)->x, m_pFramework->GetPlayer(i)->y);
+								coinLockDown = TRUE;
+							}
+						}
 					}
 				}
+				
 				break; // 앞 볼 때
 			case 3:
 			case 4:
@@ -682,18 +691,25 @@ void CIngameScene::CharacterState()
 				m_pFramework->GetPlayer(myPlayerNum)->CharacterStatus = 7;
 
 				//상대 피격 처리(수정필)
-				if ((abs(m_pFramework->GetPlayer(myPlayerNum)->x - m_pFramework->GetPlayer(1)->x) < 70) &&
-					(abs(m_pFramework->GetPlayer(myPlayerNum)->y - m_pFramework->GetPlayer(1)->y) < 50))
+				for (int i = 1; i <= MEMBERS; ++i)
 				{
-					m_pFramework->GetPlayer(1)->Old_CharStat = m_pFramework->GetPlayer(1)->CharacterStatus;
-					m_pFramework->GetPlayer(1)->isAttacked = TRUE;
-					m_pFramework->GetPlayer(1)->CharacterStatus = 8;
-					//isp1LockDown = TRUE;
-					if (m_pFramework->GetPlayer(1)->iHaveCoin)
+					if (i != myPlayerNum)
 					{
-						m_pFramework->GetPlayer(1)->iHaveCoin = FALSE;
-						CoinObject->OnCreate(m_pFramework->GetPlayer(1)->x, m_pFramework->GetPlayer(1)->y);
-						coinLockDown = TRUE;
+						if ((abs(m_pFramework->GetPlayer(myPlayerNum)->x - m_pFramework->GetPlayer(i)->x) < 70) &&
+							(abs(m_pFramework->GetPlayer(myPlayerNum)->y - m_pFramework->GetPlayer(i)->y) < 50))
+						{
+							m_pFramework->CTS.AttackedPlayerNum[i - 1] = true;
+							m_pFramework->GetPlayer(i)->Old_CharStat = m_pFramework->GetPlayer(i)->CharacterStatus;
+							m_pFramework->GetPlayer(i)->isAttacked = TRUE;
+							m_pFramework->GetPlayer(i)->CharacterStatus = 8;
+							//isp1LockDown = TRUE;
+							if (m_pFramework->GetPlayer(i)->iHaveCoin)
+							{
+								m_pFramework->GetPlayer(i)->iHaveCoin = FALSE;
+								CoinObject->OnCreate(m_pFramework->GetPlayer(i)->x, m_pFramework->GetPlayer(i)->y);
+								coinLockDown = TRUE;
+							}
+						}
 					}
 				}
 				break; // 뒤 볼 때
@@ -947,7 +963,6 @@ void CIngameScene::CharacterState()
 				m_pFramework->GetPlayer(myPlayerNum)->WalkingTimerTick = 0;
 				m_pFramework->GetPlayer(myPlayerNum)->WalkingImageTick++;
 			}
-
 		}
 		else
 		{
@@ -969,6 +984,28 @@ void CIngameScene::CharacterState()
 				}
 			}
 		}
+
+		//상대 설정
+		for (int i = 1; i <= MEMBERS; ++i)
+		{
+			if (i != myPlayerNum)
+			{
+				if (m_pFramework->GetPlayer(i)->CharacterStatus != 0 && m_pFramework->GetPlayer(i)->CharacterStatus != 1)
+				{
+					m_pFramework->GetPlayer(i)->isWalk = TRUE;
+					if (m_pFramework->GetPlayer(i)->WalkingTimerTick++ > 3)
+					{
+						m_pFramework->GetPlayer(i)->WalkingTimerTick = 0;
+						m_pFramework->GetPlayer(i)->WalkingImageTick++;
+					}
+				}
+				else
+				{
+					m_pFramework->GetPlayer(i)->isWalk = FALSE;
+				}
+			}
+		}
+
 	}
 }
 
@@ -1017,6 +1054,7 @@ void CIngameScene::Update(float fTimeElapsed)
 		m_pFramework->NetGram.recvData(m_pFramework->STC);
 
 		m_pFramework->STC.explain();
+		m_pFramework->CTS.APNclear();
 		KeyState();
 		CharacterState();
 		//Nevigator();

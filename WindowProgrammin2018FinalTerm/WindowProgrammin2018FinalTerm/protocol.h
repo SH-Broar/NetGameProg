@@ -49,6 +49,13 @@ struct ClientToServer
 		AttackedPlayerNum[2] = false;
 	}
 
+	void APNclear()
+	{
+		AttackedPlayerNum[0] = false;
+		AttackedPlayerNum[1] = false;
+		AttackedPlayerNum[2] = false;
+	}
+
 	void explain()
 	{
 		printf("CTS : %d %d %d %d %d %d %d", PlayerNum, x, y, state, AttackedPlayerNum[0], AttackedPlayerNum[1], AttackedPlayerNum[2]);

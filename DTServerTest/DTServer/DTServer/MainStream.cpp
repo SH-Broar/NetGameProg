@@ -2,7 +2,7 @@
 #include "protocol.h"
 #include "network.h"
 
-#define MEMBERS 2
+#define MEMBERS 1
 #define SERVERPORT 9000
 
 MainStream::MainStream() {
