@@ -209,22 +209,30 @@ void MainStream::GameLogic()
 		{
 			if (data.CoinState == 0)
 			{
-				if (abs(data.CoinX - data.PlayerData[i].x) < 30 && abs(data.CoinY - data.PlayerData[i].y) < 30)
+				if (data.PlayerData[i].drawState != 8 && data.PlayerData[i].drawState != 9)
 				{
-					data.CoinState = i+1;
-					//m_pFramework->GetPlayer(myPlayerNum)->iHaveCoin = TRUE;
-					//CoinObject->SetDrawFalse();
+					if (abs(data.CoinX - data.PlayerData[i].x) < 30 && abs(data.CoinY - data.PlayerData[i].y) < 30)
+					{
+						data.CoinState = i + 1;
+						//m_pFramework->GetPlayer(myPlayerNum)->iHaveCoin = TRUE;
+						//CoinObject->SetDrawFalse();
+					}
 				}
 			}
 			else
 			{
 				for (int j = 0; j < MEMBERS; j++)
 				{
-					if (data.PlayerData[i].AttackedPlayerNum[j])
+					if (i != j)
 					{
-						if (j + 1 == data.CoinState)
+						if (data.PlayerData[i].AttackedPlayerNum[j])
 						{
-							data.CoinState = 0;
+							if (j + 1 == data.CoinState)
+							{
+								data.CoinX = data.PlayerData[j].x;
+								data.CoinY = data.PlayerData[j].y;
+								data.CoinState = 0;
+							}
 						}
 					}
 				}
@@ -241,8 +249,11 @@ void MainStream::GameLogic()
 			SetEvent(players[i].WaitMainStream);
 		}
 
-		if (data.CoinState == 1) //다음 씬으로 넘어갈 상태이면
+		//게임 끝나면 종료해야함
+		if (data.Time <= 0 && data.CoinState != 0)
 		{
+			printf("\n****Game End!!****\n");
+			printf("****Game End!!****\n");
 			break;
 		}
 	}
