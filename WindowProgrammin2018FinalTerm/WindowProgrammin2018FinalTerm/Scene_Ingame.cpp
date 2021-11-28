@@ -176,146 +176,6 @@ void CIngameScene::KeyState()
 				}
 			}
 		}
-		else
-		{
-			if (m_pFramework->GetPlayer(myPlayerNum)->isAttack)
-			{
-				if (m_pFramework->GetPlayer(myPlayerNum)->AttackTimerTick++ > 3)
-				{
-					m_pFramework->GetPlayer(myPlayerNum)->AttackTimerTick = 0;
-					if (m_pFramework->GetPlayer(myPlayerNum)->AttackImageTick++ > 2)
-					{
-						m_pFramework->GetPlayer(myPlayerNum)->isAttack = FALSE;
-						m_pFramework->GetPlayer(myPlayerNum)->AttackTimerTick = 0;
-						m_pFramework->GetPlayer(myPlayerNum)->AttackImageTick = 0;
-						//printf("%d", m_pFramework->GetPlayer(2)->CharacterStatus);
-						if (m_pFramework->GetPlayer(myPlayerNum)->CharacterStatus == 6)
-							m_pFramework->GetPlayer(myPlayerNum)->CharacterStatus = 0;
-						else
-							m_pFramework->GetPlayer(myPlayerNum)->CharacterStatus = 1;
-						ismyPLockDown = FALSE;
-						pkey = TRUE;
-					}
-				}
-			}
-			else if (m_pFramework->GetPlayer(myPlayerNum)->isSkill)
-			{
-				if (m_pFramework->GetPlayer(myPlayerNum)->AttackTimerTick++ > 3)
-				{
-					m_pFramework->GetPlayer(myPlayerNum)->AttackTimerTick = 0;
-					if (m_pFramework->GetPlayer(myPlayerNum)->AttackImageTick++ > 2)
-					{
-						m_pFramework->GetPlayer(myPlayerNum)->AttackTimerTick = 0;
-						m_pFramework->GetPlayer(myPlayerNum)->AttackImageTick = 0;
-						//printf("%d", m_pFramework->GetPlayer(2)->CharacterStatus);
-					}
-				}
-			}
-			else if (m_pFramework->GetPlayer(myPlayerNum)->isSkillEnd)
-			{
-				if (m_pFramework->GetPlayer(myPlayerNum)->CharacterStatus == 12)
-					m_pFramework->GetPlayer(myPlayerNum)->CharacterStatus = 0;
-				else
-					m_pFramework->GetPlayer(myPlayerNum)->CharacterStatus = 1;
-				m_pFramework->GetPlayer(myPlayerNum)->AttackTimerTick = 0;
-				m_pFramework->GetPlayer(myPlayerNum)->AttackImageTick = 0;
-				m_pFramework->GetPlayer(myPlayerNum)->isSkillEnd = FALSE;
-				ismyPLockDown = FALSE;
-			}
-			else if (m_pFramework->GetPlayer(myPlayerNum)->isDash)
-			{
-				if (m_pFramework->GetPlayer(myPlayerNum)->DashTimerTick++ > 10)
-				{
-					m_pFramework->GetPlayer(myPlayerNum)->DashTimerTick = 0;
-					m_pFramework->GetPlayer(myPlayerNum)->isDash = FALSE;
-					m_pFramework->GetPlayer(myPlayerNum)->CharacterStatus = m_pFramework->GetPlayer(myPlayerNum)->Old_CharStat;
-					ismyPLockDown = FALSE;
-					pkey = TRUE;
-				}
-				switch (m_pFramework->GetPlayer(myPlayerNum)->Old_CharStat)
-				{
-				case 2:
-				case 0:
-					if (m_pFramework->GetPlayer(myPlayerNum)->x > 50)
-						m_pFramework->GetPlayer(myPlayerNum)->x -= 25;
-					break;
-				case 5:
-					if (m_pFramework->GetPlayer(myPlayerNum)->y < 6350)
-						m_pFramework->GetPlayer(myPlayerNum)->y += 25;
-
-					break; // 앞 볼 때
-				case 3:
-					if (m_pFramework->GetPlayer(myPlayerNum)->y > 50)
-						m_pFramework->GetPlayer(myPlayerNum)->y -= 25;
-
-					break;
-				case 4:
-				case 1:
-					if (m_pFramework->GetPlayer(myPlayerNum)->x < 6350)
-						m_pFramework->GetPlayer(myPlayerNum)->x += 25;
-
-					break; // 뒤 볼 때
-				}
-			}
-			else if (m_pFramework->GetPlayer(myPlayerNum)->isAttacked)
-			{
-				if (m_pFramework->GetPlayer(myPlayerNum)->SkillAttackedTimer-- > 0 &&
-					m_pFramework->GetPlayer(myPlayerNum)->AttackTimerTick > 10)
-				{
-					m_pFramework->GetPlayer(myPlayerNum)->AttackTimerTick--;
-				}
-
-				if (m_pFramework->GetPlayer(myPlayerNum)->AttackTimerTick++ > 20)
-				{
-					m_pFramework->GetPlayer(myPlayerNum)->AttackTimerTick = 0;
-					m_pFramework->GetPlayer(myPlayerNum)->isAttacked = FALSE;
-					m_pFramework->GetPlayer(myPlayerNum)->CharacterStatus = m_pFramework->GetPlayer(myPlayerNum)->Old_CharStat;
-					ismyPLockDown = FALSE;
-					pkey = TRUE;
-					m_pFramework->GetPlayer(myPlayerNum)->SkillAttackedTimer = 0;
-				}
-
-				if (m_pFramework->GetPlayer(myPlayerNum)->AttackTimerTick < 10)
-				{
-					//원래 때린사람 기준으로 해야되긴 하는데
-					switch (m_pFramework->GetPlayer(myPlayerNum)->Old_CharStat)
-					{
-					case 2:
-					case 0:
-						if (m_pFramework->GetPlayer(myPlayerNum)->x < 6350)
-							m_pFramework->GetPlayer(myPlayerNum)->x += 15;
-						if (coinLockDown)
-							CoinObject->Setx(CoinObject->x() - 5);
-						break;
-					case 5:
-						if (m_pFramework->GetPlayer(myPlayerNum)->y > 50)
-							m_pFramework->GetPlayer(myPlayerNum)->y -= 15;
-						if (coinLockDown)
-							CoinObject->Setx(CoinObject->y() + 5);
-						break; // 앞 볼 때
-					case 3:
-
-						if (m_pFramework->GetPlayer(myPlayerNum)->y < 6350)
-							m_pFramework->GetPlayer(myPlayerNum)->y += 15;
-						if (coinLockDown)
-							CoinObject->Setx(CoinObject->y() - 5);
-						break;
-					case 4:
-					case 1:
-
-						if (m_pFramework->GetPlayer(myPlayerNum)->x > 50)
-							m_pFramework->GetPlayer(myPlayerNum)->x -= 15;
-						if (coinLockDown)
-							CoinObject->Setx(CoinObject->x() + 5);
-						break; // 뒤 볼 때
-					}
-				}
-				else
-				{
-					coinLockDown = FALSE;
-				}
-			}
-		}
 
 		for (int i = 1; i <= MEMBERS; ++i)
 		{
@@ -328,8 +188,257 @@ void CIngameScene::KeyState()
 			}
 		}
 	}
+
+		FrameAdvance();
+	
 }
 
+void CIngameScene::FrameAdvance()
+{
+	//상대 설정
+	for (int i = 1; i <= MEMBERS; ++i)
+	{
+		if (i != myPlayerNum)
+		{
+			m_pFramework->GetPlayer(myPlayerNum)->Old_CharStat = m_pFramework->GetPlayer(myPlayerNum)->CharacterStatus;
+			switch (m_pFramework->GetPlayer(i)->CharacterStatus)
+			{
+			case 0:
+			case 1:
+				m_pFramework->GetPlayer(i)->isWalk = FALSE;
+				m_pFramework->GetPlayer(i)->AttackTimerTick = 0;
+				m_pFramework->GetPlayer(i)->AttackImageTick = 0;
+				m_pFramework->GetPlayer(i)->WalkingTimerTick = 0;
+				break;
+			case 2:
+			case 3:
+			case 4:
+			case 5:
+				m_pFramework->GetPlayer(i)->isWalk = TRUE;
+				if (m_pFramework->GetPlayer(i)->WalkingTimerTick++ > 3)
+				{
+					m_pFramework->GetPlayer(i)->WalkingTimerTick = 0;
+					m_pFramework->GetPlayer(i)->WalkingImageTick++;
+				}
+				break;
+			case 6:
+			case 7:
+				m_pFramework->GetPlayer(i)->isAttack = TRUE;
+				if (m_pFramework->GetPlayer(i)->AttackTimerTick++ > 3)
+				{
+					m_pFramework->GetPlayer(i)->AttackTimerTick = 0;
+					if (m_pFramework->GetPlayer(i)->AttackImageTick++ > 2)
+					{
+						m_pFramework->GetPlayer(i)->isAttack = FALSE;
+						m_pFramework->GetPlayer(i)->AttackTimerTick = 0;
+						m_pFramework->GetPlayer(i)->AttackImageTick = 0;
+						//printf("%d", m_pFramework->GetPlayer(2)->CharacterStatus);
+						if (m_pFramework->GetPlayer(i)->CharacterStatus == 6)
+						{
+							m_pFramework->GetPlayer(i)->CharacterStatus = 0;
+						}
+						else
+						{
+							m_pFramework->GetPlayer(i)->CharacterStatus = 1;
+						}
+					}
+				}
+				break;
+			case 8:
+			case 9:
+				m_pFramework->GetPlayer(i)->isWalk = FALSE;
+				if (m_pFramework->GetPlayer(i)->SkillAttackedTimer-- > 0 &&
+					m_pFramework->GetPlayer(i)->AttackTimerTick > 10)
+				{
+					m_pFramework->GetPlayer(i)->AttackTimerTick--;
+				}
+
+				if (m_pFramework->GetPlayer(i)->AttackTimerTick++ > 20)
+				{
+					m_pFramework->GetPlayer(i)->AttackTimerTick = 0;
+					m_pFramework->GetPlayer(i)->isAttacked = FALSE;
+					m_pFramework->GetPlayer(i)->CharacterStatus = m_pFramework->GetPlayer(i)->Old_CharStat;
+					m_pFramework->GetPlayer(i)->SkillAttackedTimer = 0;
+				}
+				break;
+			case 10:
+			case 11:
+				m_pFramework->GetPlayer(i)->isWalk = FALSE;
+				if (m_pFramework->GetPlayer(i)->DashTimerTick++ > 10)
+				{
+					m_pFramework->GetPlayer(i)->DashTimerTick = 0;
+					m_pFramework->GetPlayer(i)->isDash = FALSE;
+				}
+				break;
+			case 12:
+			case 13:
+				m_pFramework->GetPlayer(i)->isWalk = FALSE;
+				m_pFramework->GetPlayer(i)->isSkill = TRUE;
+				m_pFramework->GetPlayer(i)->SkillCast(m_pFramework->GetPlayer(i)->x, m_pFramework->GetPlayer(i)->y,m_pFramework->GetPlayer(i)->Old_CharStat);
+
+				if (m_pFramework->GetPlayer(i)->AttackTimerTick++ > 3)
+				{
+					m_pFramework->GetPlayer(i)->AttackTimerTick = 0;
+					if (m_pFramework->GetPlayer(i)->AttackImageTick++ > 2)
+					{
+						m_pFramework->GetPlayer(i)->AttackTimerTick = 0;
+						m_pFramework->GetPlayer(i)->AttackImageTick = 0;
+						//printf("%d", m_pFramework->GetPlayer(2)->CharacterStatus);
+					}
+				}
+				break;
+			default:
+				m_pFramework->GetPlayer(i)->isWalk = FALSE;
+				break;
+			}
+		}
+	}
+
+	//if (keydown)
+	{
+		if (m_pFramework->GetPlayer(myPlayerNum)->isAttack)
+		{
+			if (m_pFramework->GetPlayer(myPlayerNum)->AttackTimerTick++ > 3)
+			{
+				m_pFramework->GetPlayer(myPlayerNum)->AttackTimerTick = 0;
+				if (m_pFramework->GetPlayer(myPlayerNum)->AttackImageTick++ > 2)
+				{
+					m_pFramework->GetPlayer(myPlayerNum)->isAttack = FALSE;
+					m_pFramework->GetPlayer(myPlayerNum)->AttackTimerTick = 0;
+					m_pFramework->GetPlayer(myPlayerNum)->AttackImageTick = 0;
+					//printf("%d", m_pFramework->GetPlayer(2)->CharacterStatus);
+					if (m_pFramework->GetPlayer(myPlayerNum)->CharacterStatus == 6)
+					{
+						m_pFramework->GetPlayer(myPlayerNum)->CharacterStatus = 0;
+					}
+					else
+					{
+						m_pFramework->GetPlayer(myPlayerNum)->CharacterStatus = 1;
+					}
+					ismyPLockDown = FALSE;
+					pkey = TRUE;
+				}
+			}
+		}
+		else if (m_pFramework->GetPlayer(myPlayerNum)->isSkill)
+		{
+			if (m_pFramework->GetPlayer(myPlayerNum)->AttackTimerTick++ > 3)
+			{
+				m_pFramework->GetPlayer(myPlayerNum)->AttackTimerTick = 0;
+				if (m_pFramework->GetPlayer(myPlayerNum)->AttackImageTick++ > 2)
+				{
+					m_pFramework->GetPlayer(myPlayerNum)->AttackTimerTick = 0;
+					m_pFramework->GetPlayer(myPlayerNum)->AttackImageTick = 0;
+					//printf("%d", m_pFramework->GetPlayer(2)->CharacterStatus);
+				}
+			}
+		}
+		else if (m_pFramework->GetPlayer(myPlayerNum)->isSkillEnd)
+		{
+			if (m_pFramework->GetPlayer(myPlayerNum)->CharacterStatus == 12)
+				m_pFramework->GetPlayer(myPlayerNum)->CharacterStatus = 0;
+			else
+				m_pFramework->GetPlayer(myPlayerNum)->CharacterStatus = 1;
+			m_pFramework->GetPlayer(myPlayerNum)->AttackTimerTick = 0;
+			m_pFramework->GetPlayer(myPlayerNum)->AttackImageTick = 0;
+			m_pFramework->GetPlayer(myPlayerNum)->isSkillEnd = FALSE;
+			ismyPLockDown = FALSE;
+		}
+		else if (m_pFramework->GetPlayer(myPlayerNum)->isDash)
+		{
+			if (m_pFramework->GetPlayer(myPlayerNum)->DashTimerTick++ > 10)
+			{
+				m_pFramework->GetPlayer(myPlayerNum)->DashTimerTick = 0;
+				m_pFramework->GetPlayer(myPlayerNum)->isDash = FALSE;
+				m_pFramework->GetPlayer(myPlayerNum)->CharacterStatus = m_pFramework->GetPlayer(myPlayerNum)->Old_CharStat;
+				ismyPLockDown = FALSE;
+				pkey = TRUE;
+			}
+			switch (m_pFramework->GetPlayer(myPlayerNum)->Old_CharStat)
+			{
+			case 2:
+			case 0:
+				if (m_pFramework->GetPlayer(myPlayerNum)->x > 50)
+					m_pFramework->GetPlayer(myPlayerNum)->x -= 25;
+				break;
+			case 5:
+				if (m_pFramework->GetPlayer(myPlayerNum)->y < 6350)
+					m_pFramework->GetPlayer(myPlayerNum)->y += 25;
+
+				break; // 앞 볼 때
+			case 3:
+				if (m_pFramework->GetPlayer(myPlayerNum)->y > 50)
+					m_pFramework->GetPlayer(myPlayerNum)->y -= 25;
+
+				break;
+			case 4:
+			case 1:
+				if (m_pFramework->GetPlayer(myPlayerNum)->x < 6350)
+					m_pFramework->GetPlayer(myPlayerNum)->x += 25;
+
+				break; // 뒤 볼 때
+			}
+		}
+		else if (m_pFramework->GetPlayer(myPlayerNum)->isAttacked)
+		{
+			if (m_pFramework->GetPlayer(myPlayerNum)->SkillAttackedTimer-- > 0 &&
+				m_pFramework->GetPlayer(myPlayerNum)->AttackTimerTick > 10)
+			{
+				m_pFramework->GetPlayer(myPlayerNum)->AttackTimerTick--;
+			}
+
+			if (m_pFramework->GetPlayer(myPlayerNum)->AttackTimerTick++ > 20)
+			{
+				m_pFramework->GetPlayer(myPlayerNum)->AttackTimerTick = 0;
+				m_pFramework->GetPlayer(myPlayerNum)->isAttacked = FALSE;
+				m_pFramework->GetPlayer(myPlayerNum)->CharacterStatus = m_pFramework->GetPlayer(myPlayerNum)->Old_CharStat;
+				ismyPLockDown = FALSE;
+				pkey = TRUE;
+				m_pFramework->GetPlayer(myPlayerNum)->SkillAttackedTimer = 0;
+			}
+
+			if (m_pFramework->GetPlayer(myPlayerNum)->AttackTimerTick < 10)
+			{
+				//원래 때린사람 기준으로 해야되긴 하는데
+				switch (m_pFramework->GetPlayer(myPlayerNum)->Old_CharStat)
+				{
+				case 2:
+				case 0:
+					if (m_pFramework->GetPlayer(myPlayerNum)->x < 6350)
+						m_pFramework->GetPlayer(myPlayerNum)->x += 15;
+					if (coinLockDown)
+						CoinObject->Setx(CoinObject->x() - 5);
+					break;
+				case 5:
+					if (m_pFramework->GetPlayer(myPlayerNum)->y > 50)
+						m_pFramework->GetPlayer(myPlayerNum)->y -= 15;
+					if (coinLockDown)
+						CoinObject->Setx(CoinObject->y() + 5);
+					break; // 앞 볼 때
+				case 3:
+
+					if (m_pFramework->GetPlayer(myPlayerNum)->y < 6350)
+						m_pFramework->GetPlayer(myPlayerNum)->y += 15;
+					if (coinLockDown)
+						CoinObject->Setx(CoinObject->y() - 5);
+					break;
+				case 4:
+				case 1:
+
+					if (m_pFramework->GetPlayer(myPlayerNum)->x > 50)
+						m_pFramework->GetPlayer(myPlayerNum)->x -= 15;
+					if (coinLockDown)
+						CoinObject->Setx(CoinObject->x() + 5);
+					break; // 뒤 볼 때
+				}
+			}
+			else
+			{
+				coinLockDown = FALSE;
+			}
+		}
+	}
+}
 
 //
 void CIngameScene::CharacterState()
@@ -458,6 +567,7 @@ void CIngameScene::CharacterState()
 				break; // 뒤 볼 때
 			}
 		}
+		//printf("Character Status 3_1 : %d\n", m_pFramework->GetPlayer(myPlayerNum)->CharacterStatus);
 		if (keydownList_N[5]) // p2 공격
 		{
 			switch (m_pFramework->GetPlayer(myPlayerNum)->CharacterStatus)
@@ -528,6 +638,7 @@ void CIngameScene::CharacterState()
 				break; // 뒤 볼 때
 			}
 		}
+		//printf("Character Status 3_2 : %d\n", m_pFramework->GetPlayer(myPlayerNum)->CharacterStatus);
 		if (keydownList_N[6]) // p2 대시
 		{
 			if (m_pFramework->GetPlayer(myPlayerNum)->DashCoolTimer <= 0)
@@ -562,78 +673,40 @@ void CIngameScene::CharacterState()
 				}
 			}
 		}
+		//printf("Character Status 3_3 : %d\n", m_pFramework->GetPlayer(myPlayerNum)->CharacterStatus);
 
-		 
-		if (pkey)
+		//printf("Character Status 3_4 : %d\n", m_pFramework->GetPlayer(myPlayerNum)->CharacterStatus);
+	}
+
+	if (pkey)
+	{
+		if (m_pFramework->GetPlayer(myPlayerNum)->isAttack != TRUE)
 		{
-			if (m_pFramework->GetPlayer(myPlayerNum)->isAttack != TRUE)
+			m_pFramework->GetPlayer(myPlayerNum)->isWalk = TRUE;
+			if (m_pFramework->GetPlayer(myPlayerNum)->WalkingTimerTick++ > 3)
 			{
-				m_pFramework->GetPlayer(myPlayerNum)->isWalk = TRUE;
-				if (m_pFramework->GetPlayer(myPlayerNum)->WalkingTimerTick++ > 3)
-				{
-					m_pFramework->GetPlayer(myPlayerNum)->WalkingTimerTick = 0;
-					m_pFramework->GetPlayer(myPlayerNum)->WalkingImageTick++;
-				}
+				m_pFramework->GetPlayer(myPlayerNum)->WalkingTimerTick = 0;
+				m_pFramework->GetPlayer(myPlayerNum)->WalkingImageTick++;
 			}
 		}
-		else
-		{
-			if (m_pFramework->GetPlayer(myPlayerNum)->isAttack != TRUE)
-			{
-				m_pFramework->GetPlayer(myPlayerNum)->isWalk = FALSE;
-				switch (m_pFramework->GetPlayer(myPlayerNum)->CharacterStatus)
-				{
-				case 2:
-				case 5:
-				case 6:
-					m_pFramework->GetPlayer(myPlayerNum)->CharacterStatus = 0;
-					break;
-				case 3:
-				case 4:
-				case 7:
-					m_pFramework->GetPlayer(myPlayerNum)->CharacterStatus = 1;
-					break;
-				}
-			}
-		}
-
 	}
 	else
 	{
-		switch (m_pFramework->GetPlayer(myPlayerNum)->CharacterStatus)
+		if (m_pFramework->GetPlayer(myPlayerNum)->isAttack != TRUE)
 		{
-		case 2:
-		case 5:
-		case 6:
-		case 0:
-			m_pFramework->GetPlayer(myPlayerNum)->CharacterStatus = 0;
-			break; // 앞 볼 때
-		case 3:
-		case 4:
-		case 7:
-		case 1:
-			m_pFramework->GetPlayer(myPlayerNum)->CharacterStatus = 1;
-			break; // 뒤 볼 때
-		}
-	}
-
-	//상대 설정
-	for (int i = 1; i <= MEMBERS; ++i)
-	{
-		if (i != myPlayerNum)
-		{
-			if (m_pFramework->GetPlayer(i)->CharacterStatus >= 2 && m_pFramework->GetPlayer(i)->CharacterStatus <= 5)
+			m_pFramework->GetPlayer(myPlayerNum)->isWalk = FALSE;
+			switch (m_pFramework->GetPlayer(myPlayerNum)->CharacterStatus)
 			{
-				m_pFramework->GetPlayer(i)->isWalk = TRUE;
-				if (m_pFramework->GetPlayer(i)->WalkingTimerTick++ > 3)
-				{
-					m_pFramework->GetPlayer(i)->WalkingTimerTick = 0;
-					m_pFramework->GetPlayer(i)->WalkingImageTick++;
-				}
-			}
-			else
-			{
-				m_pFramework->GetPlayer(i)->isWalk = FALSE;
+			case 2:
+			case 5:
+			case 6:
+				m_pFramework->GetPlayer(myPlayerNum)->CharacterStatus = 0;
+				break;
+			case 3:
+			case 4:
+			case 7:
+				m_pFramework->GetPlayer(myPlayerNum)->CharacterStatus = 1;
+				break;
 			}
 		}
 	}
@@ -679,9 +752,9 @@ void CIngameScene::Update(float fTimeElapsed)
 
 	if (isGameEnd == FALSE)
 	{
-		printf("%d\n", m_pFramework->GetPlayer(myPlayerNum)->CharacterStatus);
+		//printf("Character Status 1 : %d\n", m_pFramework->GetPlayer(myPlayerNum)->CharacterStatus);
 		m_pFramework->NetGram.recvData(m_pFramework->STC);
-
+		//printf("Character Status 2 : %d\n", m_pFramework->GetPlayer(myPlayerNum)->CharacterStatus);
 		m_pFramework->STC.explain();
 		m_pFramework->CTS.APNclear();
 
@@ -718,8 +791,12 @@ void CIngameScene::Update(float fTimeElapsed)
 
 
 		KeyState();
+		//printf("Character Status 3 : %d\n", m_pFramework->GetPlayer(myPlayerNum)->CharacterStatus);
 		CharacterState();
+		//printf("Character Status 4 : %d\n", m_pFramework->GetPlayer(myPlayerNum)->CharacterStatus);
+		
 
+		//printf("Character Status 5 : %d\n", m_pFramework->GetPlayer(myPlayerNum)->CharacterStatus);
 		if (m_pFramework->GetPlayer(myPlayerNum)->DashCoolTimer > 0)
 		{
 			m_pFramework->GetPlayer(myPlayerNum)->DashCoolTimer--;
@@ -728,7 +805,7 @@ void CIngameScene::Update(float fTimeElapsed)
 		//여기서 스킬을 사용했는지 판별(from네트워크)
 		for (int i = 0; i < MEMBERS; i++)
 		{
-			if (m_pFramework->STC.PlayerData[i].AttackedPlayerNum[myPlayerNum - 1] && i+1 != myPlayerNum)
+			if (m_pFramework->STC.PlayerData[i].AttackedPlayerNum[myPlayerNum - 1] && i + 1 != myPlayerNum)
 			{
 				//피격
 				switch (m_pFramework->GetPlayer(i + 1)->charNum)
@@ -825,7 +902,7 @@ void CIngameScene::Update(float fTimeElapsed)
 
 		//VER3
 		//CObject_Player 이거 수정하고 CTS.set에서 수정한걸로 send하면 될거같음
-		m_pFramework->CTS.set(m_pFramework->GetPlayer(m_pFramework->NetGram.getPN()));
+		m_pFramework->CTS.set(m_pFramework->GetPlayer(myPlayerNum));
 		m_pFramework->NetGram.sendData(m_pFramework->CTS);
 	}
 	//for (int i = 0; i < nObjects; ++i)
@@ -910,9 +987,12 @@ void CIngameScene::Render(HDC hdc)
 
 
 	//플레이어
-	m_pFramework->GetPlayer(1)->Render(m_pFramework->GetPlayerDC());
-	m_pFramework->GetPlayer(2)->Render(m_pFramework->GetPlayerDC());
-	m_pFramework->GetPlayer(3)->Render(m_pFramework->GetPlayerDC());
+	m_pFramework->GetPlayer(myPlayerNum)->Render(m_pFramework->GetPlayerDC());
+	for (int i = 1; i <= MEMBERS; ++i)
+	{
+		if (i != myPlayerNum)
+			m_pFramework->GetPlayer(i)->Render(m_pFramework->GetPlayerDC());
+	}
 
 	//코인
 	CoinObject->Render(&*m_pFramework->GetPlayerDC());

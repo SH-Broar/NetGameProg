@@ -18,6 +18,7 @@ public:
 												// m_pCurrScene->Render(m_hdc);
 
 	void KeyState();
+	void FrameAdvance();
 	void CharacterState();
 	void Nevigator();
 	void AngleRender(HDC hdc);
