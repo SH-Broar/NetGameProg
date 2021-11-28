@@ -56,6 +56,8 @@ private:
 	int myPlayerNum = 1;
 
 	bool pkey = false;	//이동키
+
+	int prePlayersDirections[3];
 	//bool p1key = false;				// p1 이동키라면
 	//bool p2key = false;				// p2 이동키라면
 	//bool p3key = false;
