@@ -80,8 +80,9 @@ void OBJECT_Skill::OnCreate(int x,int y,int Old_CharStat)
 {
 	this->skillx = x;
 	this->skilly = y;
-	direction = Old_CharStat;
 
+	//printf("*********************%d\n", Old_CharStat);
+	direction = Old_CharStat;
 }
 
 void OBJECT_Skill::OnDestroy()

@@ -184,14 +184,14 @@ void CObject_Player::Render(HDC* hdc)
 			this->y - 5 - this->Image.Attack[this->AttackImageTick].GetHeight() / 2, this->Image.Attack[this->AttackImageTick].GetWidth(),
 			this->Image.Attack[this->AttackImageTick].GetHeight());
 		if (this->isSkill)
-		this->CSkill->Render(hdc);
+			this->CSkill->Render(hdc);
 		break;
 	case 13:
 		this->Image.Attack_B[this->AttackImageTick].Draw(*hdc, this->x - this->Image.Attack_B[this->AttackImageTick].GetWidth() / 2,
 			this->y - 5 - this->Image.Attack_B[this->AttackImageTick].GetHeight() / 2, this->Image.Attack_B[this->AttackImageTick].GetWidth(),
 			this->Image.Attack_B[this->AttackImageTick].GetHeight());
 		if (this->isSkill)
-		this->CSkill->Render(hdc);
+			this->CSkill->Render(hdc);
 		break;
 	case 14:
 		this->Image.Win.Draw(*hdc, this->x - this->Image.Idle_B.GetWidth() / 2, this->y - 5 - this->Image.Idle_B.GetHeight() / 2,
