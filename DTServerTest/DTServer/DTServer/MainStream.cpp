@@ -190,7 +190,7 @@ void MainStream::GameLogic()
 					recvDoneCount++;
 			}
 			//printf("recvDoneC : %d\n", recvDoneCount);
-			Sleep(17);
+			Sleep(0);
 			timeCut += 17;
 		}
 
