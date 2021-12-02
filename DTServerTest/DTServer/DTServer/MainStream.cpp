@@ -2,7 +2,7 @@
 #include "protocol.h"
 #include "network.h"
 
-#define MEMBERS 2
+#define MEMBERS 3
 #define SERVERPORT 9000
 
 MainStream::MainStream() {
@@ -137,7 +137,7 @@ void MainStream::PlayerSelectStart()
 		sec = std::chrono::system_clock::now() - start;
 
 		DataCrowl(sec.count());
-		if (players[0].getCTS().AttackedPlayerNum[0] == 1)//&& players[1].getCTS().AttackedPlayerNum[0] == 1 && players[2].getCTS().AttackedPlayerNum[0] == 1)
+		if (players[0].getCTS().AttackedPlayerNum[0] == 1 && players[1].getCTS().AttackedPlayerNum[0] == 1 && players[2].getCTS().AttackedPlayerNum[0] == 1)
 		{
 			printf("***Select Ended***\n");
 			data.CoinState = 1;	//씬 끝나는 플래그 설정
@@ -250,7 +250,7 @@ void MainStream::GameLogic()
 		}
 
 		//게임 끝나면 종료해야함
-		if (data.Time <= 0 && data.CoinState != 0)
+		if (data.Time <= -1 && data.CoinState != 0)
 		{
 			printf("\n****Game End!!****\n");
 			printf("****Game End!!****\n");
