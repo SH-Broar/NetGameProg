@@ -105,13 +105,9 @@ void CMainScene::KeyState() {
 				SceneNum = 3;
 				break;
 			case 3:
-
 				finish = true;
 				break;
-
 			}
-
-
 		}
 		CheckKey = true;
 	}

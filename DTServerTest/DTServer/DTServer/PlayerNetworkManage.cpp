@@ -37,7 +37,7 @@ DWORD WINAPI PlayerNetworkManager::recvData(LPVOID pPNM)
 		printf("%d %d %d %d %d\n", This->CTS.PlayerNum, This->CTS.drawState, This->CTS.x, This->CTS.y, This->CTS.AttackedPlayerNum[0]);
 		printf("Pdone! %d\n", This->playerNum);
 
-		Sleep(17);
+		Sleep(0);
 		This->makeDone = true;
 		//SetEvent(This->WaitAllDataWriting);
 	}

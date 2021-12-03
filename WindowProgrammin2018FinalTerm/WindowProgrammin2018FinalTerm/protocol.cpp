@@ -18,10 +18,10 @@ bool NetworkManager::connection()
 {
 	int retval = 0;
 	char sendBuff[BUFSIZE];
-	char recvBuff[BUFSIZE];
+	//char recvBuff[BUFSIZE];
 	int loginCode = 9999;
-	sprintf(sendBuff, "%d", loginCode);
-	retval = send(sock, (char*)sendBuff, sizeof(int), 0);
+	//sprintf(sendBuff, "%d", loginCode);
+	retval = send(sock, (char*)&loginCode, sizeof(int), 0);
 	if (retval == SOCKET_ERROR)
 	{
 		err_display("send()");
@@ -29,7 +29,7 @@ bool NetworkManager::connection()
 	}
 
 	int len = 0;
-
+	int recvBuff;
 	len = recvn(sock, (char*)&recvBuff, sizeof(int), 0);
 	//printf("%d", len);
 	if (len == SOCKET_ERROR)
@@ -40,12 +40,12 @@ bool NetworkManager::connection()
 	else if (len == 0)
 		return false;
 
-	printf("player number : %d", atoi(recvBuff) + 1);
-	if (atoi(recvBuff) >= 0 && atoi(recvBuff) <= 2)
+	printf("player number : %d", recvBuff + 1);
+	if (recvBuff >= 0 && recvBuff  <= 2)
 	{
-
-		playerNum = atoi(recvBuff) + 1;
+		playerNum = recvBuff + 1;
 	}
+
 }
 
 void NetworkManager::sendData(ClientToServer CtS)

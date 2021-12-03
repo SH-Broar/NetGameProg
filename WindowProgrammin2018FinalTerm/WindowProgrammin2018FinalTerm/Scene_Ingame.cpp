@@ -5,7 +5,7 @@
 #include "OBJECT_Skill.h"
 #include "Framework.h"
 
-#define MEMBERS 2
+#define MEMBERS 3
 
 CIngameScene::CIngameScene()
 {

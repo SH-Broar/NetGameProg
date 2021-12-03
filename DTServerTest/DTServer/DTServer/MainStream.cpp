@@ -2,18 +2,14 @@
 #include "protocol.h"
 #include "network.h"
 
-#define MEMBERS 2
+#define MEMBERS 3
 #define SERVERPORT 9000
 
 MainStream::MainStream() {
 	int retval;
 	//InitializeCriticalSection(&cs);
-
-
 	if (WSAStartup(MAKEWORD(2, 2), &wsa) != 0)
 		err_quit("WSAStartup()");
-
-
 }
 
 MainStream::~MainStream() {
@@ -43,7 +39,7 @@ void MainStream::WaitForClientToConnect() {
 
 	int player_num = 0;
 
-	char recvBuff[512];
+	int recvBuff;
 
 	for (int i = 0; i < MEMBERS; ++i)
 		players[i].WaitAllDataWriting = CreateEvent(NULL, FALSE, FALSE, NULL);
@@ -66,11 +62,12 @@ void MainStream::WaitForClientToConnect() {
 		//접속 확인 플래그 (4비트)
 		recvn(client_sock, (char*)&recvBuff, sizeof(int), 0);
 
-		if (atoi(recvBuff) == 9999) // 접속 플래그
+		if (recvBuff == 9999) // 접속 플래그
 		{
 			printf("send done!\n");
-			char sendBuff[512];
-			sprintf(sendBuff, "%d", player_num);
+			int sendBuff = player_num;
+			//char sendBuff[512];
+			//sprintf(sendBuff, "%d", player_num);
 			send(client_sock, (char*)&sendBuff, sizeof(int), 0);
 
 			printf("%d player socket created\n", player_num);
@@ -85,7 +82,7 @@ void MainStream::WaitForClientToConnect() {
 		//#endif
 
 	}
-
+	closesocket(listen_sock);
 	return;
 }
 
