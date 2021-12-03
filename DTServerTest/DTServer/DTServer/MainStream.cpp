@@ -2,11 +2,10 @@
 #include "protocol.h"
 #include "network.h"
 
-#define MEMBERS 3
+#define MEMBERS 2
 #define SERVERPORT 9000
 
 MainStream::MainStream() {
-	int retval;
 	//InitializeCriticalSection(&cs);
 	if (WSAStartup(MAKEWORD(2, 2), &wsa) != 0)
 		err_quit("WSAStartup()");
@@ -41,10 +40,7 @@ void MainStream::WaitForClientToConnect() {
 
 	int recvBuff;
 
-	for (int i = 0; i < MEMBERS; ++i)
-		players[i].WaitAllDataWriting = CreateEvent(NULL, FALSE, FALSE, NULL);
-	for (int i = 0; i < MEMBERS; ++i)
-		players[i].WaitMainStream = CreateEvent(NULL, FALSE, FALSE, NULL);
+	
 
 	while (player_num < MEMBERS)
 	{
@@ -71,7 +67,11 @@ void MainStream::WaitForClientToConnect() {
 			send(client_sock, (char*)&sendBuff, sizeof(int), 0);
 
 			printf("%d player socket created\n", player_num);
-			players[player_num++].setSocket(client_sock, player_num);
+			players[player_num].setSTC(&data);
+			players[player_num].setSocket(client_sock, player_num);
+			WaitAllDataWriting[player_num] = players[player_num].WaitRecvComplete;
+			WaitAllDataReading[player_num] = players[player_num].WaitSendComplete;
+			player_num++;
 		}
 
 		//#ifdef TEST_BEFORE_CLIENT_COMPLETE
@@ -114,37 +114,31 @@ void MainStream::PlayerSelectStart()
 	while (true)
 	{
 		printf("wait...\n");
-		while (recvDoneCount < MEMBERS)
-		{
-			recvDoneCount = 0;
-			for (int i = 0; i < MEMBERS; ++i) {
-				if (players[i].isDone() == 1)
-					recvDoneCount++;
-			}
-			printf("recvDoneC : %d\n", recvDoneCount);
-			Sleep(17);
-			timeCut += 17;
-		}
-		//for (int i = 0; i < MEMBERS; ++i) {
-		//	WaitForSingleObject(players[i].WaitAllDataWriting, INFINITE);
-		//}
-		recvDoneCount = 0;
+		
+		WaitForMultipleObjects(MEMBERS, WaitAllDataWriting, TRUE, INFINITE);
+
 		printf("done!\n");
 
 		sec = std::chrono::system_clock::now() - start;
 
 		DataCrowl(sec.count());
-		if (players[0].getCTS().AttackedPlayerNum[0] == 1)//&& players[1].getCTS().AttackedPlayerNum[0] == 1 && players[2].getCTS().AttackedPlayerNum[0] == 1)
+		int cnt = 0;
+		for (int i = 0; i < MEMBERS; ++i)
+		{
+			cnt += players[i].getCTS().AttackedPlayerNum[0];
+		}
+		if (cnt >= MEMBERS)
 		{
 			printf("***Select Ended***\n");
 			data.CoinState = 1;	//씬 끝나는 플래그 설정
 		}
 
-		for (int i = 0; i < MEMBERS; ++i) {
-			players[i].sendData(data);
+		for (int i = 0; i < MEMBERS; ++i) {	//	데이터 보내기
+			SetEvent(players[i].WaitMainStreamForSend);
 		}
+		WaitForMultipleObjects(MEMBERS, WaitAllDataReading, TRUE, INFINITE);
 
-		for (int i = 0; i < MEMBERS; ++i) {
+		for (int i = 0; i < MEMBERS; ++i) {	//데이터 받기
 			SetEvent(players[i].WaitMainStream);
 		}
 
@@ -179,23 +173,7 @@ void MainStream::GameLogic()
 	while (true)
 	{
 		printf("wait...\n");
-		while (recvDoneCount < MEMBERS)
-		{
-			recvDoneCount = 0;
-			for (int i = 0; i < MEMBERS; ++i) {
-				if (players[i].isDone() == 1)
-					recvDoneCount++;
-			}
-			//printf("recvDoneC : %d\n", recvDoneCount);
-			Sleep(0);
-			timeCut += 17;
-		}
-
-		//for (int i = 0; i < MEMBERS; ++i) {
-		//	WaitForSingleObject(players[i].WaitAllDataWriting, INFINITE);
-		//}
-		recvDoneCount = 0;
-		//printf("done!\n");
+		WaitForMultipleObjects(MEMBERS, WaitAllDataWriting, TRUE, INFINITE);
 
 		sec = std::chrono::system_clock::now() - start;
 
@@ -238,11 +216,12 @@ void MainStream::GameLogic()
 		}
 
 
-		for (int i = 0; i < MEMBERS; ++i) {
-			players[i].sendData(data);
+		for (int i = 0; i < MEMBERS; ++i) {	//데이터 보내기
+			SetEvent(players[i].WaitMainStreamForSend);
 		}
+		WaitForMultipleObjects(MEMBERS, WaitAllDataReading, TRUE, INFINITE);
 
-		for (int i = 0; i < MEMBERS; ++i) {
+		for (int i = 0; i < MEMBERS; ++i) {	//데이터 받기
 			SetEvent(players[i].WaitMainStream);
 		}
 

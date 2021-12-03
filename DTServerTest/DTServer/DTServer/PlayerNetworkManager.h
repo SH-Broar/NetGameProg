@@ -5,17 +5,21 @@ class PlayerNetworkManager
 {
 	SOCKET socket;
 	ClientToServer CTS;
-
+	ServerToClient* pSTC;
 public:
 	PlayerNetworkManager(){}
 	~PlayerNetworkManager(){}
 	void setSocket(const SOCKET&, int);
+	void setSTC(ServerToClient*);
 	static DWORD WINAPI recvData(LPVOID);
+	static DWORD WINAPI sendThread(LPVOID);
 	void sendData(const ServerToClient&);
-
+	void sendData();
 	ClientToServer& getCTS();
-	HANDLE WaitAllDataWriting;
+	HANDLE WaitRecvComplete;
 	HANDLE WaitMainStream;
+	HANDLE WaitMainStreamForSend;
+	HANDLE WaitSendComplete;
 
 	int isDone();
 
