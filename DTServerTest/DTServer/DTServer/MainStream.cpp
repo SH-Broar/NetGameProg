@@ -122,6 +122,14 @@ void MainStream::PlayerSelectStart()
 		sec = std::chrono::system_clock::now() - start;
 
 		DataCrowl(sec.count());
+
+		if (players[0].getCTS().AttackedPlayerNum[0] == 1 && players[1].getCTS().AttackedPlayerNum[0] == 1 && players[2].getCTS().AttackedPlayerNum[0] == 1)
+		{
+			printf("***Select Ended***\n");
+			data.CoinState = 1;	//씬 끝나는 플래그 설정
+		}
+
+		/*
 		int cnt = 0;
 		for (int i = 0; i < MEMBERS; ++i)
 		{
@@ -131,7 +139,7 @@ void MainStream::PlayerSelectStart()
 		{
 			printf("***Select Ended***\n");
 			data.CoinState = 1;	//씬 끝나는 플래그 설정
-		}
+		}*/
 
 		for (int i = 0; i < MEMBERS; ++i) {	//	데이터 보내기
 			SetEvent(players[i].WaitMainStreamForSend);
