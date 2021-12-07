@@ -55,10 +55,10 @@ void MainStream::WaitForClientToConnect() {
 			break;
 		}
 
-		//Á¢¼Ó È®ÀÎ ÇÃ·¡±× (4ºñÆ®)
+		//ì ‘ì† í™•ì¸ í”Œë˜ê·¸ (4ë¹„íŠ¸)
 		recvn(client_sock, (char*)&recvBuff, sizeof(int), 0);
 
-		if (recvBuff == 9999) // Á¢¼Ó ÇÃ·¡±×
+		if (recvBuff == 9999) // ì ‘ì† í”Œë˜ê·¸
 		{
 			printf("send done!\n");
 			int sendBuff = player_num;
@@ -92,17 +92,17 @@ void MainStream::PlayerSelectStart()
 	scene.setInitForSelect();
 	for (int i = 0; i < MEMBERS; ++i) {
 		players[i].getCTS() = scene.PlayerData[i];
-		players[i].sendData(scene);	//Ä³¸¯ÅÍ ¼±ÅÃ Ã¢À¸·Î ³Ñ¾î°¬´Ù´Â °ÍÀ» ¾Ë¸°´Ù.
+		players[i].sendData(scene);	//ìºë¦­í„° ì„ íƒ ì°½ìœ¼ë¡œ ë„˜ì–´ê°”ë‹¤ëŠ” ê²ƒì„ ì•Œë¦°ë‹¤.
 	}
 	std::chrono::system_clock::time_point start = std::chrono::system_clock::now();
 	std::chrono::duration<double> sec;
 
 	data = scene;
-	printf("¼±ÅÃÃ¢À¸·Î ³Ñ¾î°¡±â %d\n", data.CoinState);
+	printf("ì„ íƒì°½ìœ¼ë¡œ ë„˜ì–´ê°€ê¸° %d\n", data.CoinState);
 	Sleep(17);
 	for (int i = 0; i < MEMBERS; ++i) {
 		players[i].getCTS() = scene.PlayerData[i];
-		players[i].sendData(scene);	 // ÇÑ¹ø ´õ¹Ì º¸³»Áà¾ßÇÔ (¤Ğ¤Ğ?)
+		players[i].sendData(scene);	 // í•œë²ˆ ë”ë¯¸ ë³´ë‚´ì¤˜ì•¼í•¨ (ã… ã… ?)
 	}
 	for (int i = 0; i < MEMBERS; ++i) {
 		SetEvent(players[i].WaitMainStream);
@@ -126,7 +126,7 @@ void MainStream::PlayerSelectStart()
 		if (players[0].getCTS().AttackedPlayerNum[0] == 1 && players[1].getCTS().AttackedPlayerNum[0] == 1 && players[2].getCTS().AttackedPlayerNum[0] == 1)
 		{
 			printf("***Select Ended***\n");
-			data.CoinState = 1;	//¾À ³¡³ª´Â ÇÃ·¡±× ¼³Á¤
+			data.CoinState = 1;	//ì”¬ ëë‚˜ëŠ” í”Œë˜ê·¸ ì„¤ì •
 		}
 
 		/*
@@ -138,19 +138,19 @@ void MainStream::PlayerSelectStart()
 		if (cnt >= MEMBERS)
 		{
 			printf("***Select Ended***\n");
-			data.CoinState = 1;	//¾À ³¡³ª´Â ÇÃ·¡±× ¼³Á¤
+			data.CoinState = 1;	//ì”¬ ëë‚˜ëŠ” í”Œë˜ê·¸ ì„¤ì •
 		}*/
 
-		for (int i = 0; i < MEMBERS; ++i) {	//	µ¥ÀÌÅÍ º¸³»±â
+		for (int i = 0; i < MEMBERS; ++i) {	//	ë°ì´í„° ë³´ë‚´ê¸°
 			SetEvent(players[i].WaitMainStreamForSend);
 		}
 		WaitForMultipleObjects(MEMBERS, WaitAllDataReading, TRUE, INFINITE);
 
-		for (int i = 0; i < MEMBERS; ++i) {	//µ¥ÀÌÅÍ ¹Ş±â
+		for (int i = 0; i < MEMBERS; ++i) {	//ë°ì´í„° ë°›ê¸°
 			SetEvent(players[i].WaitMainStream);
 		}
 
-		if (data.CoinState == 1) //´ÙÀ½ ¾ÀÀ¸·Î ³Ñ¾î°¥ »óÅÂÀÌ¸é
+		if (data.CoinState == 1) //ë‹¤ìŒ ì”¬ìœ¼ë¡œ ë„˜ì–´ê°ˆ ìƒíƒœì´ë©´
 		{
 			break;
 		}
@@ -187,7 +187,7 @@ void MainStream::GameLogic()
 
 		DataCrowl(sec.count());
 
-		//ÄÚÀÎ Ã³¸®
+		//ì½”ì¸ ì²˜ë¦¬
 		for (int i = 0; i < MEMBERS; i++)
 		{
 			if (data.CoinState == 0)
@@ -224,17 +224,17 @@ void MainStream::GameLogic()
 		}
 
 
-		for (int i = 0; i < MEMBERS; ++i) {	//µ¥ÀÌÅÍ º¸³»±â
+		for (int i = 0; i < MEMBERS; ++i) {	//ë°ì´í„° ë³´ë‚´ê¸°
 			SetEvent(players[i].WaitMainStreamForSend);
 		}
 		WaitForMultipleObjects(MEMBERS, WaitAllDataReading, TRUE, INFINITE);
 
-		for (int i = 0; i < MEMBERS; ++i) {	//µ¥ÀÌÅÍ ¹Ş±â
+		for (int i = 0; i < MEMBERS; ++i) {	//ë°ì´í„° ë°›ê¸°
 			SetEvent(players[i].WaitMainStream);
 		}
 
-		//°ÔÀÓ ³¡³ª¸é Á¾·áÇØ¾ßÇÔ
-		if (data.Time <= 0 && data.CoinState != 0)
+		//ê²Œì„ ëë‚˜ë©´ ì¢…ë£Œí•´ì•¼í•¨
+		if (data.Time <= -1 && data.CoinState != 0)
 		{
 			printf("\n****Game End!!****\n");
 			printf("****Game End!!****\n");
