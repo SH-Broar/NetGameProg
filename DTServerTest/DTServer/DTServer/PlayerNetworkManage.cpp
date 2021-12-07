@@ -10,12 +10,16 @@ void PlayerNetworkManager::setSocket(const SOCKET& sock,int pn) {
 	//);
 	playerNum = pn;
 	
+	int delay = 1;
+
+	setsockopt(sock, SOL_SOCKET, TCP_NODELAY, (const char*)&delay, sizeof(delay));
+
 	WaitMainStream = CreateEvent(NULL, FALSE, FALSE, NULL);
 	WaitRecvComplete = CreateEvent(NULL, FALSE, FALSE, NULL);
 	WaitMainStreamForSend = CreateEvent(NULL, FALSE, FALSE, NULL);
 	WaitSendComplete = CreateEvent(NULL, FALSE, FALSE, NULL);
 	CreateThread(NULL, 0, this->recvData, this, 0, NULL);
-	CreateThread(NULL, 0, this->sendThread, this, 0, NULL);
+	//CreateThread(NULL, 0, this->sendThread, this, 0, NULL);
 }
 
 void PlayerNetworkManager::setSTC(ServerToClient* stc)
@@ -31,17 +35,29 @@ DWORD WINAPI PlayerNetworkManager::recvData(LPVOID pPNM)
 	{
 		printf("Pwait... %d\n", This->playerNum);
 
-		WaitForSingleObject(This->WaitMainStream, INFINITE);
-		//This->makeDone = false;
-		int retval;
-		retval = recvn(This ->socket, (char*)&(This->CTS), sizeof(ClientToServer), 0);
 
-		printf("%d %d %d %d %d\n", This->CTS.PlayerNum, This->CTS.drawState, This->CTS.x, This->CTS.y, This->CTS.AttackedPlayerNum[0]);
-		printf("Pdone! %d\n", This->playerNum);
+		//receive
+		{
+			WaitForSingleObject(This->WaitMainStream, INFINITE);
+			//This->makeDone = false;
+			int retval;
+			retval = recvn(This->socket, (char*)&(This->CTS), sizeof(ClientToServer), 0);
 
-		Sleep(0);
-		//This->makeDone = true;
-		SetEvent(This->WaitRecvComplete);
+			printf("%d %d %d %d %d\n", This->CTS.PlayerNum, This->CTS.drawState, This->CTS.x, This->CTS.y, This->CTS.AttackedPlayerNum[0]);
+			printf("Pdone! %d\n", This->playerNum);
+
+			Sleep(0);
+			//This->makeDone = true;
+			SetEvent(This->WaitRecvComplete);
+		}
+
+		//Send 
+		{
+			WaitForSingleObject(This->WaitMainStreamForSend, INFINITE);
+			This->sendData();
+			SetEvent(This->WaitSendComplete);
+			Sleep(0);
+		}
 	}
 	return NULL;
 }
@@ -61,6 +77,11 @@ void PlayerNetworkManager::sendData()
 	retval = send(socket, (char*)pSTC, sizeof(ServerToClient), 0);
 	printf("%d Send : %d\n", count++, pSTC->PlayerData[0].drawState);
 }
+
+
+
+
+
 
 DWORD WINAPI PlayerNetworkManager::sendThread(LPVOID pPNM)
 {

@@ -2,7 +2,7 @@
 #include "protocol.h"
 #include "network.h"
 
-#define MEMBERS 2
+#define MEMBERS 3
 #define SERVERPORT 9000
 
 MainStream::MainStream() {
@@ -230,6 +230,8 @@ void MainStream::GameLogic()
 		{
 			printf("\n****Game End!!****\n");
 			printf("****Game End!!****\n");
+			WaitForMultipleObjects(MEMBERS, WaitAllDataWriting, TRUE, INFINITE);
+			WaitForMultipleObjects(MEMBERS, WaitAllDataReading, TRUE, INFINITE);
 			break;
 		}
 	}

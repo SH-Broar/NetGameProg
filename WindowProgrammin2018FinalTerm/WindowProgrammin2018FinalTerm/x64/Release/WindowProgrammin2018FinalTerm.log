@@ -1,41 +1,24 @@
-﻿  Framework.cpp
-Framework.cpp(245): warning C4244: 'return': 'LRESULT'에서 'HRESULT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-Framework.cpp(315): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  OBJECT_Player.cpp
-  Scene.cpp
-  Scene_CharSel.cpp
-Scene_CharSel.cpp(445): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-Scene_CharSel.cpp(447): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-Scene_CharSel.cpp(452): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-Scene_CharSel.cpp(453): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-Scene_CharSel.cpp(457): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-Scene_CharSel.cpp(458): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  Scene_Ingame.cpp
-Scene_Ingame.cpp(972): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-Scene_Ingame.cpp(973): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-Scene_Ingame.cpp(984): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-Scene_Ingame.cpp(1126): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-Scene_Ingame.cpp(1130): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-Scene_Ingame.cpp(1131): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-Scene_Ingame.cpp(1133): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-Scene_Ingame.cpp(1138): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-Scene_Ingame.cpp(1142): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-Scene_Ingame.cpp(1143): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-Scene_Ingame.cpp(1145): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-Scene_Ingame.cpp(1150): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-Scene_Ingame.cpp(1154): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-Scene_Ingame.cpp(1155): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-Scene_Ingame.cpp(1157): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-Scene_Ingame.cpp(1162): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-Scene_Ingame.cpp(1166): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-Scene_Ingame.cpp(1167): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-Scene_Ingame.cpp(1169): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  Scene_Main.cpp
-  WindowProgrammin2018FinalTerm.cpp
+﻿  Scene_Ingame.cpp
+f:\2021 2학기\network team\netgameprog\windowprogrammin2018finalterm\windowprogrammin2018finalterm\protocol.h(1): warning C4067: 전처리기 지시문 다음에 예기치 않은 토큰이 있습니다. 줄 바꿈 문자가 필요합니다.
+f:\2021 2학기\network team\netgameprog\windowprogrammin2018finalterm\windowprogrammin2018finalterm\scene_ingame.cpp(935): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+f:\2021 2학기\network team\netgameprog\windowprogrammin2018finalterm\windowprogrammin2018finalterm\scene_ingame.cpp(939): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+f:\2021 2학기\network team\netgameprog\windowprogrammin2018finalterm\windowprogrammin2018finalterm\scene_ingame.cpp(940): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+f:\2021 2학기\network team\netgameprog\windowprogrammin2018finalterm\windowprogrammin2018finalterm\scene_ingame.cpp(942): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+f:\2021 2학기\network team\netgameprog\windowprogrammin2018finalterm\windowprogrammin2018finalterm\scene_ingame.cpp(947): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+f:\2021 2학기\network team\netgameprog\windowprogrammin2018finalterm\windowprogrammin2018finalterm\scene_ingame.cpp(951): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+f:\2021 2학기\network team\netgameprog\windowprogrammin2018finalterm\windowprogrammin2018finalterm\scene_ingame.cpp(952): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+f:\2021 2학기\network team\netgameprog\windowprogrammin2018finalterm\windowprogrammin2018finalterm\scene_ingame.cpp(954): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+f:\2021 2학기\network team\netgameprog\windowprogrammin2018finalterm\windowprogrammin2018finalterm\scene_ingame.cpp(959): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+f:\2021 2학기\network team\netgameprog\windowprogrammin2018finalterm\windowprogrammin2018finalterm\scene_ingame.cpp(963): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+f:\2021 2학기\network team\netgameprog\windowprogrammin2018finalterm\windowprogrammin2018finalterm\scene_ingame.cpp(964): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+f:\2021 2학기\network team\netgameprog\windowprogrammin2018finalterm\windowprogrammin2018finalterm\scene_ingame.cpp(966): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+f:\2021 2학기\network team\netgameprog\windowprogrammin2018finalterm\windowprogrammin2018finalterm\scene_ingame.cpp(971): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+f:\2021 2학기\network team\netgameprog\windowprogrammin2018finalterm\windowprogrammin2018finalterm\scene_ingame.cpp(975): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+f:\2021 2학기\network team\netgameprog\windowprogrammin2018finalterm\windowprogrammin2018finalterm\scene_ingame.cpp(976): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+f:\2021 2학기\network team\netgameprog\windowprogrammin2018finalterm\windowprogrammin2018finalterm\scene_ingame.cpp(978): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   코드를 생성하고 있습니다.
-c:\users\aeco-nu-drjxes\desktop\　\윈플\finalterm\windowprogrammin2018finalterm\windowprogrammin2018finalterm\framework.cpp(113): warning C4715: 'CFramework::GetPlayer': 모든 제어 경로에서 값을 반환하지는 않습니다.
-  93 of 315 functions (29.5%) were compiled, the rest were copied from previous compilation.
-    6 functions were new in current compilation
-    9 functions had inline decision re-evaluated but remain unchanged
+  0 of 338 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
   코드를 생성했습니다.
-  WindowProgrammin2018FinalTerm.vcxproj -> C:\Users\Aeco-NU-Drjxes\Desktop\　\윈플\FinalTerm\WindowProgrammin2018FinalTerm\x64\Release\WindowProgrammin2018FinalTerm.exe
+  WindowProgrammin2018FinalTerm.vcxproj -> F:\2021 2학기\Network team\NetGameProg\WindowProgrammin2018FinalTerm\x64\Release\WindowProgrammin2018FinalTerm.exe

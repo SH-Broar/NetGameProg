@@ -16,6 +16,7 @@ NetworkManager::~NetworkManager()
 
 bool NetworkManager::connection()
 {
+	
 	int retval = 0;
 	char sendBuff[BUFSIZE];
 	//char recvBuff[BUFSIZE];
@@ -39,8 +40,9 @@ bool NetworkManager::connection()
 	}
 	else if (len == 0)
 		return false;
-
+#ifdef _DEBUG
 	printf("player number : %d", recvBuff + 1);
+#endif
 	if (recvBuff >= 0 && recvBuff  <= 2)
 	{
 		playerNum = recvBuff + 1;
@@ -128,6 +130,10 @@ int NetworkManager::init()
 	serveraddr.sin_addr.s_addr = inet_addr(SERVERIP);
 	serveraddr.sin_port = htons(SERVERPORT);
 	retval = connect(sock, (SOCKADDR*)&serveraddr, sizeof(serveraddr));
+
+	int delay = 1;
+	setsockopt(sock, SOL_SOCKET, TCP_NODELAY, (const char*)&delay, sizeof(delay));
+
 
 	if (retval == SOCKET_ERROR)
 		err_quit("connect()");

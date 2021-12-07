@@ -5,7 +5,7 @@
 #include "OBJECT_Skill.h"
 #include "Framework.h"
 
-#define MEMBERS 2
+#define MEMBERS 3
 
 CIngameScene::CIngameScene()
 {
@@ -28,7 +28,9 @@ char Inbuff[20000] = { 0 };
 bool CIngameScene::OnCreate()
 {
 	myPlayerNum = m_pFramework->NetGram.getPN();
+#ifdef _DEBUG
 	printf("My Player Number : %d", myPlayerNum);
+#endif
 
 	m_pFramework->CTS.clear();
 	m_pFramework->STC.clear();
@@ -747,8 +749,9 @@ void CIngameScene::Update(float fTimeElapsed)
 	if (RemainTime <= 0)
 	{
 		isGameEnd = TRUE;
-
+#ifdef _DEBUG
 		printf("End\n");
+#endif
 
 		for (int i = 1; i <= MEMBERS; ++i)
 		{
@@ -765,7 +768,9 @@ void CIngameScene::Update(float fTimeElapsed)
 		//printf("Character Status 1 : %d\n", m_pFramework->GetPlayer(myPlayerNum)->CharacterStatus);
 		m_pFramework->NetGram.recvData(m_pFramework->STC);
 		//printf("Character Status 2 : %d\n", m_pFramework->GetPlayer(myPlayerNum)->CharacterStatus);
+#ifdef _DEBUG
 		m_pFramework->STC.explain();
+#endif
 		m_pFramework->CTS.APNclear();
 
 		//Nevigator();
