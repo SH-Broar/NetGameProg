@@ -3,7 +3,7 @@
 #include <Windows.h>
 #include "OBJECT_Player.h"
 
-#define SERVERIP		"210.99.120.89"
+#define SERVERIP		"127.0.0.1"
 #define SERVERPORT 9000
 #define BUFSIZE 512
 

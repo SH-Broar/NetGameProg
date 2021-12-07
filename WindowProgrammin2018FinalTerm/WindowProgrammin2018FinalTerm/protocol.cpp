@@ -16,12 +16,13 @@ NetworkManager::~NetworkManager()
 
 bool NetworkManager::connection()
 {
+	
 	int retval = 0;
 	char sendBuff[BUFSIZE];
-	char recvBuff[BUFSIZE];
+	//char recvBuff[BUFSIZE];
 	int loginCode = 9999;
-	sprintf(sendBuff, "%d", loginCode);
-	retval = send(sock, (char*)sendBuff, sizeof(int), 0);
+	//sprintf(sendBuff, "%d", loginCode);
+	retval = send(sock, (char*)&loginCode, sizeof(int), 0);
 	if (retval == SOCKET_ERROR)
 	{
 		err_display("send()");
@@ -29,7 +30,7 @@ bool NetworkManager::connection()
 	}
 
 	int len = 0;
-
+	int recvBuff;
 	len = recvn(sock, (char*)&recvBuff, sizeof(int), 0);
 	//printf("%d", len);
 	if (len == SOCKET_ERROR)
@@ -39,13 +40,14 @@ bool NetworkManager::connection()
 	}
 	else if (len == 0)
 		return false;
-
-	printf("player number : %d", atoi(recvBuff) + 1);
-	if (atoi(recvBuff) >= 0 && atoi(recvBuff) <= 2)
+#ifdef _DEBUG
+	printf("player number : %d", recvBuff + 1);
+#endif
+	if (recvBuff >= 0 && recvBuff  <= 2)
 	{
-
-		playerNum = atoi(recvBuff) + 1;
+		playerNum = recvBuff + 1;
 	}
+
 }
 
 void NetworkManager::sendData(ClientToServer CtS)
@@ -128,6 +130,10 @@ int NetworkManager::init()
 	serveraddr.sin_addr.s_addr = inet_addr(SERVERIP);
 	serveraddr.sin_port = htons(SERVERPORT);
 	retval = connect(sock, (SOCKADDR*)&serveraddr, sizeof(serveraddr));
+
+	int delay = 1;
+	setsockopt(sock, SOL_SOCKET, TCP_NODELAY, (const char*)&delay, sizeof(delay));
+
 
 	if (retval == SOCKET_ERROR)
 		err_quit("connect()");

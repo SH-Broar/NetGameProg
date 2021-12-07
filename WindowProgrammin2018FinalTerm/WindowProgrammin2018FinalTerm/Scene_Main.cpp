@@ -71,10 +71,15 @@ void CMainScene::Update(float fTimeElapsed)
 	{
 		while (m_pFramework->STC.CoinState != 1000)
 		{
+#ifdef _DEBUG
 			printf("waiting %d\n", m_pFramework->STC.CoinState);
+#endif // DEBUG
+
 			m_pFramework->NetGram.recvData(m_pFramework->STC);
 		}
+#ifdef _DEBUG
 		printf("waiting done %d\n",m_pFramework->STC.CoinState);
+#endif
 		m_pFramework->ChangeScene(CScene::SceneTag::Select_Char);
 		m_pFramework->curSceneCreate();
 		CMainScene::OnDestroy();
@@ -89,7 +94,9 @@ void CMainScene::KeyState() {
 			{				//네트워크
 				if (m_pFramework->NetGram.connection())
 				{
+#ifdef _DEBUG
 					printf("connected w/ Server\n");
+#endif
 					SceneNum = 1;
 				}
 				else
@@ -105,13 +112,9 @@ void CMainScene::KeyState() {
 				SceneNum = 3;
 				break;
 			case 3:
-
 				finish = true;
 				break;
-
 			}
-
-
 		}
 		CheckKey = true;
 	}

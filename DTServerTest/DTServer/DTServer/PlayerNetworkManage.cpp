@@ -9,37 +9,55 @@ void PlayerNetworkManager::setSocket(const SOCKET& sock,int pn) {
 	//	&isNonBlocking //넘기는 인자, 여기서는 nonblocking설정 값
 	//);
 	playerNum = pn;
+	
+	int delay = 1;
+
+	setsockopt(sock, SOL_SOCKET, TCP_NODELAY, (const char*)&delay, sizeof(delay));
+
+	WaitMainStream = CreateEvent(NULL, FALSE, FALSE, NULL);
+	WaitRecvComplete = CreateEvent(NULL, FALSE, FALSE, NULL);
+	WaitMainStreamForSend = CreateEvent(NULL, FALSE, FALSE, NULL);
+	WaitSendComplete = CreateEvent(NULL, FALSE, FALSE, NULL);
 	CreateThread(NULL, 0, this->recvData, this, 0, NULL);
+	//CreateThread(NULL, 0, this->sendThread, this, 0, NULL);
 }
 
-void voidBuffer(SOCKET s)
+void PlayerNetworkManager::setSTC(ServerToClient* stc)
 {
-	u_long tmpl, i;
-	char tmpc; ioctlsocket(s, FIONREAD, &tmpl);
-	for (i = 0; i < tmpl; i++)
-		recv(s, &tmpc, sizeof(char), 0);
+	pSTC = stc;
 }
 
 DWORD WINAPI PlayerNetworkManager::recvData(LPVOID pPNM)
 {
 	PlayerNetworkManager* This = (PlayerNetworkManager*)pPNM;
 
-	//voidBuffer(This->socket);
 	while (1)
 	{
 		printf("Pwait... %d\n", This->playerNum);
 
-		WaitForSingleObject(This->WaitMainStream, INFINITE);
-		This->makeDone = false;
-		int retval;
-		retval = recvn(This ->socket, (char*)&(This->CTS), sizeof(ClientToServer), 0);
 
-		printf("%d %d %d %d %d\n", This->CTS.PlayerNum, This->CTS.drawState, This->CTS.x, This->CTS.y, This->CTS.AttackedPlayerNum[0]);
-		printf("Pdone! %d\n", This->playerNum);
+		//receive
+		{
+			WaitForSingleObject(This->WaitMainStream, INFINITE);
+			//This->makeDone = false;
+			int retval;
+			retval = recvn(This->socket, (char*)&(This->CTS), sizeof(ClientToServer), 0);
 
-		Sleep(17);
-		This->makeDone = true;
-		//SetEvent(This->WaitAllDataWriting);
+			printf("%d %d %d %d %d\n", This->CTS.PlayerNum, This->CTS.drawState, This->CTS.x, This->CTS.y, This->CTS.AttackedPlayerNum[0]);
+			printf("Pdone! %d\n", This->playerNum);
+
+			Sleep(0);
+			//This->makeDone = true;
+			SetEvent(This->WaitRecvComplete);
+		}
+
+		//Send 
+		{
+			WaitForSingleObject(This->WaitMainStreamForSend, INFINITE);
+			This->sendData();
+			SetEvent(This->WaitSendComplete);
+			Sleep(0);
+		}
 	}
 	return NULL;
 }
@@ -50,6 +68,31 @@ void PlayerNetworkManager::sendData(const ServerToClient& stc)
 	static int count = 0;
 	retval = send(socket, (char*)&stc, sizeof(ServerToClient), 0);
 	printf("%d Send : %d\n", count++, stc.PlayerData[0].drawState);
+}
+
+void PlayerNetworkManager::sendData()
+{
+	int retval;
+	static int count = 0;
+	retval = send(socket, (char*)pSTC, sizeof(ServerToClient), 0);
+	printf("%d Send : %d\n", count++, pSTC->PlayerData[0].drawState);
+}
+
+
+
+
+
+
+DWORD WINAPI PlayerNetworkManager::sendThread(LPVOID pPNM)
+{
+	PlayerNetworkManager* This = (PlayerNetworkManager*)pPNM;
+	while (true) 
+	{
+		WaitForSingleObject(This->WaitMainStreamForSend, INFINITE);
+		This->sendData();
+		SetEvent(This->WaitSendComplete);
+	}
+	return NULL;
 }
 
 ClientToServer& PlayerNetworkManager::getCTS()

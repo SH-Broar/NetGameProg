@@ -9,7 +9,8 @@ private:
 	WSADATA wsa;
 	ServerToClient data;
 	PlayerNetworkManager players[3];
-
+	HANDLE WaitAllDataWriting[3];
+	HANDLE WaitAllDataReading[3];
 	int recvDoneCount = 0;
 
 public:
