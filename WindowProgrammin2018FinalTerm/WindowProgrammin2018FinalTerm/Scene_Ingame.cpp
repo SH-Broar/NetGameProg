@@ -6,6 +6,7 @@
 #include "Framework.h"
 
 #define MEMBERS 3
+#define FrameDelayCnt 1
 
 CIngameScene::CIngameScene()
 {
@@ -104,6 +105,7 @@ bool CIngameScene::OnCreate()
 	SkillCoolTime = 0;
 	BuildObjects();
 
+	currentFDC = FrameDelayCnt;
 
 	return true;
 }
@@ -771,13 +773,17 @@ void CIngameScene::Update(float fTimeElapsed)
 
 	if (isGameEnd == FALSE)
 	{
-		//printf("Character Status 1 : %d\n", m_pFramework->GetPlayer(myPlayerNum)->CharacterStatus);
-		m_pFramework->NetGram.recvData(m_pFramework->STC);
-		//printf("Character Status 2 : %d\n", m_pFramework->GetPlayer(myPlayerNum)->CharacterStatus);
+		currentFDC--;
+		if (currentFDC == 0)
+		{
+			//printf("Character Status 1 : %d\n", m_pFramework->GetPlayer(myPlayerNum)->CharacterStatus);
+			m_pFramework->NetGram.recvData(m_pFramework->STC);
+			//printf("Character Status 2 : %d\n", m_pFramework->GetPlayer(myPlayerNum)->CharacterStatus);
 #ifdef _DEBUG
-		m_pFramework->STC.explain();
+			m_pFramework->STC.explain();
 #endif
-		m_pFramework->CTS.APNclear();
+			m_pFramework->CTS.APNclear();
+		}
 
 		//Nevigator();
 
@@ -925,8 +931,13 @@ void CIngameScene::Update(float fTimeElapsed)
 
 		//VER3
 		//CObject_Player 이거 수정하고 CTS.set에서 수정한걸로 send하면 될거같음
-		m_pFramework->CTS.set(m_pFramework->GetPlayer(myPlayerNum));
-		m_pFramework->NetGram.sendData(m_pFramework->CTS);
+
+		if (currentFDC == 0)
+		{
+			m_pFramework->CTS.set(m_pFramework->GetPlayer(myPlayerNum));
+			m_pFramework->NetGram.sendData(m_pFramework->CTS);
+			currentFDC = FrameDelayCnt;
+		}
 	}
 	//for (int i = 0; i < nObjects; ++i)
 		//ppObjects[i]->Update(fTimeElapsed);

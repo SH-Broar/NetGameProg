@@ -75,4 +75,6 @@ private:
 	int RemainTime;
 	int TimeTick;
 	int TimerImage[2];
+
+	int currentFDC;
 };
