@@ -145,7 +145,7 @@ void CIngameScene::KeyState()
 			}
 			else if (GetAsyncKeyState(0x43) & 0x8000) //대시
 			{
-				if (m_pFramework->GetPlayer(2)->DashCoolTimer <= 0)
+				if (m_pFramework->GetPlayer(myPlayerNum)->DashCoolTimer <= 0)
 				{
 					keydownList_N[6] = TRUE;
 
@@ -362,14 +362,20 @@ void CIngameScene::FrameAdvance()
 			{
 				m_pFramework->GetPlayer(myPlayerNum)->DashTimerTick = 0;
 				m_pFramework->GetPlayer(myPlayerNum)->isDash = FALSE;
-				m_pFramework->GetPlayer(myPlayerNum)->CharacterStatus = m_pFramework->GetPlayer(myPlayerNum)->Old_CharStat;
+				if (m_pFramework->GetPlayer(myPlayerNum)->Old_CharStat % 2)
+					m_pFramework->GetPlayer(myPlayerNum)->CharacterStatus = 1;
+				else
+					m_pFramework->GetPlayer(myPlayerNum)->CharacterStatus = 2;
+
 				ismyPLockDown = FALSE;
 				pkey = TRUE;
 			}
+			printf("Dash OldStat : %d\n", m_pFramework->GetPlayer(myPlayerNum)->Old_CharStat);
 			switch (m_pFramework->GetPlayer(myPlayerNum)->Old_CharStat)
 			{
 			case 2:
 			case 0:
+			case 10:
 				if (m_pFramework->GetPlayer(myPlayerNum)->x > 50)
 					m_pFramework->GetPlayer(myPlayerNum)->x -= 25;
 				break;
@@ -385,9 +391,9 @@ void CIngameScene::FrameAdvance()
 				break;
 			case 4:
 			case 1:
+			case 11:
 				if (m_pFramework->GetPlayer(myPlayerNum)->x < 6350)
 					m_pFramework->GetPlayer(myPlayerNum)->x += 25;
-
 				break; // 뒤 볼 때
 			}
 		}
