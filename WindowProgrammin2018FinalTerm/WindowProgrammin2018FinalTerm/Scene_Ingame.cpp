@@ -226,7 +226,7 @@ void CIngameScene::FrameAdvance()
 					m_pFramework->GetPlayer(i)->WalkingTimerTick = 0;
 					m_pFramework->GetPlayer(i)->WalkingImageTick++;
 				}
-				prePlayersDirections[i - 1] = m_pFramework->GetPlayer(i)->CharacterStatus;
+				//prePlayersDirections[i - 1] = m_pFramework->GetPlayer(i)->CharacterStatus;
 				break;
 			case 6:
 			case 7:
@@ -264,7 +264,7 @@ void CIngameScene::FrameAdvance()
 				{
 					m_pFramework->GetPlayer(i)->AttackTimerTick = 0;
 					m_pFramework->GetPlayer(i)->isAttacked = FALSE;
-					m_pFramework->GetPlayer(i)->CharacterStatus = m_pFramework->GetPlayer(i)->Old_CharStat;
+					//m_pFramework->GetPlayer(i)->CharacterStatus = m_pFramework->GetPlayer(i)->Old_CharStat;
 					m_pFramework->GetPlayer(i)->SkillAttackedTimer = 0;
 				}
 				break;
@@ -780,6 +780,8 @@ void CIngameScene::Update(float fTimeElapsed)
 		m_pFramework->CTS.APNclear();
 
 		//Nevigator();
+
+		printf("STATE : %d\n", m_pFramework->STC.PlayerData[1].state);
 
 		if (m_pFramework->STC.CoinState != 0)
 		{
